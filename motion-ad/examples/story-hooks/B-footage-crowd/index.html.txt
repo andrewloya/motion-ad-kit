@@ -1,0 +1,282 @@
+<!doctype html>
+<!-- who-hook (S2 hook-only test): loya's real night-shoot footage + the crowd, acting out the line.
+     Story + 0.25 s storyboard: storyboard.md. Times are measured song events (bed from goodbye 113.68). -->
+<html>
+<head>
+<meta charset="utf-8">
+<title>LYRC — who-hook</title>
+<style>
+@font-face{font-family:'SG';src:url('fonts/SpaceGrotesk-Variable.ttf');font-weight:300 700}
+@font-face{font-family:'ARC';src:url('fonts/Archivo-VF.ttf');font-weight:100 900;font-stretch:62% 125%}
+:root{--stage:#000;--ink:#fff;--accent:#1BA3E0;--glow:#3CC5F7;--night:#05070D}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;background:#000;overflow:hidden}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:'SG',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;background:#000}
+.abs{position:absolute}
+.full{position:absolute;left:0;top:0;width:1080px;height:1920px}
+video{display:block;width:100%;height:100%;object-fit:cover}
+/* hero words: Archivo, per-letter */
+.hero{position:absolute;left:0;width:1080px;text-align:center;font-family:'ARC';font-weight:900;line-height:.8;letter-spacing:-.01em;white-space:nowrap;color:#fff}
+.hero .l{display:inline-block;transform-origin:50% 100%;font-variation-settings:'wdth' 100,'wght' 900}
+/* comments: props in space, no boxes */
+.cm{position:absolute;font-family:'SG';font-weight:600;letter-spacing:-.03em;white-space:nowrap;color:#fff;text-shadow:0 6px 24px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,.9);transform-origin:50% 50%}
+.cm.c{color:var(--glow)}
+/* strangers: real people, cut out, turned to black silhouettes with a blue rim from the light behind */
+.sil video{filter:drop-shadow(0 0 20px rgba(27,163,224,.4))}
+.sil.soft video{filter:brightness(.8) blur(2px)}
+.mir{transform:scaleX(-1)}
+.halftone{position:absolute;inset:0;background-image:radial-gradient(circle at 50% 50%,rgba(0,0,0,.55) 38%,transparent 42%);background-size:8px 8px;mix-blend-mode:multiply;opacity:.32;pointer-events:none}
+.haze{position:absolute;inset:0;background:radial-gradient(ellipse 620px 900px at 540px 520px,rgba(27,163,224,.55),rgba(27,163,224,.12) 55%,rgba(0,0,0,0) 75%)}
+.bk{position:absolute;border-radius:50%;box-shadow:0 0 16px 10px currentColor}
+#grain{position:absolute;inset:-60px;background:url('assets/hook/grain.png');opacity:.09;mix-blend-mode:overlay;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="who-hook" data-width="1080" data-height="1920" data-start="0" data-duration="5.84" data-fps="60">
+  <audio id="music" data-start="0" data-duration="5.84" data-track-index="0" src="assets/audio/hook-mix.wav"></audio>
+
+  <div id="cam" class="full">
+    <!-- ===== S3: the crowd around the stranger's phone (behind the phone, seen after the snap-back) ===== -->
+    <div id="S3" class="full" style="background:var(--night)">
+      <div class="haze" style="background:radial-gradient(ellipse 700px 820px at 540px 900px,rgba(27,163,224,.42),rgba(27,163,224,.08) 60%,rgba(0,0,0,0) 80%)"></div>
+      <div class="halftone"></div>
+      <div id="s3bk" class="full">
+        <div class="bk" style="left:90px;top:300px;width:26px;height:26px;background:#cfeeff;color:#cfeeff;opacity:.5"></div>
+        <div class="bk" style="left:930px;top:420px;width:34px;height:34px;background:#3CC5F7;color:#3CC5F7;opacity:.45"></div>
+        <div class="bk" style="left:180px;top:1180px;width:22px;height:22px;background:#fff;color:#fff;opacity:.4"></div>
+        <div class="bk" style="left:880px;top:1260px;width:28px;height:28px;background:#9bdcff;color:#9bdcff;opacity:.4"></div>
+      </div>
+      <div id="c5w" class="abs sil" style="left:-430px;top:760px;width:1100px;height:1955px"><video id="c5" data-start="3.5" data-duration="2.34" data-media-start="0.6" data-track-index="9" src="assets/hook/crowd-ht.webm" muted playsinline></video></div>
+      <div id="c6w" class="abs sil mir" style="left:410px;top:740px;width:1100px;height:1955px"><video id="c6" data-start="3.5" data-duration="2.33" data-media-start="1.7" data-track-index="10" src="assets/hook/crowd-ht.webm" muted playsinline></video></div>
+    </div>
+
+    <!-- ===== the phone: before 3.78 its screen IS the whole frame ===== -->
+    <div id="phone" class="full">
+      <div id="bezel" class="abs" style="left:-30px;top:-30px;width:1140px;height:1980px;border-radius:150px;background:#07090d;box-shadow:0 0 0 6px #22384a,0 0 0 9px #0a0f15,0 0 140px rgba(27,163,224,.4)"></div>
+      <div id="slot" class="full" style="border-radius:120px;overflow:hidden;background:#020306;box-shadow:inset 0 0 0 4px rgba(60,197,247,.55),inset 0 0 90px rgba(60,197,247,.28)">
+        
+        <div id="sheen" class="abs" style="left:-700px;top:-200px;width:420px;height:2400px;transform:rotate(18deg);background:linear-gradient(90deg,rgba(155,220,255,0),rgba(155,220,255,.16),rgba(155,220,255,0))"></div>
+      </div>
+      <div id="content" class="full" style="overflow:hidden;background:#000">
+
+        <!-- ===== W1: loya alone in the dark, strangers rise ===== -->
+        <div id="W1" class="full">
+          <div class="haze" id="haze1"></div>
+          <div id="beam" class="abs" style="left:240px;top:-200px;width:600px;height:1700px;background:linear-gradient(180deg,rgba(155,220,255,.22),rgba(60,197,247,.05) 70%,rgba(0,0,0,0));clip-path:polygon(40% 0,60% 0,100% 100%,0 100%);filter:blur(28px);mix-blend-mode:screen"></div>
+          <div id="bk1" class="full">
+            <div class="bk" style="left:120px;top:250px;width:30px;height:30px;background:#fff;color:#fff;opacity:.45"></div>
+            <div class="bk" style="left:860px;top:330px;width:22px;height:22px;background:#9bdcff;color:#9bdcff;opacity:.5"></div>
+            <div class="bk" style="left:960px;top:880px;width:40px;height:40px;background:#3CC5F7;color:#3CC5F7;opacity:.35"></div>
+            <div class="bk" style="left:60px;top:980px;width:26px;height:26px;background:#cfeeff;color:#cfeeff;opacity:.4"></div>
+          </div>
+          <!-- far strangers, behind the word -->
+          <div id="c3w" class="abs sil" style="left:-300px;top:660px;width:880px;height:1564px"><video id="c3" data-start="0" data-duration="2.31" data-media-start="0.2" data-track-index="2" src="assets/hook/crowd-ht.webm" muted playsinline></video></div>
+          <div id="c4w" class="abs sil mir" style="left:500px;top:630px;width:880px;height:1564px"><video id="c4" data-start="0" data-duration="2.32" data-media-start="2.4" data-track-index="3" src="assets/hook/crowd-ht.webm" muted playsinline></video></div>
+          <div id="w1" class="hero" style="top:456px;font-size:198px"></div>
+          <!-- loya, cut out of his own night shoot -->
+          <div id="lbw" class="abs" style="left:119px;top:520px;width:1080px;height:1920px;transform-origin:0 0;transform:scale(.78)">
+            <video id="lb" data-start="0" data-duration="2.3" data-media-start="0" data-track-index="1" src="assets/hook/back-cut.webm" muted playsinline style="filter:drop-shadow(-3px -4px 0 rgba(60,197,247,.75)) drop-shadow(0 -10px 26px rgba(27,163,224,.35))"></video>
+          </div>
+          <div id="sweep1" class="full" style="background:radial-gradient(ellipse 380px 700px at 50% 60%,rgba(60,197,247,.5),rgba(60,197,247,0) 70%);mix-blend-mode:screen;opacity:0"></div>
+          <!-- strangers with phones, shoving in -->
+          <div id="p1w" class="abs sil" style="left:-500px;top:840px;width:1000px;height:1778px;-webkit-mask-image:linear-gradient(90deg,#000 91%,transparent 100%);mask-image:linear-gradient(90deg,#000 91%,transparent 100%)"><video id="p1" data-start="0" data-duration="1.8" data-media-start="0.05" data-track-index="4" src="assets/hook/phoneL-ht.webm" muted playsinline></video></div>
+          <div id="p2w" class="abs sil" style="left:560px;top:800px;width:1000px;height:1778px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%);mask-image:linear-gradient(90deg,transparent 0,#000 9%)"><video id="p2" data-start="0" data-duration="2.3" data-media-start="0.2" data-track-index="5" src="assets/hook/phone2-ht.webm" muted playsinline></video></div>
+          <!-- near strangers, foreground heads -->
+          <div id="c1w" class="abs sil soft" style="left:-640px;top:420px;width:1500px;height:2667px"><video id="c1" data-start="0" data-duration="2.33" data-media-start="1.0" data-track-index="6" src="assets/hook/crowd-ht.webm" muted playsinline></video></div>
+          <div id="c2w" class="abs sil soft mir" style="left:220px;top:450px;width:1500px;height:2667px"><video id="c2" data-start="0" data-duration="2.34" data-media-start="3.0" data-track-index="7" src="assets/hook/crowd-ht.webm" muted playsinline></video></div>
+          <div id="k1" class="cm c" style="left:520px;top:900px;font-size:86px">song name??</div>
+          <div id="k2" class="cm" style="left:50px;top:1040px;font-size:78px">who is this??</div>
+          <div id="k3" class="cm" style="left:430px;top:1210px;font-size:66px">wait who is he</div>
+        </div>
+
+        <!-- ===== W2: he turns to the lens ===== -->
+        <div id="W2" class="full" style="background:#000">
+          <div class="haze" style="background:radial-gradient(ellipse 760px 620px at 540px 260px,rgba(27,163,224,.5),rgba(0,0,0,0) 75%)"></div>
+          <div id="lvw" class="abs" style="left:0;top:430px;width:1080px;height:1920px;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 220px);mask-image:linear-gradient(180deg,transparent 0,#000 220px)">
+            <video id="lv" data-start="1.96" data-duration="2.8" data-media-start="0" data-track-index="8" src="assets/hook/lean.mp4" muted playsinline></video>
+          </div>
+          <div id="w2" class="hero" style="top:262px;font-size:292px"></div>
+          <div id="lcw" class="abs" style="left:0;top:430px;width:1080px;height:1920px">
+            <video id="lc" data-start="1.96" data-duration="2.8" data-media-start="0" data-track-index="12" src="assets/hook/lean-cut.webm" muted playsinline></video>
+          </div>
+          <div id="k4" class="cm" style="left:40px;top:640px;font-size:76px">who is this??</div>
+          <div id="k5" class="cm c" style="left:130px;top:900px;font-size:84px">song??</div>
+          <div id="k6" class="cm" style="left:30px;top:1110px;font-size:74px">on repeat</div>
+          <div id="f1w" class="abs sil" style="left:-430px;top:1180px;width:900px;height:1600px"><video id="f1" data-start="1.96" data-duration="1.84" data-media-start="0.02" data-track-index="15" src="assets/hook/phoneL-ht.webm" muted playsinline></video></div>
+          <div id="f2w" class="abs sil" style="left:640px;top:1120px;width:900px;height:1600px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%);mask-image:linear-gradient(90deg,transparent 0,#000 9%)"><video id="f2" data-start="1.96" data-duration="1.85" data-media-start="0.6" data-track-index="16" src="assets/hook/phone2-ht.webm" muted playsinline></video></div>
+          <div id="w3" class="hero" style="top:1290px;font-size:286px;left:-60px"></div>
+        </div>
+      </div>
+      <div id="island" class="abs" style="left:430px;top:44px;width:220px;height:64px;border-radius:32px;background:#000;box-shadow:0 0 0 2px #10161d;opacity:0"></div>
+    </div>
+
+    <!-- ===== S3 front: words + near heads, in front of the phone ===== -->
+    <div id="S3f" class="full" style="pointer-events:none">
+      <div id="c7w" class="abs sil soft" style="left:-200px;top:1010px;width:1500px;height:2667px;opacity:0"><video id="c7" data-start="3.5" data-duration="2.32" data-media-start="2.9" data-track-index="13" src="assets/hook/crowd-ht.webm" muted playsinline></video></div>
+      <div id="w4" class="hero" style="top:284px;font-size:282px"></div>
+      <div id="w5" class="hero" style="top:1350px;font-size:262px;left:-60px"></div>
+    </div>
+  </div>
+  <div id="grain"></div>
+</div>
+<script src="assets/vendor/gsap.min.js"></script>
+<script>
+(function () {
+  const DUR = 5.84;
+  const tl = gsap.timeline({ paused: true });
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
+  function ft(t, target, from, to) { tl.fromTo(target, from, Object.assign({ immediateRender: false }, to), t); }
+  // letters: <span class="l">…</span> (with an optional class for the accent word)
+  function letters(sel, text, extraCls) {
+    const el = $(sel);
+    el.innerHTML = [...text].map((c) => c === ' ' ? '<span class="l sp" style="width:.22em"> </span>' : `<span class="l">${c}</span>`).join('');
+    return $$(sel + ' .l:not(.sp)');
+  }
+  // hero-word punch: per letter width/weight swell + squash, from a scale-through
+  function punch(ls, t, gap, from, w0 = 62, w1 = 112, wr = 100) {
+    ls.forEach((l, i) => {
+      const at = t + i * gap;
+      ft(at, l, Object.assign({ opacity: 0, fontVariationSettings: `'wdth' ${w0},'wght' 300` }, from),
+        { opacity: 1, x: 0, y: 0, scale: 1, rotation: 0, fontVariationSettings: `'wdth' ${w1},'wght' 900`, duration: 0.2, ease: 'expo.out' });
+      ft(at + 0.2, l, { fontVariationSettings: `'wdth' ${w1},'wght' 900`, scaleY: 1.18 }, { fontVariationSettings: `'wdth' ${wr},'wght' 900`, scaleY: 1, duration: 0.34, ease: 'back.out(2.2)' });
+    });
+  }
+  // a comment fired from a stranger's phone: thrown in from (fx,fy) offset, lands with overshoot, then drifts
+  function fire(sel, t, fx, fy, rot, drift, end) {
+    gsap.set(sel, { opacity: 0 });
+    ft(t, sel, { opacity: 0, x: fx, y: fy, scale: 0.25, rotation: rot * -3, filter: 'blur(8px)' },
+      { opacity: 1, x: 0, y: 0, scale: 1, rotation: rot, filter: 'blur(0px)', duration: 0.42, ease: 'back.out(1.6)' });
+    ft(t + 0.42, sel, { y: 0, rotation: rot }, { y: drift, rotation: rot * 0.6, duration: end - t - 0.42, ease: 'sine.inOut' });
+  }
+
+  // ---------- pre-states
+  const L1 = letters('#w1', 'STRANGERS');
+  const L2 = letters('#w2', 'WHO IS');
+  const L3 = letters('#w3', 'THIS?');
+  const L4 = letters('#w4', 'STEAL');
+  const L5 = letters('#w5', 'THIS.');
+  gsap.set($$('.hero .l'), { opacity: 0 });
+  gsap.set('#w3 .l', { fontVariationSettings: "'wdth' 75,'wght' 900" });
+  gsap.set('#w1 .l', { fontVariationSettings: "'wdth' 66,'wght' 900" });
+  gsap.set(['#w2 .l', '#w5 .l'], { fontVariationSettings: "'wdth' 80,'wght' 900" });
+  gsap.set('#W2', { x: 1300 });
+
+  // ================= BEAT 1 (0–0.70) "If you want": loya alone, camera brakes out of a whip
+  ft(0, '#W1', { x: 150, rotation: 2.5 }, { x: 0, rotation: 0, duration: 0.42, ease: 'expo.out' });
+  ft(0, '#W1', { scale: 1.32, transformOrigin: '540px 900px' }, { scale: 1.0, transformOrigin: '540px 900px', duration: 2.1, ease: 'sine.inOut' });
+  ft(0, '#beam', { x: -60, rotation: -4 }, { x: 70, rotation: 5, duration: 2.1, ease: 'sine.inOut' });
+  ft(0, '#bk1', { x: 30 }, { x: -50, duration: 2.1, ease: 'sine.inOut' });
+  // the near heads lurk at the bottom edge from frame 0, then rise on "strangers"
+  ft(0, '#c1w', { y: 60 }, { y: 250, duration: 0.8, ease: 'sine.inOut' });
+  ft(0, '#c2w', { y: 80 }, { y: 270, duration: 0.85, ease: 'sine.inOut' });
+  ft(0, '#c3w', { y: 340, opacity: 0.0 }, { y: 340, opacity: 0, duration: 0.7, ease: 'power1.inOut' });
+  ft(0, '#c4w', { y: 340, opacity: 0.0 }, { y: 340, opacity: 0, duration: 0.7, ease: 'power1.inOut' });
+
+  // ================= BEAT 2 (0.70–1.60) "strangers in your": STRANGERS behind him, the crowd rises
+  punch(L1, 0.70, 0.045, { y: 60, scale: 1.5 }, 62, 74, 66);
+  // anticipation dip then rise (mass land)
+  ft(0.80, '#c1w', { y: 250 }, { y: 268, duration: 0.08, ease: 'power2.in' });
+  ft(0.88, '#c1w', { y: 268 }, { y: 0, duration: 0.55, ease: 'back.out(1.4)' });
+  ft(0.92, '#c2w', { y: 270 }, { y: 290, duration: 0.08, ease: 'power2.in' });
+  ft(1.00, '#c2w', { y: 290 }, { y: 20, duration: 0.55, ease: 'back.out(1.4)' });
+  ft(0.78, '#c3w', { y: 340, opacity: 0 }, { y: 0, opacity: 0.9, duration: 0.6, ease: 'expo.out' });
+  ft(0.86, '#c4w', { y: 340, opacity: 0 }, { y: 0, opacity: 0.9, duration: 0.6, ease: 'expo.out' });
+  // hands with phones shove in from both edges
+  ft(0, '#p1w', { opacity: 1, x: -260, y: 220, rotation: -10 }, { opacity: 1, x: -120, y: 120, rotation: -4, duration: 0.95, ease: 'sine.out' });
+  ft(0, '#p2w', { opacity: 1, x: 300, y: 260, rotation: 10 }, { opacity: 1, x: 160, y: 160, rotation: 4, duration: 1.2, ease: 'sine.out' });
+  ft(0.95, '#p1w', { x: -120, y: 120, rotation: -4 }, { x: 30, y: 0, rotation: 0, duration: 0.5, ease: 'back.out(1.5)' });
+  ft(1.24, '#p2w', { x: 160, y: 160, rotation: 4 }, { x: -30, y: 0, rotation: 0, duration: 0.5, ease: 'back.out(1.5)' });
+  // STRANGERS lives: slow drift while it's read
+  ft(1.24, '#w1', { y: 0 }, { y: -26, duration: 0.9, ease: 'sine.inOut' });
+
+  // ================= BEAT 3 (1.60–2.15) "comments": phone light hits him, the comments fly
+  ft(1.52, '#sweep1', { opacity: 0, x: -500 }, { opacity: 0.55, x: 0, duration: 0.3, ease: 'power2.out' });
+  ft(1.82, '#sweep1', { opacity: 0.55, x: 0 }, { opacity: 0.2, x: 300, duration: 0.3, ease: 'power2.inOut' });
+  fire('#k1', 1.40, 460, 520, 5, -30, 2.2);
+  fire('#k2', 1.62, -440, 520, -5, -24, 2.2);
+  fire('#k3', 1.84, 380, 480, 3, -16, 2.2);
+  // whip around to his front (lands on the 2.165 onset)
+  ft(1.98, '#W1', { x: 0, filter: 'blur(0px)' }, { x: -1300, filter: 'blur(18px)', duration: 0.18, ease: 'expo.in' });
+  ft(2.16, '#W2', { x: 1300, filter: 'blur(18px)' }, { x: 0, filter: 'blur(0px)', duration: 0.38, ease: 'expo.out' });
+  tl.set('#W1', { opacity: 0 }, 2.2);
+
+  // ================= BEAT 4 (2.15–3.75) "asking 'who is this?'"
+  ft(2.16, '#lvw', { scale: 1.0, transformOrigin: '540px 600px' }, { scale: 1.07, transformOrigin: '540px 600px', duration: 1.62, ease: 'sine.inOut' });
+  ft(2.16, '#lcw', { scale: 1.0, transformOrigin: '540px 600px' }, { scale: 1.07, transformOrigin: '540px 600px', duration: 1.62, ease: 'sine.inOut' });
+  fire('#k4', 2.24, -360, 420, -5, -28, 3.78);
+  ft(2.16, '#f1w', { x: -300, y: 260 }, { x: 0, y: 0, duration: 0.6, ease: 'expo.out' });
+  ft(2.30, '#f2w', { x: 300, y: 260 }, { x: 0, y: 0, duration: 0.6, ease: 'expo.out' });
+  ft(2.9, '#f1w', { x: 0 }, { x: 40, duration: 0.88, ease: 'sine.inOut' });
+  ft(2.9, '#f2w', { x: 0 }, { x: -40, duration: 0.88, ease: 'sine.inOut' });
+  fire('#k5', 2.36, -380, 300, -4, -20, 3.78);
+  // WHO slams through from the camera, IS drops and bounces
+  L2.slice(0, 3).forEach((l, i) => {
+    const at = 2.50 + i * 0.035;
+    ft(at, l, { opacity: 0, scale: 2.8, filter: 'blur(10px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.26, ease: 'expo.out' });
+    ft(at + 0.26, l, { scaleY: 0.86, scaleX: 1.08 }, { scaleY: 1, scaleX: 1, duration: 0.4, ease: 'elastic.out(1,.5)' });
+  });
+  L2.slice(3).forEach((l, i) => {
+    const at = 2.80 + i * 0.04;
+    ft(at, l, { opacity: 0, rotationX: -100, transformPerspective: 700, transformOrigin: '50% 0%' }, { opacity: 1, rotationX: 0, transformPerspective: 700, transformOrigin: '50% 0%', duration: 0.45, ease: 'back.out(1.6)' });
+  });
+  // THIS? whips in from the right and brakes over his chest; the ? pops
+  L3.slice(0, 4).forEach((l, i) => {
+    const at = 3.04 + i * 0.03;
+    ft(at, l, { opacity: 0, x: 900, filter: 'blur(14px)', skewX: -18 }, { opacity: 1, x: 0, filter: 'blur(0px)', skewX: 0, duration: 0.34, ease: 'expo.out' });
+    ft(at + 0.34, l, { skewX: 0 }, { skewX: 6, duration: 0.1, ease: 'power2.out' });
+    ft(at + 0.44, l, { skewX: 6 }, { skewX: 0, duration: 0.3, ease: 'back.out(2)' });
+  });
+  ft(3.22, L3[4], { opacity: 0, scale: 0, rotation: -40 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.42, ease: 'back.out(3)' });
+  // comments go soft while the big words are read, a few more drift in at the edges
+  ft(2.50, ['#k4', '#k5'], { filter: 'blur(0px)' }, { filter: 'blur(3px)', duration: 0.3, ease: 'power2.out' });
+  fire('#k6', 2.70, -360, 300, 3, -22, 3.78);
+  ft(3.06, '#k4', { opacity: 1 }, { opacity: 0, x: -200, filter: 'blur(10px)', duration: 0.3, ease: 'power2.in' });
+  ft(3.26, '#w2', { y: 0 }, { y: -14, duration: 0.5, ease: 'sine.inOut' });
+  ft(3.40, '#w3', { y: 0 }, { y: 10, duration: 0.38, ease: 'sine.inOut' });
+
+  // ================= BEAT 5 (3.78–4.47) "steal this.": snap back — it was a stranger's phone
+  ft(3.70, '#phone', { scale: 1, rotation: 0, y: 0, transformOrigin: '540px 960px' }, { scale: 1.03, rotation: 0.4, y: 0, transformOrigin: '540px 960px', duration: 0.08, ease: 'power2.in' });
+  ft(3.78, '#phone', { scale: 1.03, rotation: 0.4, transformOrigin: '540px 960px' }, { scale: 0.56, rotation: -4, transformOrigin: '540px 960px', duration: 0.42, ease: 'back.out(1.25)' });
+  ft(3.78, ['#content', '#slot'], { borderRadius: 0 }, { borderRadius: 120, duration: 0.2, ease: 'power2.out' });
+  ft(3.84, '#island', { opacity: 0 }, { opacity: 1, duration: 0.16, ease: 'power2.out' });
+  ft(4.20, '#phone', { rotation: -4, y: 0 }, { rotation: -2.5, y: -14, duration: 0.3, ease: 'sine.inOut' });
+  // crowd around the phone, a beat late (parallax)
+  ft(3.78, '#c5w', { y: 260 }, { y: 0, duration: 0.6, ease: 'expo.out' });
+  ft(3.84, '#c6w', { y: 280 }, { y: 0, duration: 0.6, ease: 'expo.out' });
+  ft(3.80, '#c7w', { opacity: 0, y: 360 }, { opacity: 1, y: 120, duration: 0.6, ease: 'expo.out' });
+  ft(3.78, '#s3bk', { scale: 1.3, transformOrigin: '540px 960px' }, { scale: 1, transformOrigin: '540px 960px', duration: 0.7, ease: 'expo.out' });
+  // STEAL: letters fly through from the camera, punch, land
+  punch(L4, 3.80, 0.04, { scale: 3.2, y: 260 }, 62, 92, 80);
+  // THIS.: letters drop and bounce
+  L5.forEach((l, i) => {
+    const at = 4.10 + i * 0.035;
+    ft(at, l, { opacity: 0, y: 380, scaleY: 1.25 }, { opacity: 1, y: -16, scaleY: 1, duration: 0.24, ease: 'expo.out' });
+    ft(at + 0.24, l, { y: -16, scaleY: 1 }, { y: 0, scaleY: 0.88, duration: 0.07, ease: 'power2.in' });
+    ft(at + 0.31, l, { scaleY: 0.88 }, { scaleY: 1, duration: 0.36, ease: 'elastic.out(1,.5)' });
+  });
+
+  // ================= BEAT 6 (4.475–5.84) the picture is stolen out of the phone → fall into the slot
+  ft(4.40, '#content', { y: 0 }, { y: 30, duration: 0.075, ease: 'power2.in' });               // anticipation
+  ft(4.475, '#content', { y: 30, scale: 1, rotation: 0, opacity: 1, filter: 'blur(0px)' }, { y: -300, scale: 3.4, rotation: 7, opacity: 0, filter: 'blur(14px)', duration: 0.26, ease: 'expo.in' });
+  
+  ft(4.62, '#sheen', { x: 0 }, { x: 2200, duration: 0.8, ease: 'power2.inOut' });
+  // the words kick once on the hit
+  ft(4.475, '#w4', { y: 0 }, { y: -18, duration: 0.25, ease: 'expo.out' });
+  ft(4.475, '#w5', { y: 0 }, { y: 18, duration: 0.25, ease: 'expo.out' });
+  // camera falls into the slot, accelerating; the world slides outward past it
+  ft(4.56, '#phone', { scale: 0.56, rotation: -2.5, y: -14, transformOrigin: '540px 960px' }, { scale: 0.94, rotation: 0, y: 0, transformOrigin: '540px 960px', duration: 1.28, ease: 'power3.in' });
+  ft(4.56, '#c5w', { x: 0, scale: 1 }, { x: -380, scale: 1.25, duration: 1.28, ease: 'power3.in' });
+  ft(4.56, '#c6w', { x: 0, scale: 1 }, { x: 380, scale: 1.25, duration: 1.28, ease: 'power3.in' });
+  ft(4.56, '#c7w', { y: 120, scale: 1 }, { y: 700, scale: 1.4, duration: 1.28, ease: 'power3.in' });
+  ft(4.56, '#s3bk', { scale: 1 }, { scale: 1.8, duration: 1.28, ease: 'power3.in' });
+  ft(4.90, '#w4', { y: -18, scale: 1, filter: 'blur(0px)' }, { y: -520, scale: 1.7, filter: 'blur(10px)', duration: 0.9, ease: 'power3.in' });
+  ft(4.90, '#w5', { y: 18, scale: 1, filter: 'blur(0px)' }, { y: 620, scale: 1.7, filter: 'blur(10px)', duration: 0.9, ease: 'power3.in' });
+
+  tl.set({}, {}, DUR);
+  window.__timelines = window.__timelines || {};
+  window.__timelines['who-hook'] = tl;
+})();
+</script>
+</body>
+</html>

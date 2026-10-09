@@ -1,0 +1,425 @@
+<!doctype html>
+<!-- HOOK-ONLY style test (S1): "If you want strangers in your comments asking 'who is this?', steal this."
+     Stick figures act the line out (hook-plan.md). 0–5.84 s; ends on a dark phone screen the body dives into. -->
+<html data-composition-variables='[{"id":"hook","type":"enum","label":"Hook","default":"h1","options":[{"value":"h1","label":"Stick story"}]}]'>
+<head>
+<meta charset="utf-8">
+<title>LYRC — who-hook</title>
+<style>
+@font-face{font-family:'SG';src:url('fonts/SpaceGrotesk-Variable.ttf');font-weight:300 700}
+@font-face{font-family:'IS';src:url('fonts/InstrumentSerif-Italic.ttf');font-style:italic;font-weight:400}
+@font-face{font-family:'ARC';src:url('fonts/Archivo-VF.ttf');font-weight:100 900;font-stretch:62% 125%}
+:root{--stage:#000;--ink:#fff;--accent:#1BA3E0;--glow:#3CC5F7;--night:#05070D}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;background:var(--stage);overflow:hidden}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:'SG',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0}
+.hook{position:absolute;inset:0;opacity:0}
+#cam{position:absolute;inset:0}
+/* the drawn world: one camera (#world x/y/scale, origin 0 0) */
+#world,#specks{position:absolute;left:0;top:0;width:0;height:0;transform-origin:0 0}
+.speck{position:absolute;background:#fff;border-radius:50%}
+.fig,.j,.ph{position:absolute;left:0;top:0;width:0;height:0}
+.b{position:absolute;background:#fff}
+.head{position:absolute;border-radius:50%;background:#000;border-style:solid;border-color:#fff}
+.phone{position:absolute;left:-16px;top:-27px;width:32px;height:54px;border:5px solid #fff;border-radius:8px;background:#9bdcff}
+.artist .phone{background:var(--accent);box-shadow:0 0 26px 6px rgba(60,197,247,.75)}
+.artist .phone::after,#thiefPh .phone::after{content:'';position:absolute;left:4px;top:13px;border-right:13px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent}
+#spot{position:absolute;left:-160px;top:300px;width:1400px;height:1400px;border-radius:50%;background:radial-gradient(circle,rgba(60,197,247,.26) 0%,rgba(27,163,224,.1) 40%,rgba(0,0,0,0) 68%)}
+#floor{position:absolute;left:-3000px;top:1597px;width:8000px;height:7px;border-radius:4px;background:#fff}
+.hatch{position:absolute;height:5px;border-radius:3px;background:#fff;opacity:.35;transform:rotate(-24deg)}
+.ring{position:absolute;width:1600px;height:1600px;margin:-800px 0 0 -800px;border-radius:50%;border:10px solid var(--accent)}
+#shade{position:absolute;left:-6000px;top:-6000px;width:14000px;height:14000px;background:#000;opacity:0}
+#litGlow{position:absolute;width:700px;height:700px;margin:-350px 0 0 -350px;border-radius:50%;
+  background:radial-gradient(circle,rgba(60,197,247,.42) 0%,rgba(27,163,224,.16) 38%,rgba(0,0,0,0) 70%)}
+/* cricket */
+#cricket{position:absolute;left:0;top:0;width:0;height:0}
+#cricket .cb{position:absolute;left:-46px;top:-30px;width:92px;height:34px;border:6px solid #fff;border-radius:50%;background:#000}
+#cricket .ch{position:absolute;left:34px;top:-40px;width:30px;height:30px;border:6px solid #fff;border-radius:50%;background:#000}
+#cricket .cl{position:absolute;height:6px;border-radius:3px;background:#fff;transform-origin:0 50%}
+/* type */
+#type{position:absolute;inset:0}
+.arc{font-family:'ARC';font-weight:900;line-height:.82;white-space:nowrap;letter-spacing:-.01em}
+.word{position:absolute;left:0;width:1080px;text-align:center}
+.word>span{display:inline-block}
+.cm{position:absolute;left:0;top:0;font-weight:600;white-space:nowrap;letter-spacing:-.02em}
+.serif{font-family:'IS';font-style:italic;font-weight:400;color:var(--accent)}
+/* the stolen phone, flat to camera */
+#endPush{position:absolute;inset:0;transform-origin:540px 1350px}
+#bigPhone{position:absolute;left:220px;top:760px;width:640px;height:1180px;border:22px solid #fff;border-radius:92px;background:var(--night);
+  box-shadow:inset 0 0 60px rgba(60,197,247,.22);overflow:hidden}
+#bigPhone .notch{position:absolute;left:236px;top:30px;width:126px;height:14px;border-radius:7px;background:#fff}
+.pl{position:absolute;left:56px;font-weight:600;font-size:46px;white-space:nowrap;letter-spacing:-.02em}
+#grain{position:absolute;left:-60px;top:-60px;width:1200px;height:2040px;opacity:.14;mix-blend-mode:screen;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.6 -.3'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="who-hook" data-width="1080" data-height="1920" data-start="0" data-duration="5.84" data-fps="60">
+  <audio id="music" data-start="0" data-duration="5.84" data-track-index="0" src="assets/audio/final-mix.wav"></audio>
+  <div id="stage">
+    <div id="h1" class="hook">
+      <div id="cam">
+        <div id="specks"></div>
+        <div id="world">
+          <div id="floor"></div>
+          <div id="hatches"></div>
+          <div id="rings"><div class="ring" id="ring1"></div><div class="ring" id="ring2"></div></div>
+          <div id="back"></div>
+                    <div id="front"></div>
+          <div id="cricket"><div class="cl" id="clg1"></div><div class="cl" id="clg2"></div><div class="cb"></div><div class="ch"></div></div>
+          <div id="shade"></div>
+          <div id="spot"></div>
+          <div id="artistWrap"></div>
+          <div id="litGlow"></div>
+          <div class="fig" id="thief"></div>
+        </div>
+        <div id="type">
+          <div id="zero" style="position:absolute;left:-10px;top:225px;width:580px;height:520px">
+            <svg width="580" height="520" style="position:absolute;left:0;top:0;overflow:visible"><path id="bubble" d="M 70 40 H 510 Q 550 40 550 80 V 330 Q 550 370 510 370 H 450 L 500 480 L 340 370 H 70 Q 30 370 30 330 V 80 Q 30 40 70 40 Z" fill="none" stroke="#fff" stroke-width="16" stroke-linejoin="round"/></svg>
+            <div class="arc" id="zeroN" style="position:absolute;left:0;top:62px;width:580px;text-align:center;font-size:290px;color:var(--accent)">0</div>
+          </div>
+          <div class="word arc" id="strangers" style="top:250px;font-size:228px"></div>
+          <div id="comments"></div>
+          <div class="word arc" id="who" style="top:250px;font-size:400px"></div>
+          <div class="word arc" id="isthis" style="top:610px;font-size:210px"></div>
+        </div>
+        <div id="endPush">
+          <div id="bigPhone"><div class="notch"></div>
+            <div id="scr" style="position:absolute;inset:0">
+              <video id="lv" data-start="4.42" data-duration="1.42" data-track-index="1" src="assets/footage/v01.mp4" muted playsinline style="position:absolute;left:0;top:0;width:596px;height:1136px;object-fit:cover"></video>
+              <svg width="250" height="224" viewBox="0 0 580 520" style="position:absolute;left:34px;top:74px;overflow:visible"><path d="M 70 40 H 510 Q 550 40 550 80 V 330 Q 550 370 510 370 H 230 L 120 470 L 140 370 H 70 Q 30 370 30 330 V 80 Q 30 40 70 40 Z" fill="none" fill="rgba(0,0,0,.55)" stroke="#fff" stroke-width="22" stroke-linejoin="round"/></svg>
+              <div class="arc" id="cnt" style="position:absolute;left:34px;top:104px;width:250px;text-align:center;font-size:90px;font-variation-settings:'wdth' 70, 'wght' 900;color:var(--accent)">0</div>
+              </div></div>
+          <div class="word arc" id="steal" style="top:296px;font-size:300px"></div>
+          <div class="word serif" id="thisw" style="top:500px;left:150px;font-size:250px;line-height:1">this.</div>
+          <svg id="arrow" width="1080" height="1920" style="position:absolute;left:0;top:0;overflow:visible">
+            <path id="arrowPath" d="M 820 600 C 900 640 880 730 760 790" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+            <path id="arrowHead" d="M 790 742 L 752 794 L 816 806" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div id="grain"></div>
+      <div style="position:absolute;left:0;top:0;opacity:.001;font-size:40px"><span class="serif">this.</span><span class="arc">WHO</span><span>who</span></div>
+    </div>
+  </div>
+</div>
+<script src="assets/vendor/gsap.min.js"></script>
+<script>
+(function () {
+  const DUR = 5.84;
+  const HOOK_END = 5.84;       // BASS IN (measured) — the body's dive into a dark slot starts here
+  gsap.defaults({ lazy: false });
+  const tl = gsap.timeline({ paused: true });
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
+  function ft(t, target, from, to) {   // a from-only prop (e.g. opacity:1 to reveal) is held through the tween, so seeks never lose it
+    const hold = {}; Object.keys(from).forEach((k) => { if (!(k in to)) hold[k] = from[k]; });
+    tl.fromTo(target, from, Object.assign({ immediateRender: false }, hold, to), t);
+  }
+  // seeded random so every render is identical
+  let seed = 11; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+
+  // ------------------------------------------------ stick-figure rig (forward kinematics on nested 0×0 joints)
+  // units: torso 110 · upper arm 62 · forearm 58 · thigh 80 · shin 80 · head ⌀72. Angle 0 = limb hanging down,
+  // positive = swings toward screen-left (CSS rotate is clockwise). Arms are given relative to the body.
+  const U = { T: 110, SH: 100, A: 62, F: 58, L: 80, S: 80, HD: 72 };
+  function bone(L, W) { return `<div class="b" style="left:${-W / 2}px;top:${-W / 2}px;width:${W}px;height:${L + W}px;border-radius:${W / 2}px"></div>`; }
+  function joint(cls, x, y, inner) { return `<div class="j ${cls}" style="left:${x}px;top:${y}px">${inner}</div>`; }
+  function figHTML(W, phone) {
+    const hand = phone ? joint('hand', 0, U.F, `<div class="ph" style="top:27px"><div class="phone"></div></div>`) : joint('hand', 0, U.F, '');
+    const arm = (s, inner) => joint('a' + s, 0, U.SH, bone(U.A, W) + joint('f' + s, 0, U.A, bone(U.F, W) + inner));
+    const leg = (s) => joint('l' + s, 0, 0, bone(U.L, W) + joint('s' + s, 0, U.L, bone(U.S, W)));
+    return joint('root', 0, 0,
+      leg('L') + leg('R') +
+      joint('torso', 0, 0, bone(U.T, W) +
+        arm('L', '') + arm('R', hand) +
+        joint('neck', 0, U.T, (phone === 'hp' ? `<div style="position:absolute;left:-50px;top:-8px;width:100px;height:100px;border-radius:50%;border:${W}px solid transparent;border-bottom-color:#fff"></div><div style="position:absolute;left:-52px;top:26px;width:20px;height:34px;border-radius:8px;background:var(--accent)"></div><div style="position:absolute;left:32px;top:26px;width:20px;height:34px;border-radius:8px;background:var(--accent)"></div>` : '') + `<div class="head" style="left:${-U.HD / 2}px;top:6px;width:${U.HD}px;height:${U.HD}px;border-width:${W}px"></div>`)));
+  }
+  const FIGS = {};
+  function makeFig(id, parent, o) {   // o: {s, x, feet, flip, W, phone}
+    const el = document.createElement('div'); el.className = 'fig' + (id === 'artist' ? ' artist' : ''); el.id = id;
+    el.innerHTML = figHTML(o.W || 6, o.phone !== false ? (id === 'artist' ? 'hp' : true) : false); $(parent).appendChild(el);
+    const hip = o.feet - (U.L + U.S) * o.s;
+    gsap.set(el, { x: o.x, y: hip, scaleX: o.s * (o.flip || 1), scaleY: o.s });
+    gsap.set(`#${id} .torso`, { rotation: 180 });
+    FIGS[id] = Object.assign({ hip }, o);
+    return el;
+  }
+  const POSE_KEYS = ['root', 'aL', 'fL', 'aR', 'fR', 'lL', 'sL', 'lR', 'sR', 'neck'];
+  function rots(P) {
+    return { root: P.lean || 0, aL: P.aL[0] - 180, fL: P.aL[1], aR: P.aR[0] - 180, fR: P.aR[1],
+      lL: P.lL[0], sL: P.lL[1], lR: P.lR[0], sR: P.lR[1], neck: P.head || 0 };
+  }
+  function setPose(id, P) { const r = rots(P); POSE_KEYS.forEach((k) => gsap.set(`#${id} .${k}`, { rotation: r[k] })); }
+  function pose(t, id, P, d, ease) { const r = rots(P); POSE_KEYS.forEach((k) => tl.to(`#${id} .${k}`, { rotation: r[k], duration: d, ease }, t)); }
+  // forward kinematics: world point of the right hand's phone centre for figure id in pose P
+  const R2 = (v, deg) => { const a = deg * Math.PI / 180, c = Math.cos(a), s = Math.sin(a); return [v[0] * c - v[1] * s, v[0] * s + v[1] * c]; };
+  const add = (a, b) => [a[0] + b[0], a[1] + b[1]];
+  function fkPhone(id, P, hipX, hipY) {
+    const f = FIGS[id], r = rots(P);
+    let v = [0, U.F + 27];
+    v = add([0, U.A], R2(v, r.fR)); v = add([0, U.SH], R2(v, r.aR)); v = R2(v, 180); v = R2(v, r.root);
+    return { x: hipX + f.s * (f.flip || 1) * v[0], y: hipY + f.s * v[1], rot: (f.flip || 1) * (r.root + 180 + r.aR + r.fR) };
+  }
+
+  // poses (facing screen-right; crowd running left are mirrored with flip −1)
+  const STAND = { lean: 0, aL: [12, 6], aR: [-12, -6], lL: [-7, 4], lR: [7, -4], head: 0 };
+  const RUN_A = { lean: 16, aL: [55, -80], aR: [-150, -15], lL: [-52, 70], lR: [38, 85], head: -8 };
+  const RUN_B = { lean: 16, aL: [-35, -90], aR: [-140, -25], lL: [36, 90], lR: [-50, 62], head: -8 };
+  const SKID = { lean: -14, aL: [70, -40], aR: [-165, -10], lL: [-38, 30], lR: [22, 10], head: -10 };
+  const UP_A = { lean: 4, aL: [40, -50], aR: [-122, -12], lL: [-10, 8], lR: [10, -8], head: -6 };
+  const UP_B = { lean: 9, aL: [70, -60], aR: [-112, -26], lL: [-22, 40], lR: [22, -40], head: 2 };
+
+  // ------------------------------------------------ build the world
+  const FLOOR = 1600;
+  makeFig('artist', '#artistWrap', { s: 2.6, x: 540, feet: FLOOR, W: 7 });
+  const CROWD = [   // id, layer, scale, feet, x0 (at its start), x1 (arrival), flip, start, arrive
+    ['A5', '#back', 1.75, 1572, 2550, 330, -1, 0.70, 1.66],
+    ['A2', '#back', 1.95, 1585, 1900, 830, -1, 0.70, 1.62],
+    ['B3', '#back', 1.7, 1570, -1000, 30, 1, 0.95, 1.64],
+    ['A1', '#front', 2.3, 1640, 1500, 1010, -1, 0.70, 1.58],
+    ['A4', '#front', 2.05, 1615, 2350, 1460, -1, 0.70, 1.70],
+    ['A3', '#front', 2.45, 1665, 2100, 1240, -1, 0.70, 1.64],
+    ['B2', '#front', 1.95, 1600, -1150, -170, 1, 0.95, 1.62],
+    ['B1', '#front', 2.45, 1665, -1350, -400, 1, 0.95, 1.68],
+  ];
+  CROWD.forEach(([id, layer, s, feet, x0, x1, flip]) => { makeFig(id, layer, { s, x: x0, feet, flip, W: 6 }); setPose(id, RUN_A); });
+  // floor hatching + background specks (parallax layer)
+  let hh = ''; for (let i = 0; i < 46; i++) hh += `<div class="hatch" style="left:${-2600 + i * 130 + rnd() * 60}px;top:${1625 + rnd() * 120}px;width:${30 + rnd() * 50}px"></div>`;
+  $('#hatches').innerHTML = hh;
+  let sp = ''; for (let i = 0; i < 70; i++) { const d = 3 + rnd() * 6; sp += `<div class="speck" style="left:${-900 + rnd() * 3200}px;top:${-700 + rnd() * 2700}px;width:${d}px;height:${d}px;opacity:${0.15 + rnd() * 0.3}"></div>`; }
+  $('#specks').innerHTML = sp;
+  // the cricket's two hind legs
+  gsap.set('#clg1', { left: -30, top: -4, width: 70, rotation: -40 }); gsap.set('#clg2', { left: -10, top: -2, width: 60, rotation: 130 });
+
+  // ------------------------------------------------ camera (world + specks at 0.3× for parallax)
+  const camV = (cx, cy, s) => ({ x: 540 - cx * s, y: 960 - cy * s, scale: s });
+  function cam(t, cx, cy, s, d, ease) {
+    const v = camV(cx, cy, s);
+    tl.to('#world', Object.assign({ duration: d, ease }, v), t);
+    tl.to('#specks', { x: v.x * 0.3, y: v.y * 0.3, duration: d, ease }, t);
+  }
+
+  tl.set('#h1', { opacity: 1 }, 0);
+
+  // ================================================ BEAT 1 · 0–0.68 "If you want" — he posts. Nothing.
+  const A = 'artist', AH = FIGS.artist.hip;
+  const POST_AIR = { lean: -4, aL: [78, -38], aR: [-172, -4], lL: [-34, 66], lR: [26, 84], head: -14 };
+  const LAND = { lean: 0, aL: [40, -20], aR: [-150, -20], lL: [-30, 52], lR: [30, -52], head: -6 };
+  const LOOK = { lean: 3, aL: [14, 8], aR: [-38, -112], lL: [-7, 4], lR: [7, -4], head: 18 };
+  const SLUMP = { lean: 6, aL: [4, 4], aR: [-14, -70], lL: [-6, 6], lR: [6, -6], head: 34 };
+  setPose(A, POST_AIR); gsap.set('#artist', { y: AH - 90 });
+  cam(0, 540, 1120, 1.2, 0.6, 'expo.out');                                  // camera braking at frame 0
+  tl.to('#artist', { y: AH + 26, duration: 0.2, ease: 'power2.in' }, 0);    // falls back to the floor
+  pose(0, A, LAND, 0.2, 'power2.in');
+  tl.to('#artist', { y: AH, duration: 0.3, ease: 'back.out(2.2)' }, 0.2);   // knees soak the landing
+  pose(0.2, A, STAND, 0.24, 'power2.out');
+  pose(0.38, A, LOOK, 0.2, 'power3.out');
+  pose(0.56, A, SLUMP, 0.22, 'power2.inOut');
+  // the post goes out: two blue rings off the phone (already flying at frame 0)
+  const P0 = fkPhone(A, POST_AIR, 540, AH - 90);
+  gsap.set(['#ring1', '#ring2'], { left: P0.x, top: P0.y });
+  const c0 = camV(540, P0.y + 600 / 1.3, 1.3);
+  gsap.set('#world', c0); gsap.set('#specks', { x: c0.x * 0.3, y: c0.y * 0.3 });
+  ft(0, '#ring1', { scale: 0.16, opacity: 1 }, { scale: 1, opacity: 0, duration: 0.8, ease: 'expo.out' });
+  ft(0, '#ring2', { scale: 0.02, opacity: 0.9 }, { scale: 0.75, opacity: 0, duration: 0.9, ease: 'expo.out' });
+  // crickets: a cricket hops across the floor twice
+  gsap.set('#cricket', { x: 1180, y: FLOOR - 4, scale: 1.9 });
+  [[0.36, 1180, 960], [0.52, 960, 760]].forEach(([t, xa, xb]) => {
+    tl.to('#cricket', { x: xb, duration: 0.15, ease: 'power1.inOut' }, t);
+    tl.to('#cricket', { y: FLOOR - 120, rotation: 14, duration: 0.075, ease: 'power2.out' }, t);
+    tl.to('#cricket', { y: FLOOR - 4, rotation: 0, duration: 0.075, ease: 'power2.in' }, t + 0.075);
+    tl.to('#clg1', { rotation: -10, duration: 0.06, ease: 'power3.out' }, t);
+    tl.to('#clg1', { rotation: -40, duration: 0.09, ease: 'power2.inOut' }, t + 0.07);
+  });
+
+  tl.set('#cricket', { opacity: 0 }, 0.84);
+  // the comment count: an empty bubble reading 0 (the crickets beat)
+  gsap.set('#zero', { opacity: 0, transformOrigin: '85% 90%' });
+  gsap.set('#zeroN', { fontVariationSettings: "'wdth' 100, 'wght' 900" });
+  ft(0.3, '#zero', { opacity: 1, scale: 0, rotation: -14 }, { scale: 0.74, rotation: 3, duration: 0.3, ease: 'back.out(2.4)' });
+  tl.to('#zero', { rotation: -2, y: 26, scaleY: 0.94, duration: 0.3, ease: 'sine.inOut' }, 0.6);   // deflates a little
+  ft(0.42, '#zeroN', { scale: 1.4, fontVariationSettings: "'wdth' 125, 'wght' 300" }, { scale: 1, fontVariationSettings: "'wdth' 100, 'wght' 900", duration: 0.28, ease: 'expo.out' });
+  tl.to('#zero', { x: -1300, skewX: 20, duration: 0.2, ease: 'expo.in' }, 0.7);                 // swept away by the whip
+
+  // ================================================ BEAT 2 · 0.68–1.40 "strangers" — whip to the stampede
+  tl.to('#world', { x: '+=70', duration: 0.08, ease: 'power2.out' }, 0.6);            // anticipation
+  cam(0.68, 1760, 885, 0.95, 0.34, 'expo.inOut');                                     // whip + brake
+  ft(0.68, '#world', { filter: 'blur(0px)' }, { filter: 'blur(14px)', duration: 0.16, ease: 'power2.in' });
+  ft(0.84, '#world', { filter: 'blur(14px)' }, { filter: 'blur(0px)', duration: 0.18, ease: 'power2.out' });
+  cam(1.02, 1460, 900, 0.93, 0.4, 'sine.inOut');                                      // tracks the crowd
+  // the crowd runs: alternating run poses + a bob, then skids in, phones up, and hops
+  CROWD.forEach(([id, , s, feet, x0, x1, flip, t0, t1], n) => {
+    const hip = FIGS[id].hip, step = 0.11 + (n % 3) * 0.012;
+    tl.to('#' + id, { x: x1, duration: t1 - t0, ease: 'power2.out' }, t0);
+    for (let t = t0, k = n % 2; t < t1 - 0.05; t += step, k++) {
+      pose(t, id, k % 2 ? RUN_A : RUN_B, step, 'sine.inOut');
+      tl.to('#' + id, { y: hip - (k % 2 ? 14 : 2) * s, duration: step, ease: 'sine.inOut' }, t);
+    }
+    pose(t1 - 0.05, id, SKID, 0.14, 'power3.out');
+    tl.to('#' + id, { y: hip + 8 * s, duration: 0.12, ease: 'power3.out' }, t1 - 0.05);
+    // hops, phones up — each on its own clock (never on the beat)
+    let t = t1 + 0.12 + (n % 4) * 0.05, k = 0; const hop = 0.2 + (n % 3) * 0.03;
+    while (t < 3.5) {
+      pose(t, id, k % 2 ? UP_B : UP_A, hop, 'sine.inOut');
+      tl.to('#' + id, { y: hip - (k % 2 ? 0 : 22) * s, duration: hop, ease: k % 2 ? 'power2.in' : 'power2.out' }, t);
+      t += hop; k++;
+    }
+  });
+  // STRANGERS stomps in letter by letter, like footsteps
+  $('#strangers').innerHTML = [...'STRANGERS'].map((c) => `<span class="sl">${c}</span>`).join('');
+  gsap.set('#strangers', { fontVariationSettings: "'wdth' 62, 'wght' 900" });
+  gsap.set('.sl', { y: -420, opacity: 0, transformOrigin: '50% 100%' });
+  $$('.sl').forEach((el, i) => {
+    const t = 0.7 + i * 0.045;
+    ft(t, el, { y: -420, opacity: 1, scaleY: 1.35, scaleX: 0.85 }, { y: 0, scaleY: 1.35, scaleX: 0.85, duration: 0.14, ease: 'power3.in' });
+    ft(t + 0.14, el, { scaleY: 1.35, scaleX: 0.85 }, { scaleY: 0.72, scaleX: 1.18, duration: 0.05, ease: 'power2.out' });
+    ft(t + 0.19, el, { scaleY: 0.72, scaleX: 1.18 }, { scaleY: 1, scaleX: 1, duration: 0.42, ease: 'elastic.out(1,.45)' });
+    // trampled: kicked up and out as the camera pulls wide
+    ft(1.44 + i * 0.022, el, { y: 0, rotation: 0 }, { y: -1100 - rnd() * 300, x: (rnd() - 0.5) * 500, rotation: (rnd() - 0.5) * 140, duration: 0.34, ease: 'expo.in' });
+  });
+
+  // ================================================ BEAT 3 · 1.40–2.45 "in your comments asking" — they surround him
+  cam(1.38, 540, 450, 0.6, 0.42, 'expo.inOut');
+  cam(1.82, 560, 470, 0.63, 1.7, 'sine.inOut');                                         // long drift in the hold
+  const SURPRISE = { lean: -8, aL: [112, 24], aR: [-112, -24], lL: [-16, 10], lR: [16, -10], head: -12 };
+  const AMAZE_A = { lean: -3, aL: [150, -30], aR: [-40, -100], lL: [-9, 5], lR: [9, -5], head: -18 };
+  const AMAZE_B = { lean: 3, aL: [128, -52], aR: [-50, -95], lL: [-9, 5], lR: [9, -5], head: 16 };
+  pose(1.42, A, SURPRISE, 0.16, 'back.out(2.5)');
+  gsap.set('#spot', { opacity: 0, transformOrigin: '50% 50%' });
+  ft(1.62, '#spot', { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' });  // he's the one being filmed
+  tl.to('#artist', { y: AH - 50, duration: 0.14, ease: 'power2.out' }, 1.42);
+  tl.to('#artist', { y: AH, duration: 0.16, ease: 'power2.in' }, 1.56);
+  pose(1.9, A, AMAZE_A, 0.4, 'power2.inOut');
+  pose(2.4, A, AMAZE_B, 0.45, 'power2.inOut');
+  pose(2.95, A, AMAZE_A, 0.45, 'power2.inOut');
+  // comments spray out of their phones and fill the sky
+  const LINES = ['who is this??', 'WHO IS THIS', 'wait who is this', 'who is thisss', 'song name??', 'who is this omg',
+    'WHO IS THIS??', 'who is this', 'need the name', 'who IS this??', 'who is this fr', 'who is this 2'];
+  const camW = camV(540, 450, 0.6);
+  const toScreen = (p) => ({ x: p.x * camW.scale + camW.x, y: p.y * camW.scale + camW.y });
+  const sources = CROWD.map(([id, , , , , x1]) => toScreen(fkPhone(id, UP_A, x1, FIGS[id].hip - 22 * FIGS[id].s)));
+  let ch = ''; LINES.forEach((s, i) => { ch += `<div class="cm" id="cm${i}" style="font-size:${44 + Math.round(rnd() * 10)}px;color:${i % 4 === 1 ? 'var(--glow)' : '#fff'}">${s}</div>`; });
+  $('#comments').innerHTML = ch;
+  LINES.forEach((s, i) => {
+    const src = sources[i % sources.length], t = 1.6 + i * 0.055;
+    const tx = (i % 2 ? 570 : 60) + rnd() * 40, ty = 290 + Math.floor(i / 2) * 104 + (i % 2) * 40, r = (rnd() - 0.5) * 10;
+    gsap.set('#cm' + i, { opacity: 0 });
+    ft(t, '#cm' + i, { x: src.x - 120, y: src.y - 30, scale: 0.2, opacity: 0, rotation: r * 3 },
+      { x: tx, y: ty, scale: 1, opacity: 1, rotation: r, duration: Math.min(0.5, 2.28 - t), ease: 'expo.out' });
+    tl.to('#cm' + i, { x: tx + (rnd() - 0.5) * 20, y: ty - 20, rotation: r * 0.6, duration: Math.max(0.02, 2.28 - t - Math.min(0.5, 2.28 - t)), ease: 'sine.inOut' }, t + Math.min(0.5, 2.28 - t));
+    // sucked together into WHO
+    tl.to('#cm' + i, { x: 380, y: 420, scale: 0.15, opacity: 0, rotation: 0, duration: 0.14, ease: 'power3.in' }, 2.28 + (i % 4) * 0.02);
+  });
+
+  // ================================================ BEAT 4 · 2.45–3.55 "who is this?" — the comments become the line
+  $('#who').innerHTML = [...'WHO'].map((c) => `<span class="wl">${c}</span>`).join('');
+  gsap.set('#who', { fontVariationSettings: "'wdth' 100, 'wght' 900" });
+  gsap.set('.wl', { opacity: 0, transformOrigin: '50% 60%' });
+  $$('.wl').forEach((el, i) => {
+    const t = 2.5 + i * 0.012;
+    ft(t, el, { opacity: 1, scale: 0.15, fontVariationSettings: "'wdth' 125, 'wght' 300" },
+      { scale: 1, fontVariationSettings: "'wdth' 100, 'wght' 900", duration: 0.32, ease: 'expo.out' });
+    ft(t + 0.12, el, { scaleY: 1 }, { scaleY: 0.9, duration: 0.06, ease: 'power2.out' });
+    ft(t + 0.18, el, { scaleY: 0.9 }, { scaleY: 1, duration: 0.3, ease: 'back.out(2)' });
+  });
+  tl.to('#who', { y: -14, duration: 1.0, ease: 'sine.inOut' }, 2.6);
+  // IS drops and bounces; THIS whips in from the right and brakes; ?? pops
+  $('#isthis').innerHTML = '<span id="isw">IS&nbsp;</span><span id="thisb">THIS</span><span id="qq">??</span>';
+  gsap.set('#isthis', { fontVariationSettings: "'wdth' 82, 'wght' 900" });
+  gsap.set(['#isw', '#thisb', '#qq'], { opacity: 0 });
+  ft(2.8, '#isw', { opacity: 1, y: -700 }, { y: 0, duration: 0.5, ease: 'bounce.out' });
+  ft(3.04, '#thisb', { opacity: 1, x: 900, skewX: -18, filter: 'blur(12px)' }, { x: 0, skewX: 0, filter: 'blur(0px)', duration: 0.34, ease: 'expo.out' });
+  ft(3.3, '#thisb', { scaleX: 1 }, { scaleX: 0.92, duration: 0.05, ease: 'power2.out', transformOrigin: '0% 50%' });
+  ft(3.35, '#thisb', { scaleX: 0.92 }, { scaleX: 1, duration: 0.25, ease: 'back.out(2)', transformOrigin: '0% 50%' });
+  ft(3.22, '#qq', { opacity: 1, scale: 0, rotation: -40 }, { scale: 1, rotation: 0, duration: 0.3, ease: 'back.out(3)' });
+
+  // ================================================ BEAT 5 · 3.55–4.44 "steal" — lights die, a hand takes it
+  const DARK = { lean: 0, aL: [52, 30], aR: [-150, -16], lL: [-9, 5], lR: [9, -5], head: -16 };
+  const LUNGE = { lean: 22, aL: [80, -30], aR: [-96, -6], lL: [-46, 30], lR: [30, 70], head: -4 };
+  const SHRUG = { lean: 0, aL: [120, -70], aR: [-120, 70], lL: [-9, 5], lR: [9, -5], head: 10 };
+  pose(3.36, A, DARK, 0.18, 'power3.out');
+  const PD = fkPhone(A, DARK, 540, AH);
+  ft(3.55, '#shade', { opacity: 0 }, { opacity: 0.86, duration: 0.12, ease: 'power2.out' });
+  gsap.set('#litGlow', { left: PD.x, top: PD.y, opacity: 0 });
+  ft(3.55, '#litGlow', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1.25, duration: 0.5, ease: 'power2.out' });
+  const DS = 0.82; const camD = [PD.x - (470 - 540) / DS, PD.y - (1080 - 960) / DS];
+  cam(3.52, camD[0], camD[1], DS, 0.5, 'expo.inOut');
+  // WHO IS THIS?? falls with the lights
+  tl.to(['#who', '#isthis'], { opacity: 0, duration: 0.07, ease: 'power2.out' }, 3.55);   // the lights cut the words
+  // the stealing arm: one long stick arm from the bottom-right corner (it's yours), open hand → grab
+  const ST = 4.0, TL = 300, PHI = 143.13, DIR = [-0.6, -0.8];
+  $('#thief').innerHTML = joint('root', 0, 0, bone(TL, 8) + joint('hand', 0, TL,
+    `<div class="head" style="left:-21px;top:0px;width:42px;height:42px;border-width:8px"></div>` +
+    [-50, -18, 14, 46, 100].map((r, i) => joint('fg fg' + i, i === 4 ? -14 : (i - 1.5) * 7, i === 4 ? 14 : 34, bone(i === 4 ? 24 : 30, 8))).join('') +
+    `<div class="ph" id="thiefPh"><div class="phone" style="background:var(--accent);box-shadow:0 0 40px 10px rgba(60,197,247,.8)"></div></div>`));
+  const HP = [PD.x - ST * 52 * DIR[0], PD.y - ST * 52 * DIR[1]];           // hand just short of the phone
+  const C = [HP[0] - ST * TL * DIR[0], HP[1] - ST * TL * DIR[1]];          // shoulder off the bottom-right corner
+  gsap.set('#thief', { x: C[0] + 1200 * 0.6, y: C[1] + 1200 * 0.8, scale: ST, rotation: PHI, opacity: 0 });
+  tl.set('#thief', { opacity: 1 }, 3.57);
+  [-50, -18, 14, 46, 100].forEach((r, i) => gsap.set('#thief .fg' + i, { rotation: r }));
+  const loc = R2([(PD.x - HP[0]) / ST, (PD.y - HP[1]) / ST], -PHI);
+  gsap.set('#thiefPh', { x: loc[0], y: loc[1], rotation: PD.rot - PHI, scale: 2.6 / ST, opacity: 0 });
+  tl.to('#thief', { x: C[0] + 520 * 0.6, y: C[1] + 520 * 0.8, duration: 0.16, ease: "power2.out" }, 3.57);   // creeps in
+  tl.to('#thief', { x: C[0] + 680 * 0.6, y: C[1] + 680 * 0.8, duration: 0.1, ease: 'power2.inOut' }, 3.74); // winds back
+  tl.to('#thief', { x: C[0], y: C[1], duration: 0.12, ease: 'expo.out' }, 3.84);                            // strikes
+  [-16, -6, 6, 16, 40].forEach((r, i) => tl.to('#thief .fg' + i, { rotation: r, duration: 0.06, ease: 'power3.out' }, 3.94));
+  tl.set('#artist .phone', { opacity: 0 }, 3.96); tl.set('#thiefPh', { opacity: 1 }, 3.96);
+  tl.to('#thief', { x: C[0] + 50 * 0.6, y: C[1] + 50 * 0.8, duration: 0.14, ease: 'power2.inOut' }, 3.98);  // tug — the grab holds a beat
+  tl.to('#litGlow', { opacity: 0, duration: 0.3, ease: 'power2.out' }, 4.0);
+  pose(4.14, A, LUNGE, 0.22, 'back.out(1.6)');
+  tl.to('#artist', { x: 620, duration: 0.3, ease: 'power3.out' }, 4.14);
+  // the yank: ripped back down-right and toward the lens
+  tl.to('#thief', { x: C[0] + 1500 * 0.6, y: C[1] + 1500 * 0.8, scale: ST * 1.7, rotation: PHI + 14, duration: 0.3, ease: 'power3.in' }, 4.12);
+  ft(4.26, '#thief', { filter: 'blur(0px)' }, { filter: 'blur(10px)', duration: 0.18, ease: 'power2.in' });
+  // STEAL yanks in from the right, letter by letter, and brakes
+  $('#steal').innerHTML = [...'STEAL'].map((c) => `<span class="stl">${c}</span>`).join('');
+  gsap.set('#steal', { fontVariationSettings: "'wdth' 78, 'wght' 900" });
+  gsap.set('.stl', { opacity: 0, transformOrigin: '0% 100%' });
+  $$('.stl').forEach((el, i) => {
+    const t = 3.76 + i * 0.018;
+    ft(t, el, { opacity: 1, x: 1100, skewX: -24, filter: 'blur(14px)' }, { x: 0, skewX: 0, filter: 'blur(0px)', duration: 0.3, ease: 'expo.out' });
+    ft(t + 0.3, el, { skewX: 0 }, { skewX: 6, duration: 0.07, ease: 'power2.out' });
+    ft(t + 0.37, el, { skewX: 6 }, { skewX: 0, duration: 0.3, ease: 'back.out(2)' });
+  });
+  gsap.set('#thisw', { opacity: 0, transformOrigin: '30% 70%' });
+  ft(4.1, '#thisw', { opacity: 1, scale: 0, rotation: -24 }, { scale: 1, rotation: -6, duration: 0.42, ease: 'back.out(2.6)' });
+
+  // ================================================ BEAT 6 · 4.44–5.84 "this." — the phone slams flat to camera
+  gsap.set('#bigPhone', { opacity: 0, transformOrigin: '50% 50%' });
+  ft(4.42, '#bigPhone', { opacity: 1, x: 640, y: 900, scale: 2.3, rotation: -38, filter: 'blur(16px)' },
+    { x: 0, y: 0, scale: 1, rotation: -4, filter: 'blur(0px)', duration: 0.3, ease: 'expo.out' });
+  ft(4.62, '#bigPhone', { scaleY: 1, scaleX: 1 }, { scaleY: 0.95, scaleX: 1.04, duration: 0.05, ease: 'power2.out' });
+  ft(4.67, '#bigPhone', { scaleY: 0.95, scaleX: 1.04 }, { scaleY: 1, scaleX: 1, duration: 0.4, ease: 'elastic.out(1,.5)' });
+  tl.to('#bigPhone', { rotation: 1.5, duration: 0.6, ease: 'sine.inOut' }, 4.75);
+  const N = 16; for (let k = 1; k <= N; k++) tl.set('#cnt', { textContent: Math.round(3481 * (1 - Math.pow(1 - k / N, 3))).toLocaleString('en-US') }, 4.6 + k * 0.045);
+  gsap.set('#lv', { scale: 1.12, transformOrigin: '50% 50%' });
+  ft(4.44, '#lv', { scale: 1.12 }, { scale: 1, duration: 1.1, ease: 'sine.out' });  // the real lyric video, settling
+  ft(4.6, '#cnt', { scale: 1 }, { scale: 1.12, duration: 0.36, ease: 'power2.out' });
+  ft(4.96, '#cnt', { scale: 1.12 }, { scale: 1, duration: 0.3, ease: 'back.out(2)' });
+  tl.to('#scr', { opacity: 0, duration: 0.18, ease: 'power2.in' }, 5.5);                  // screen goes dark: the slot
+  [[18, -10], [-13, 8], [8, -5], [-3, 2], [0, 0]].forEach(([x, y], i) => tl.to('#cam', { x, y, duration: 0.05, ease: 'power2.out' }, 4.44 + i * 0.05));
+  ft(4.44, '#shade', { opacity: 0.86 }, { opacity: 0.55, duration: 0.3, ease: 'power2.out' });
+  ft(4.44, '#world', { filter: 'blur(0px)' }, { filter: 'blur(4px)', duration: 0.3, ease: 'power2.out' });
+  cam(4.44, 560, 980, 0.62, 1.4, 'sine.inOut');                                          // the scene he lost, behind
+  pose(4.5, A, SHRUG, 0.3, 'back.out(2)');
+  // the drawn arrow from "this." to the phone
+  const ap = $('#arrowPath'), al = ap.getTotalLength ? ap.getTotalLength() : 320;
+  gsap.set(ap, { strokeDasharray: al, strokeDashoffset: al }); gsap.set('#arrowHead', { strokeDasharray: 140, strokeDashoffset: 140 });
+  ft(4.56, ap, { strokeDashoffset: al }, { strokeDashoffset: 0, duration: 0.24, ease: 'power2.inOut' });
+  ft(4.78, '#arrowHead', { strokeDashoffset: 140 }, { strokeDashoffset: 0, duration: 0.12, ease: 'power2.out' });
+  // the push into the dark screen — the body dives through it at 5.84
+  tl.to('#endPush', { scale: 1.06, duration: 0.6, ease: 'sine.inOut' }, 4.5);
+  tl.to('#endPush', { scale: 1.58, y: -390, duration: 0.6, ease: 'expo.in' }, 5.24);
+  tl.to(['#steal', '#thisw', '#arrow'], { opacity: 0, duration: 0.3, ease: 'power2.in' }, 5.42);
+
+  // grain: re-seeded 12×/s (texture, not a pulse)
+  for (let t = 0, k = 0; t < DUR; t += 1 / 12, k++) tl.set('#grain', { x: (k * 37) % 60, y: (k * 53) % 60 }, t);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines['who-hook'] = tl;
+})();
+</script>
+</body>
+</html>

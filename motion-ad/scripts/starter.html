@@ -1,0 +1,130 @@
+<!doctype html>
+<!-- A blank motion ad. Design it from THIS ad's plan (its ads-log row, its track map, its picked hook).
+     The examples in the skill's examples/ folder show technique; never paste their scenes. -->
+<html data-composition-variables='[{"id":"hook","type":"enum","label":"Hook","default":"h1","options":[{"value":"h1","label":"Hook 1"},{"value":"h2","label":"Hook 2"},{"value":"h3","label":"Hook 3"},{"value":"h4","label":"Hook 4"},{"value":"h5","label":"Hook 5"},{"value":"h6","label":"Hook 6"}]}]'>
+<head>
+<meta charset="utf-8">
+<title>__BUSINESS__ — __SLUG__</title>
+<style>
+/* type roles (STYLE.md → Type): filled from brand.json → fonts by new_ad.sh. SG = headline, IS = accent, JB = mono,
+   Bebas = big titles, ARC = the hero word (a variable font: font-variation-settings 'wdth' / 'wght' if it has them) */
+@font-face{font-family:'SG';src:url('fonts/__F_HEADLINE__');font-weight:300 700}
+@font-face{font-family:'IS';src:url('fonts/__F_ACCENT__');font-style:italic;font-weight:400}
+@font-face{font-family:'JB';src:url('fonts/__F_MONO__');font-weight:100 800}
+@font-face{font-family:'Bebas';src:url('fonts/__F_TITLES__')}
+@font-face{font-family:'ARC';src:url('fonts/__F_HERO__');font-weight:100 900;font-stretch:62% 125%}
+/* the brand palette only (STYLE.md → Colour), from brand.json. Pick the stage for THIS ad (dark or light), ink = its opposite. */
+:root{--stage:__STAGE__;--ink:__INK__;--accent:__ACCENT__;--flood:__FLOOD__;--glow:__GLOW__}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;background:var(--stage);overflow:hidden}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:'SG',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.serif{font-family:'IS',serif;font-style:italic;font-weight:400;color:var(--accent)}
+.mono{font-family:'JB',monospace}
+#stage{position:absolute;inset:0}
+.flood{position:absolute;inset:0;background:var(--flood)}
+.mask{overflow:hidden;display:block}
+.mask>span{display:inline-block}
+.hook{position:absolute;inset:0;opacity:0}
+/* the hero screen that ONE continuous camera carries (a 9:16 box scaled between rects in R) */
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.flip>div{transform-style:preserve-3d}
+#screenWrap{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:0 0;overflow:hidden;background:#000}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="__SLUG__" data-width="1080" data-height="1920" data-start="0" data-duration="30" data-fps="60">
+  <audio id="music" data-start="0" data-duration="30" data-track-index="0" src="assets/audio/final-mix.wav"></audio>
+  <div id="stage">
+    <!-- the picked hook goes in #h1 (HOOKS.md → 6 ideas, build the best one). h2–h6 only if the owner asks for variants.
+         Each owns its DOM + tweens and is gone by HOOK_END. Build and check it BEFORE the body. -->
+    <div id="h1" class="hook"></div>
+    <div id="h2" class="hook"></div>
+    <div id="h3" class="hook"></div>
+    <div id="h4" class="hook"></div>
+    <div id="h5" class="hook"></div>
+    <div id="h6" class="hook"></div>
+    <!-- body scenes go here, built from the real product: footage, photos, screens rebuilt 1:1 (PIPELINE.md §1).
+         <video>/<audio>/<img> must be STATIC HTML here with an id (hyperframes discovers media from the markup, not
+         from JS; a <video> without an id renders frozen). Don't measure layout in JS while building the timeline
+         (fonts may not be loaded yet): hard-code positions, or measure them from a render. -->
+    <div id="screenWrap"><!-- <video id="feed" src="assets/footage/…" muted playsinline> for the hero footage (PIPELINE §2) --></div>
+    <!-- a flood sits in SCENE ORDER, directly under the scene it reveals (not a global top layer): above z-order it
+         holds a flat colour frame until the scene is on top. Reveal the incoming scene WITH content already in it. -->
+    <div id="floodA" class="flood" style="clip-path:circle(0px at 540px 960px)"></div>
+  </div>
+</div>
+<script src="assets/vendor/gsap.min.js"></script><!-- bundled: a CDN hiccup mid-render freezes every tween (GOTCHAS) -->
+<script>
+(function () {
+  // ------------------------------------------------ this ad's clock — times come from `music_prep.py map`, not a bpm
+  const DUR = 30;
+  const HOOK_END = 2.9;          // the first measured BASS IN (or whatever event ends the hook)
+  const W = 1080;
+  // camera rects [x, y, width] for the 9:16 hero screen — design your own; names are yours
+  const R = { FULL: [0, 0, 1080] };
+  const rad = { FULL: 0 };
+  const tl = gsap.timeline({ paused: true });
+
+  // ------------------------------------------------ helpers (every tween eased — never 'none'/linear)
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
+  // explicit from->to, never rendered before its start (seek-safe). gsap.set the pre-state for anything entering late.
+  function ft(t, target, from, to) { tl.fromTo(target, from, Object.assign({ immediateRender: false }, to), t); }
+  function scr(name) { const r = R[name]; const s = r[2] / W; return { x: r[0], y: r[1], scale: s, borderRadius: rad[name] / s }; }
+  function moveScreen(t, from, to, dur, ease) { ft(t, '#screenWrap', scr(from), Object.assign(scr(to), { duration: dur, ease })); }
+  // a group that must stay locked to the screen while it travels: map rect a → rect b
+  function map(a, b) { const s = R[b][2] / R[a][2]; return { x: R[b][0] - s * R[a][0], y: R[b][1] - s * R[a][1], scale: s }; }
+  function mblur(sel, t0, tPeak, t1, px) {
+    ft(t0, sel, { filter: 'blur(0px)' }, { filter: `blur(${px}px)`, duration: tPeak - t0, ease: 'power2.in' });
+    ft(tPeak, sel, { filter: `blur(${px}px)` }, { filter: 'blur(0px)', duration: t1 - tPeak, ease: 'power2.out' });
+  }
+  // a flood / iris from a focal point: the ONLY way scenes change (no hard cuts); outgoing content keeps moving under it
+  // (x, y) are in the flood element's own box: if it sits in a box with a negative inset, add that inset.
+  function flood(t, sel, x, y, dur = 0.42) {
+    ft(t, sel, { clipPath: `circle(0px at ${x}px ${y}px)` }, { clipPath: `circle(2300px at ${x}px ${y}px)`, duration: dur, ease: 'power3.in' });
+  }
+  // a line rising out of its mask: <span class="mask"><span>words</span></span>
+  function rise(t, sel, dur = 0.55) { ft(t, sel, { yPercent: 115 }, { yPercent: 0, duration: dur, ease: 'expo.out' }); }
+  // camera dive INTO a point (x, y in stage px): scale the group about that point, then an iris from the same point.
+  // Set transformOrigin inside the tween's vars (not on the element while building) so earlier tweens keep theirs.
+  function diveTo(t, sel, x, y, scale = 6, dur = 0.4) {
+    ft(t, sel, { scale: 1, transformOrigin: `${x}px ${y}px` }, { scale, transformOrigin: `${x}px ${y}px`, duration: dur, ease: 'expo.in' });
+  }
+  // typewriter with a caret that follows: <span class="type"><span class="ch">h</span>…</span><span class="caret">▍</span>
+  // (wrap(el) builds the spans). Characters collapse with font-size 0 so the caret sits right after the typed text.
+  function wrap(sel) { const el = $(sel); el.innerHTML = [...el.textContent].map((c) => `<span class="ch">${c === ' ' ? '&nbsp;' : c}</span>`).join(''); return el; }
+  function typeOn(t, sel, cps = 18, times) {
+    const el = $(sel); const fs = getComputedStyle(el).fontSize; const chs = $$(sel + ' .ch');
+    chs.forEach((c) => gsap.set(c, { fontSize: 0 }));
+    chs.forEach((c, i) => tl.set(c, { fontSize: fs }, times ? times[i] : t + i / cps));   // times[] = per-letter voice times
+  }
+  // zoom a real-UI panel so its point (px, py) (panel px, unscaled) sits at screen (sx, sy) at scale s — for reading
+  // small app text (≥40 px on screen). Keep the cursor INSIDE the panel group so it stays on the control.
+  function panelTo(t, sel, px, py, s, sx = 540, sy = 960, dur = 0.6, ease = 'expo.inOut') {
+    tl.to(sel, { x: sx - px * s, y: sy - py * s, scale: s, transformOrigin: '0 0', duration: dur, ease }, t);
+  }
+  // card flip (A → B on the same spot): parent needs perspective; faces need backface-visibility:hidden
+  //   <div class="flip" style="perspective:1200px"><div class="fa">…</div><div class="fb" style="transform:rotateY(180deg)">…</div></div>
+  function flip(t, sel, dur = 0.5) { ft(t, sel, { rotationY: 0 }, { rotationY: 180, duration: dur, ease: 'back.inOut(1.4)' }); }
+
+  // ------------------------------------------------ which hook: hyperframes render --variables '{"hook":"h3"}'
+  const VARS = (window.__hyperframes && typeof window.__hyperframes.getVariables === 'function') ? window.__hyperframes.getVariables() : {};
+  const HOOK = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(VARS.hook) ? VARS.hook : 'h1';
+  tl.set('#' + HOOK, { opacity: 1 }, 0);
+  // Every element that enters later needs its pre-state set up front (gsap.set(el, {opacity:0 / clipPath / yPercent})),
+  // or it shows at full state on frame 0. Frame 0 itself must already be full and striking (HOOKS.md → Frame 0).
+  const hooks = {
+    h1() { /* the pick — device: … line: … (every text element its own move; readable; premise by ~2.5 s) */ },
+    h2() {}, h3() {}, h4() {}, h5() {}, h6() {},
+  };
+  hooks[HOOK]();
+  tl.set('#' + HOOK, { opacity: 0 }, HOOK_END + 0.5);   // gone under the flood — check a mid-ad frame of EVERY hook
+
+  // ------------------------------------------------ body (shared by every hook variant)
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines['__SLUG__'] = tl;
+})();
+</script>
+</body>
+</html>

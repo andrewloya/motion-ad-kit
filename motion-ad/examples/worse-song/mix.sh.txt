@@ -1,0 +1,11 @@
+#!/bin/zsh
+# v2 with ElevenLabs-direct narration (eleven_v4 Jessica, stability 0.0 Creative; loya 10-06). Was: Autopilot trial 1 v2 "worse song" (body voice 0.37 s earlier, end card 0.4 s later): one continuous window of goodbye from song 113.6624 (stems-ap = demucs of master revB
+# 113.6624–151.66; its first 5.86 s match the t4b hook bed, corr .999). Hook events/take unchanged; new body narration
+# (Jessica, narration-ap1.json + lt-t2 + cl-t2). The sung vocal plays under every lyric video: 21.12–27.15 (the three
+# proof videos; ends after "fine" dies at 26.6) and 30.88–34.9 (your video in the wall; ends after "lie" at 34.38).
+cd "${0:A:h}/.."
+uv run -q --with numpy --with soundfile --with scipy python pipeline/mix.py --inst assets/audio/stems-ap/no_vocals.wav \
+  --vocals assets/audio/stems-ap/vocals.wav --stem-start 113.6624 --song-start 113.6624 --dur 34.6 \
+  --vocal-windows 20.17-34.6 --vocal-fade 0.5 \
+  --duck 10 --events pipeline/events-ap3.json --out assets/audio/premix-ap3.wav --words-out pipeline/words-ad-ap3.json --no-fade --fade-out 0.45
+ffmpeg -v error -y -i assets/audio/premix-ap3.wav -af loudnorm=I=-13:TP=-1.0:LRA=9 -ar 48000 assets/audio/final-mix-ap3.wav

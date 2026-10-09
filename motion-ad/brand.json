@@ -1,0 +1,40 @@
+{
+  "_setup": true,
+  "_note": "Filled in on the first run (SETUP.md). Delete _setup when it's done. Paths may use ~.",
+  "business": "Your Business",
+  "say": "Your Business",
+  "handle": "@yourhandle",
+  "site": "yourbusiness.com",
+  "logo": "",
+  "adsDir": "~/motion-ads",
+  "finalsDir": "~/motion-ads/finals",
+  "footageDir": "",
+  "approvedAssetsDir": "",
+  "sfxDir": "~/motion-ads/sfx-library",
+  "palette": {
+    "stage": "#000000",
+    "ink": "#ffffff",
+    "accent": "#1BA3E0",
+    "flood": "#1BA3E0",
+    "glow": "#3CC5F7",
+    "extra": []
+  },
+  "fonts": {
+    "headline": "fonts/SpaceGrotesk-Variable.ttf",
+    "accent": "fonts/InstrumentSerif-Italic.ttf",
+    "mono": "fonts/JetBrainsMono.ttf",
+    "titles": "fonts/BebasNeue-Regular.ttf",
+    "hero": "fonts/Archivo-VF.ttf"
+  },
+  "cta": {
+    "type": "comment",
+    "word": "LINK",
+    "line": "comment \"LINK\" for the link",
+    "automation": "ManyChat"
+  },
+  "voice": {
+    "id": "cgSgspJ2msm6clMCkdW9",
+    "name": "Jessica"
+  },
+  "placement": "organic"
+}

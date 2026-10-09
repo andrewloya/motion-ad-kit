@@ -1,0 +1,10 @@
+The fonts in this folder are licensed under the SIL Open Font License, Version 1.1 (https://openfontlicense.org).
+You may use them in your videos, bundle and redistribute them; you may not sell the fonts by themselves.
+
+Archivo-VF.ttf               Copyright 2020 The Archivo Project Authors (https://github.com/Omnibus-Type/Archivo)
+BebasNeue-Regular.ttf        Copyright 2019 The Bebas Neue Project Authors (https://github.com/dharmatype/Bebas-Neue)
+InstrumentSerif-*.ttf        Copyright 2022 The Instrument Serif Project Authors (https://github.com/Instrument/instrument-serif)
+JetBrainsMono.ttf            Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
+SpaceGrotesk-Variable.ttf    Copyright 2020 The Space Grotesk Project Authors (https://github.com/floriankarsten/space-grotesk)
+
+The full license text is embedded in each font file (name table, record 13) and at https://openfontlicense.org/open-font-license-official-text/

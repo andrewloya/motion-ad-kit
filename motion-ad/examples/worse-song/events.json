@@ -1,0 +1,238 @@
+[
+ {
+  "t": 0.0,
+  "sfx": "voice",
+  "file": "../assets/audio/vo-11/placed/wh-c1.wav",
+  "gain": 1.0
+ },
+ {
+  "t": 0.49,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/crate-creak-impact.wav",
+  "gain": 0.3
+ },
+ {
+  "t": 0.68,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/eyes-boing.wav",
+  "gain": 0.24
+ },
+ {
+  "t": 1.397,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/slab-slam.wav",
+  "gain": 0.32
+ },
+ {
+  "t": 2.06,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/rocket-launch.wav",
+  "gain": 0.26
+ },
+ {
+  "t": 3.735,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/jaw-drop-bass.wav",
+  "gain": 0.3
+ },
+ {
+  "t": 3.02,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/cards-deal-burst.wav",
+  "gain": 0.3
+ },
+ {
+  "t": 4.232,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/yank-woosh-debris.wav",
+  "gain": 0.3
+ },
+ {
+  "t": 4.86,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/dive-whoosh-t1.wav",
+  "gain": 0.28
+ },
+ {
+  "t": 5.221,
+  "sfx": "voice",
+  "file": "../assets/audio/vo-11/placed/ap1-c2.wav",
+  "gain": 1.0,
+  "duck": 13
+ },
+ {
+  "t": 8.72,
+  "sfx": "voice",
+  "file": "../assets/audio/vo-11/placed/ap2-c1.wav",
+  "gain": 1.0,
+  "duck": 13
+ },
+ {
+  "t": 10.716,
+  "sfx": "voice",
+  "file": "../assets/audio/vo-11/placed/lt-c1.wav",
+  "gain": 1.0,
+  "duck": 13
+ },
+ {
+  "t": 14.454,
+  "sfx": "voice",
+  "file": "../assets/audio/vo-11/placed/ap3-c1.wav",
+  "gain": 1.0,
+  "duck": 13
+ },
+ {
+  "t": 17.376,
+  "sfx": "voice",
+  "file": "../assets/audio/vo-11/placed/ap4-c2.wav",
+  "gain": 1.0,
+  "duck": 13
+ },
+ {
+  "t": 20.81,
+  "sfx": "voice",
+  "file": "../assets/audio/vo-11/placed/ap5-c2.wav",
+  "gain": 1.0,
+  "duck": 13
+ },
+ {
+  "t": 27.0,
+  "sfx": "voice",
+  "file": "../assets/audio/vo-11/placed/ap6-c2.wav",
+  "gain": 1.0,
+  "duck": 13
+ },
+ {
+  "t": 32.75,
+  "sfx": "voice",
+  "file": "../assets/audio/vo-11/placed/cl-c3.wav",
+  "gain": 1.3,
+  "duck": 13
+ },
+ {
+  "t": 5.83,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-20-impact.wav",
+  "gain": 0.26
+ },
+ {
+  "t": 8.097,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-dive-wind.wav",
+  "gain": 0.22
+ },
+ {
+  "t": 9.3,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/file-drop-t1.wav",
+  "gain": 0.22
+ },
+ {
+  "t": 11.131,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-tpl-sweep.wav",
+  "gain": 0.2
+ },
+ {
+  "t": 13.03,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-marker-snap.wav",
+  "gain": 0.24
+ },
+ {
+  "t": 18.276,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-paste-pop.wav",
+  "gain": 0.22
+ },
+ {
+  "t": 18.007,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-slice-cut.wav",
+  "gain": 0.24
+ },
+ {
+  "t": 27.55,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-switch-pluck.wav",
+  "gain": 0.2
+ },
+ {
+  "t": 27.08,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-jet.wav",
+  "gain": 0.22
+ },
+ {
+  "t": 29.782,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-pull-arp.wav",
+  "gain": 0.16
+ },
+ {
+  "t": 33.62,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-post-twinkle.wav",
+  "gain": 0.18
+ },
+ {
+  "t": 2.68,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/eyes-boing.wav",
+  "gain": 0.18
+ },
+ {
+  "t": 2.79,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-dive-whoosh-t1.wav",
+  "gain": 0.16
+ },
+ {
+  "t": 30.88,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-pull-arp.wav",
+  "gain": 0.13
+ },
+ {
+  "t": 31.1,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-switch-pluck.wav",
+  "gain": 0.16
+ },
+ {
+  "t": 31.84,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-dive-whoosh-t1.wav",
+  "gain": 0.15
+ },
+ {
+  "t": 15.95,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-dive-whoosh-t1.wav",
+  "gain": 0.15
+ },
+ {
+  "t": 5.2,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/cards-deal-burst.wav",
+  "gain": 0.2
+ },
+ {
+  "t": 13.263,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-marker-snap.wav",
+  "gain": 0.13
+ },
+ {
+  "t": 13.495,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-marker-snap.wav",
+  "gain": 0.13
+ },
+ {
+  "t": 13.728,
+  "sfx": "sample",
+  "file": "~/motion-ads/sfx-library/cuts/ap-marker-snap.wav",
+  "gain": 0.13
+ }
+]

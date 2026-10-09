@@ -1,0 +1,434 @@
+<!doctype html>
+<!-- S3 hook-only test: "the words act it out" (hook-plan.md). 0–5.84 s; the body dives into the slot at 5.84. -->
+<html data-composition-variables='[{"id":"hook","type":"enum","label":"Hook","default":"h1","options":[{"value":"h1","label":"Hook 1 — the words act it out"}]}]'>
+<head>
+<meta charset="utf-8">
+<title>LYRC — who-hook</title>
+<style>
+@font-face{font-family:'SG';src:url('fonts/SpaceGrotesk-Variable.ttf');font-weight:300 700}
+@font-face{font-family:'ARC';src:url('fonts/Archivo-VF.ttf');font-weight:100 900;font-stretch:62% 125%}
+:root{--stage:#000;--ink:#fff;--accent:#1BA3E0;--glow:#3CC5F7;--night:#05070D}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;background:var(--stage);overflow:hidden}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:'SG',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;background:#000}
+.hook{position:absolute;inset:0;opacity:0}
+#cam{position:absolute;inset:0}
+#world{position:absolute;left:0;top:0;width:2160px;height:4420px;transform-origin:0 0}
+.zone{position:absolute;width:1080px;height:1920px;overflow:hidden}
+#zA{left:0;top:0;background:#000}
+#zB{left:0;top:1920px;height:2500px}
+#zC{left:1080px;top:1920px}
+/* wall: night concrete, light from above, grain baked in */
+.wall{position:absolute;inset:0;background:
+  radial-gradient(1200px 900px at 540px -120px, rgba(60,197,247,.22), rgba(27,163,224,.06) 55%, rgba(0,0,0,0) 80%),
+  radial-gradient(900px 700px at 540px 1900px, rgba(27,163,224,.10), rgba(0,0,0,0) 70%), #070b12}
+.wall::after{content:'';position:absolute;inset:0;opacity:.55;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.seam{position:absolute;left:0;right:0;height:3px;background:rgba(0,0,0,.55);box-shadow:0 2px 0 rgba(155,220,255,.06)}
+.arc{font-family:'ARC';font-weight:900;line-height:.86;font-variation-settings:'wdth' 100,'wght' 900}
+#vA{position:absolute;left:-40px;top:-70px;width:1160px;height:2062px;object-fit:cover}
+#dimA{position:absolute;inset:0;background:#02040a;opacity:0}
+#topShade{position:absolute;left:0;right:0;top:0;height:900px;background:radial-gradient(1400px 900px at 540px 0px, rgba(0,0,0,.72), rgba(0,0,0,0) 75%)}
+/* words */
+.w{position:absolute;white-space:nowrap}
+.ch{display:inline-block;transform-origin:50% 100%}
+/* letter-people */
+.lp{position:absolute;transform-origin:50% 100%}
+.lp .hd{position:absolute;left:0;right:0;top:0;text-align:center;font-family:'ARC';font-weight:900;font-variation-settings:'wdth' 80,'wght' 900;line-height:.9}
+.lp svg{position:absolute;left:0;overflow:visible}
+.lp line{stroke-linecap:round}
+/* comment balloons */
+.bal{position:absolute;transform-origin:50% 100%;filter:drop-shadow(0 22px 22px rgba(0,0,0,.55))}
+.bal .bb{position:relative;display:flex;align-items:center;gap:20px;background:#fff;border-radius:48px;padding:20px 34px 20px 20px;
+  background-image:radial-gradient(120% 140% at 30% 0%, #ffffff 0%, #eaf4fb 70%, #cfe3f1 100%)}
+.bal .av{width:66px;height:66px;border-radius:50%;background:#0b0b0d;color:#3CC5F7;display:flex;align-items:center;justify-content:center;
+  font-family:'ARC';font-weight:900;font-size:40px;flex:none}
+.bal .tx{font-family:'SG';font-weight:600;font-size:42px;letter-spacing:-.02em;color:#0b0b0d;white-space:nowrap}
+.bal .tail{position:absolute;left:38px;bottom:-18px;width:44px;height:44px;background:#d9eaf5;transform:rotate(45deg) skew(12deg,12deg);border-radius:6px}
+.q{position:absolute;font-family:'ARC';font-weight:900;font-size:96px;color:#3CC5F7;text-shadow:0 0 22px rgba(60,197,247,.6)}
+/* spray */
+#spray{position:absolute;inset:0;filter:url(#rough)}
+.sp{position:absolute;font-family:'ARC';font-weight:900;color:#3CC5F7;line-height:.86;font-variation-settings:'wdth' 78,'wght' 900;
+  text-shadow:0 0 6px rgba(60,197,247,.9),0 0 26px rgba(60,197,247,.55),0 0 70px rgba(27,163,224,.35)}
+.drip{position:absolute;width:9px;border-radius:0 0 6px 6px;background:#3CC5F7;box-shadow:0 0 10px rgba(60,197,247,.6);height:0}
+.dot{position:absolute;border-radius:50%;background:#3CC5F7}
+.mist{position:absolute;width:420px;height:420px;border-radius:50%;margin:-210px 0 0 -210px;
+  background:radial-gradient(circle, rgba(155,220,255,.55), rgba(60,197,247,.22) 40%, rgba(60,197,247,0) 70%);mix-blend-mode:screen;opacity:0}
+.shade{position:absolute;inset:0;background:#000;opacity:0}
+/* the block + the hole */
+#hole{position:absolute;left:220px;top:690px;width:640px;height:340px;background:#000;
+  box-shadow:inset 0 30px 60px rgba(0,0,0,1), inset 0 -4px 0 rgba(60,197,247,.9), inset 0 4px 0 rgba(155,220,255,.35), 0 0 0 6px #0d1520, 0 0 40px rgba(60,197,247,.25)}
+#hole .in{position:absolute;inset:34px 46px;overflow:hidden;background:radial-gradient(60% 70% at 50% 60%, #04070d, #000);box-shadow:0 0 0 2px rgba(60,197,247,.12)}
+#grab{position:absolute;left:0;top:0;width:1080px;height:1920px}
+#block{position:absolute;left:170px;top:650px;width:740px;height:420px}
+#block .bolt{position:absolute;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #cfe3f1, #3a4a5c 60%, #111 100%)}
+#block .ln{position:absolute;left:0;right:0;text-align:center;color:#fff;font-family:'ARC';font-weight:900;line-height:1;
+  text-shadow:0 5px 0 #0d6e9c,0 10px 0 #0a4b6b,0 18px 30px rgba(0,0,0,.6)}
+#sweep{position:absolute;top:-40px;bottom:-40px;width:180px;left:-260px;background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0));mix-blend-mode:overlay;transform:skewX(-18deg)}
+#cone{position:absolute;left:-260px;top:-300px;width:1600px;height:1600px;background:radial-gradient(closest-side at 50% 62%, rgba(155,220,255,.30), rgba(60,197,247,.10) 45%, rgba(0,0,0,0) 75%);mix-blend-mode:screen}
+#hand{position:absolute;left:560px;top:0;width:260px;height:360px;transform-origin:130px 300px}
+#hand svg{position:absolute;left:0;top:0;overflow:visible}
+.tag{position:absolute;font-family:'ARC';font-weight:900;color:#3CC5F7;opacity:.45;font-variation-settings:'wdth' 70,'wght' 900;text-shadow:0 0 18px rgba(60,197,247,.5)}
+#grain{position:absolute;inset:-60px;opacity:.10;pointer-events:none;mix-blend-mode:screen;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>")}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 80% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="4" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="7"/></filter>
+</svg>
+<div id="root" data-composition-id="who-hook" data-width="1080" data-height="1920" data-start="0" data-duration="5.84" data-fps="60">
+  <audio id="music" data-start="0" data-duration="5.84" data-track-index="0" src="assets/audio/final-mix.wav"></audio>
+  <div id="h1" class="hook">
+    <div id="cam">
+      <div id="world">
+        <!-- ZONE A: the artist, alone → strangers arrive -->
+        <div id="zA" class="zone">
+          <video id="vA" src="assets/footage/a-guitar-half.mp4" data-start="0" data-duration="2.2" data-track-index="1" muted playsinline></video>
+          <div id="dimA"></div>
+          <div id="topShade"></div>
+          <div id="crowdA"></div>
+          <div id="wIF" class="w arc" style="left:80px;top:310px;font-size:170px">IF</div>
+          <div id="wYOU" class="w arc" style="left:330px;top:310px;font-size:170px"></div>
+          <div id="wWANT" class="w arc" style="left:80px;top:470px;font-size:220px;transform-origin:0 50%">WANT</div>
+          <div id="strangers"></div>
+        </div>
+        <!-- ZONE B: the comments wall -->
+        <div id="zB" class="zone">
+          <div class="wall"></div>
+          <video id="vB" src="assets/footage/b-guitar-half.mp4" data-start="1.30" data-duration="2.5" data-track-index="2" muted playsinline style="position:absolute;left:-40px;top:0px;width:1160px;height:2062px;object-fit:cover"></video>
+          <div id="dimB" style="position:absolute;inset:0;background:#02040a;opacity:.5"></div>
+          <div id="spray">
+            <div id="sWHO" class="sp" style="left:50px;top:190px;font-size:240px;transform:rotate(-6deg)">WHO</div>
+            <div id="sIS" class="sp" style="left:640px;top:158px;font-size:240px;transform:rotate(-6deg)">IS</div>
+            <div id="sTHIS" class="sp" style="left:70px;top:400px;font-size:270px;transform:rotate(-4deg)">THIS?</div>
+            <svg id="arrow" width="1080" height="1100" style="position:absolute;left:0;top:0;overflow:visible"><path id="arrowP" d="M860 560 C 980 640, 900 720, 700 720 M700 720 L770 670 M700 720 L760 780" fill="none" stroke="#3CC5F7" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 14px rgba(60,197,247,.7))" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+            <div id="drips"></div><div id="dots"></div>
+          </div>
+          <div class="mist" id="mist"></div>
+          <div id="wINYOUR" class="w arc" style="left:84px;top:900px;font-size:96px;font-variation-settings:'wdth' 100,'wght' 800">in your</div>
+          <div id="pile"></div>
+          <div id="wCOMMENTS" class="w arc" style="left:60px;top:1076px;font-size:196px"></div>
+          <div id="crowdB"></div>
+          <div id="qs"></div>
+          <div id="shadeB" class="shade"></div>
+        </div>
+        <!-- ZONE C: steal this → the hole -->
+        <div id="zC" class="zone">
+          <div class="wall"></div>
+          <div class="seam" style="top:420px"></div><div class="seam" style="top:1340px"></div>
+          <div class="tag" style="left:60px;top:250px;font-size:250px;transform:rotate(-7deg)">WHO?!</div>
+          <div class="tag" style="left:120px;top:1150px;font-size:210px;transform:rotate(4deg)">who is he</div>
+          <div id="pileC"></div>
+          <div id="hole"><div class="in"><img id="glint" src="assets/footage/slot-loya.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0"></div></div>
+          <div id="crowdC"></div>
+          <div id="shadeC" class="shade" style="opacity:.5"></div>
+          <div id="cone"></div>
+          <div id="grab">
+            <div id="block">
+              <div id="bSTEAL" class="ln" style="top:40px;font-size:200px"></div>
+              <div id="bTHIS" class="ln" style="top:212px;font-size:180px"></div>
+              <div id="sweep"></div>
+            </div>
+            <div id="hand">
+              <svg id="hOpen" width="260" height="360" viewBox="0 0 260 360">
+                <rect x="40" y="-1400" width="180" height="1420" fill="#0b0b0d" stroke="#1BA3E0" stroke-width="4"/>
+                <rect x="30" y="0" width="200" height="66" rx="18" fill="#0b0b0d" stroke="#3CC5F7" stroke-width="5"/>
+                <rect x="26" y="226" width="44" height="118" rx="22" fill="#131c27" stroke="#3CC5F7" stroke-width="5" transform="rotate(14 48 226)"/>
+                <rect x="78" y="236" width="46" height="124" rx="23" fill="#131c27" stroke="#3CC5F7" stroke-width="5"/>
+                <rect x="130" y="238" width="46" height="118" rx="23" fill="#131c27" stroke="#3CC5F7" stroke-width="5"/>
+                <rect x="182" y="230" width="44" height="104" rx="22" fill="#131c27" stroke="#3CC5F7" stroke-width="5" transform="rotate(-12 204 230)"/>
+                <path d="M34 60 H226 Q246 60 244 120 L236 250 Q232 282 200 282 H66 Q34 282 30 250 L22 120 Q20 60 34 60Z" fill="#131c27" stroke="#3CC5F7" stroke-width="5"/>
+                <path d="M30 150 Q-30 170 -34 236 Q-36 262 -8 258 Q12 254 30 214" fill="#131c27" stroke="#3CC5F7" stroke-width="5" stroke-linejoin="round"/>
+                <path d="M90 110 V200 M130 104 V204 M170 110 V200" stroke="#3CC5F7" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+                <path d="M200 70 L236 120 L230 250 Q226 276 200 280 Z" fill="#9bdcff" opacity=".35"/>
+              </svg>
+              <svg id="hFist" width="260" height="360" viewBox="0 0 260 360" style="opacity:0">
+                <rect x="40" y="-1400" width="180" height="1420" fill="#0b0b0d" stroke="#1BA3E0" stroke-width="4"/>
+                <rect x="30" y="0" width="200" height="66" rx="18" fill="#0b0b0d" stroke="#3CC5F7" stroke-width="5"/>
+                <path d="M30 60 H230 Q250 60 250 110 V250 Q250 300 200 300 H60 Q16 300 14 250 V110 Q12 60 30 60Z" fill="#131c27" stroke="#3CC5F7" stroke-width="5"/>
+                <path d="M30 236 Q62 214 96 236 Q128 214 160 236 Q192 214 224 236" fill="none" stroke="#3CC5F7" stroke-width="5" stroke-linecap="round"/>
+                <path d="M96 236 V296 M160 236 V296" stroke="#3CC5F7" stroke-width="4" stroke-linecap="round" opacity=".6"/>
+                <path d="M14 150 Q60 130 120 168 Q140 182 118 196 Q80 210 16 196" fill="#131c27" stroke="#3CC5F7" stroke-width="5" stroke-linejoin="round"/>
+                <path d="M206 70 L246 118 V248 Q244 288 206 298 Z" fill="#9bdcff" opacity=".35"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="grain"></div>
+    <div id="vig"></div>
+  </div>
+</div>
+<script src="assets/vendor/gsap.min.js"></script>
+<script>
+(function () {
+  const DUR = 5.84;
+  const HOOK_END = 5.84;          // BASS IN (measured 5.86): the body's dive into the slot starts here
+  const tl = gsap.timeline({ paused: true });
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
+  function ft(t, target, from, to) { tl.fromTo(target, from, Object.assign({ immediateRender: false }, to), t); }
+  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  const R = rng(11);
+  const VARS = (window.__hyperframes && typeof window.__hyperframes.getVariables === 'function') ? window.__hyperframes.getVariables() : {};
+  const HOOK = VARS.hook === 'h1' || !VARS.hook ? 'h1' : 'h1';
+  tl.set('#' + HOOK, { opacity: 1 }, 0);
+
+  // ------------------------------------------------ camera: one continuous move over a 2160×3840 world
+  const cam = (cx, cy, s) => ({ x: 540 - s * cx, y: 960 - s * cy, scale: s });
+  const C = [
+    [0.00, 0.55, [540, 960, 1.18], [540, 960, 1.0], 'expo.out'],      // braking out of the zoom at frame 0
+    [0.55, 1.38, [540, 960, 1.0], [540, 930, 1.04], 'sine.inOut'],
+    [1.38, 1.72, [540, 930, 1.04], [540, 3480, 1.0], 'expo.inOut'],   // whip DOWN to the comments pile
+    [1.72, 2.28, [540, 3480, 1.0], [540, 3450, 1.03], 'sine.inOut'],
+    [2.28, 2.58, [540, 3450, 1.03], [540, 2880, 1.0], 'expo.inOut'],  // tilt UP to the wall for the spray
+    [2.58, 3.50, [540, 2880, 1.0], [540, 2850, 1.05], 'sine.inOut'],
+    [3.50, 3.72, [540, 2850, 1.05], [1620, 2780, 1.30], 'expo.inOut'],// lights die → whip RIGHT to STEAL THIS
+    [3.72, 4.44, [1620, 2780, 1.30], [1620, 2770, 1.40], 'sine.inOut'],
+    [4.46, 4.80, [1620, 2770, 1.38], [1620, 2880, 1.0], 'expo.out'],  // SLAM: snap back to the whole wall
+    [4.80, 5.84, [1620, 2880, 1.0], [1620, 2790, 1.34], 'sine.inOut'],// push into the slot
+  ];
+  C.forEach(([a, b, f, t, e]) => ft(a, '#world', cam(...f), Object.assign(cam(...t), { duration: b - a, ease: e })));
+  function blurPass(sel, t0, tp, t1, px) {
+    ft(t0, sel, { filter: 'blur(0px)' }, { filter: `blur(${px}px)`, duration: tp - t0, ease: 'power2.in' });
+    ft(tp, sel, { filter: `blur(${px}px)` }, { filter: 'blur(0px)', duration: t1 - tp, ease: 'power2.out' });
+  }
+  blurPass('#world', 1.42, 1.55, 1.70, 9);
+  blurPass('#world', 2.32, 2.43, 2.56, 5);
+  blurPass('#world', 3.53, 3.65, 3.78, 10);
+  // the slam shake: one decaying event, not a beat pump
+  const SH = [[4.46, 0, 0], [4.50, -22, 14], [4.55, 18, -12], [4.61, -11, 8], [4.68, 7, -5], [4.76, -3, 2], [4.86, 0, 0]];
+  for (let i = 1; i < SH.length; i++) ft(SH[i - 1][0], '#cam', { x: SH[i - 1][1], y: SH[i - 1][2] }, { x: SH[i][1], y: SH[i][2], duration: SH[i][0] - SH[i - 1][0], ease: 'sine.inOut' });
+
+  // grain re-seeds 12×/s (sets, not tweens)
+  for (let t = 0, k = 0; t < DUR; t += 1 / 12, k++) tl.set('#grain', { backgroundPosition: `${Math.floor(R() * 300)}px ${Math.floor(R() * 300)}px` }, t);
+
+  // ------------------------------------------------ helpers
+  function letters(sel, text) { const el = $(sel); el.innerHTML = [...text].map((c) => `<span class="ch">${c === ' ' ? '&nbsp;' : c}</span>`).join(''); return $$(sel + ' .ch'); }
+  // a letter-person: a letter for a head on a stick body. returns the element; legs/arms are .lg1 .lg2 .am1 .am2
+  function person(parent, ch, x, y, h, col, opt = {}) {
+    const el = document.createElement('div'); el.className = 'lp';
+    const hw = h * 0.55, hh = h * 0.42, sw = Math.max(3, h * 0.055);
+    el.style.cssText = `left:${x - hw / 2}px;top:${y - h}px;width:${hw}px;height:${h}px`;
+    const legY = hh * 1.02, bodyEnd = h * 0.70;
+    el.innerHTML = `<div class="hd" style="font-size:${hh * 1.12}px;color:${col}">${ch}</div>
+      <svg width="${hw}" height="${h}" style="top:0">
+        <line x1="${hw / 2}" y1="${legY}" x2="${hw / 2}" y2="${bodyEnd}" stroke="${col}" stroke-width="${sw}"/>
+        <g class="am1" style="transform-origin:${hw / 2}px ${legY + 6}px"><line x1="${hw / 2}" y1="${legY + 6}" x2="${hw / 2 - h * 0.2}" y2="${legY + h * 0.18}" stroke="${col}" stroke-width="${sw}"/></g>
+        <g class="am2" style="transform-origin:${hw / 2}px ${legY + 6}px"><line x1="${hw / 2}" y1="${legY + 6}" x2="${hw / 2 + h * 0.2}" y2="${legY + h * 0.18}" stroke="${col}" stroke-width="${sw}"/></g>
+        <g class="lg1" style="transform-origin:${hw / 2}px ${bodyEnd}px"><line x1="${hw / 2}" y1="${bodyEnd}" x2="${hw / 2 - h * 0.1}" y2="${h}" stroke="${col}" stroke-width="${sw}"/></g>
+        <g class="lg2" style="transform-origin:${hw / 2}px ${bodyEnd}px"><line x1="${hw / 2}" y1="${bodyEnd}" x2="${hw / 2 + h * 0.1}" y2="${h}" stroke="${col}" stroke-width="${sw}"/></g>
+      </svg>`;
+    parent.appendChild(el);
+    gsap.set(el.querySelectorAll('.am1,.am2'), { svgOrigin: `${hw / 2} ${legY + 6}` });
+    gsap.set(el.querySelectorAll('.lg1,.lg2'), { svgOrigin: `${hw / 2} ${bodyEnd}` });
+    return el;
+  }
+  // run: from (dx, dy) offset to home, legs scissoring, leaning into the run, braking with a squash
+  function run(el, t0, dur, dx, dy, strides) {
+    const lean = dx > 0 ? -14 : 14;
+    gsap.set(el, { x: dx, y: dy, rotation: lean });
+    ft(t0, el, { x: dx, y: dy }, { x: 0, y: 0, duration: dur, ease: 'power3.out' });
+    ft(t0, el, { rotation: lean }, { rotation: 0, duration: dur + 0.12, ease: 'back.out(2.2)' });
+    ft(t0 + dur - 0.06, el, { scaleY: 1, scaleX: 1 }, { scaleY: 0.86, scaleX: 1.08, duration: 0.07, ease: 'power2.in' });
+    ft(t0 + dur + 0.01, el, { scaleY: 0.86, scaleX: 1.08 }, { scaleY: 1, scaleX: 1, duration: 0.3, ease: 'elastic.out(1,.5)' });
+    const l1 = el.querySelector('.lg1'), l2 = el.querySelector('.lg2'), a1 = el.querySelector('.am1'), a2 = el.querySelector('.am2');
+    const n = strides || Math.max(2, Math.round(dur / 0.09)), sd = (dur * 0.85) / n;
+    for (let i = 0; i < n; i++) {
+      const s = i % 2 ? 1 : -1, t = t0 + i * sd;
+      ft(t, [l1, a2], { rotation: -32 * s }, { rotation: 32 * s, duration: sd, ease: 'sine.inOut' });
+      ft(t, [l2, a1], { rotation: 32 * s }, { rotation: -32 * s, duration: sd, ease: 'sine.inOut' });
+    }
+    const te = t0 + n * sd;
+    ft(te, [l1, l2, a1, a2], { rotation: (i) => (i % 2 ? -1 : 1) * 32 * (n % 2 ? 1 : -1) }, { rotation: 0, duration: 0.22, ease: 'back.out(2)' });
+  }
+
+  // ------------------------------------------------ 1. the artist, alone: IF / YOU / WANT (each its own move)
+  gsap.set('#vA', { scale: 1.06, transformOrigin: '50% 45%' });
+  ft(0, '#vA', { scale: 1.06 }, { scale: 1.0, duration: 2.0, ease: 'sine.inOut' });
+  ft(0, '#wIF', { scale: 1.35, x: 30, y: 30, fontVariationSettings: "'wdth' 125,'wght' 900" },
+    { scale: 1, x: 0, y: 0, fontVariationSettings: "'wdth' 100,'wght' 900", duration: 0.32, ease: 'expo.out' });
+  gsap.set('#wIF', { transformOrigin: '0% 50%' });
+  const you = letters('#wYOU', 'YOU');
+  gsap.set(you, { y: -260, opacity: 1 });
+  you.forEach((c, i) => {
+    const t = i * 0.05;
+    ft(t, c, { y: -260 }, { y: 0, duration: 0.2, ease: 'power3.in' });
+    ft(t + 0.20, c, { scaleY: 1, scaleX: 1 }, { scaleY: 0.78, scaleX: 1.16, duration: 0.05, ease: 'power2.out' });
+    ft(t + 0.25, c, { scaleY: 0.78, scaleX: 1.16 }, { scaleY: 1, scaleX: 1, duration: 0.4, ease: 'elastic.out(1,.45)' });
+  });
+  // WANT reaches: it stretches wide, letters straining, then snaps back a touch
+  gsap.set('#wWANT', { opacity: 0, fontVariationSettings: "'wdth' 62,'wght' 300", scaleX: 0.6 });
+  tl.set('#wWANT', { opacity: 1 }, 0);
+  ft(0, '#wWANT', { scaleX: 0.45 }, { scaleX: 0.6, duration: 0.44, ease: 'sine.out' });
+  ft(0.44, '#wWANT', { fontVariationSettings: "'wdth' 62,'wght' 300", scaleX: 0.6 }, { fontVariationSettings: "'wdth' 125,'wght' 900", scaleX: 1.12, duration: 0.26, ease: 'expo.out' });
+  ft(0.70, '#wWANT', { scaleX: 1.12 }, { scaleX: 1.0, duration: 0.45, ease: 'elastic.out(1,.4)' });
+  ft(0.80, ['#wIF', '#wYOU', '#wWANT'], { y: 0 }, { y: -40, duration: 0.6, ease: 'sine.inOut' });     // make room for the crowd
+  ft(0.62, '#dimA', { opacity: 0 }, { opacity: 0.68, duration: 0.6, ease: 'power2.out' });
+
+  // ------------------------------------------------ 2. STRANGERS: nine big letter-people sprint in and line up
+  const SW = 'STRANGERS', cell = 104, sx0 = 72, baseY = 1060;
+  [...SW].forEach((ch, i) => {
+    const p = person($('#strangers'), ch, sx0 + cell * i + cell / 2, baseY, 360, '#fff');
+    p.querySelector('.hd').style.fontVariationSettings = "'wdth' 72,'wght' 900";
+    const fromLeft = i % 2 === 0;
+    const t0 = 0.56 + i * 0.04;
+    run(p, t0, 0.32, 0, 1500, 4);
+  });
+  // a crowd of small letter-people pours in around him
+  const pool = 'ABCDEFGHJKLMNOPRSTUWXYZ?';
+  for (let k = 0; k < 6; k++) {
+    const row = 0;
+    const y = row === 0 ? 1560 + R() * 260 : row === 1 ? 1180 + R() * 260 : 1820 + R() * 120;
+    const x = 90 + k * 165 + R() * 50, h = row === 1 ? 150 + R() * 40 : 190 + R() * 70;
+    const col = R() < 0.3 ? '#3CC5F7' : '#fff';
+    const p = person($('#crowdA'), pool[Math.floor(R() * pool.length)], x, y, h, col);
+    const fromLeft = x < 540;
+    run(p, 0.66 + R() * 0.40, 0.34 + R() * 0.16, (fromLeft ? -1 : 1) * (500 + R() * 400), 0);
+  }
+
+  // ------------------------------------------------ 3. IN YOUR COMMENTS: balloons rain and pile; COMMENTS drops on top
+  const iny = letters('#wINYOUR', 'in your');
+  gsap.set(iny, { yPercent: 110, opacity: 0 });
+  iny.forEach((c, i) => ft(1.40 + i * 0.025, c, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.4, ease: 'back.out(2)' }));
+  // its job is done before the spray: it ducks back down under COMMENTS
+  iny.forEach((c, i) => ft(2.16 + i * 0.015, c, { y: 0, opacity: 1 }, { y: -50, opacity: 0, duration: 0.16, ease: 'power3.in' }));
+  const BAL = [
+    [40, 1300, -5, 'name??', 'K', 1.36], [560, 1290, 6, 'wait this is hard', 'J', 1.44],
+    [300, 1450, 3, 'sound??', 'M', 1.50], [-60, 1600, -7, 'on repeat', 'D', 1.56], [600, 1470, -4, 'found u on explore', 'T', 1.60],
+    [210, 1650, 5, 'need more', 'A', 1.66], [660, 1660, -3, 'how is he not signed', 'R', 1.72],
+    [20, 1790, 2, 'how is this not viral', 'L', 1.78],
+    [330, 1930, 4, 'need more', 'S', 1.90], [680, 1960, 7, 'who sings this', 'N', 2.02],
+    [120, 2090, -3, 'saving this', 'O', 1.52], [600, 2120, 5, 'song name??', 'U', 1.62],
+  ];
+  BAL.forEach(([x, y, r, txt, av, t], i) => {
+    const b = document.createElement('div'); b.className = 'bal';
+    b.style.cssText = `left:${x}px;top:${y}px`;
+    b.innerHTML = `<div class="tail"></div><div class="bb"><div class="av">${av}</div><div class="tx">${txt}</div></div>`;
+    $('#pile').appendChild(b);
+    const land = t + 0.22;
+    gsap.set(b, { y: -1500, rotation: r * 3 });
+    ft(t - 0.12, b, { y: -1500, rotation: r * 3 }, { y: 0, rotation: r, duration: 0.34, ease: 'power3.in' });
+    ft(land, b, { scaleY: 1, scaleX: 1 }, { scaleY: 0.82, scaleX: 1.08, duration: 0.05, ease: 'power2.out' });
+    ft(land + 0.05, b, { scaleY: 0.82, scaleX: 1.08 }, { scaleY: 1, scaleX: 1, duration: 0.4, ease: 'elastic.out(1,.45)' });
+    ft(land + 0.45, b, { y: 0 }, { y: 6 + (i % 3) * 3, duration: 3.2, ease: 'sine.inOut' }); // the pile settles under its weight
+  });
+  const com = letters('#wCOMMENTS', 'COMMENTS');
+  const CW = [96, 100, 156, 156, 88, 100, 88, 92];
+  com.forEach((c, i) => { c.style.width = CW[i] + 'px'; c.style.textAlign = 'center'; });
+  gsap.set('#wCOMMENTS', { fontVariationSettings: "'wdth' 64,'wght' 900" });
+  gsap.set(com, { y: -1300, rotation: (i) => (i % 2 ? 14 : -12) });
+  com.forEach((c, i) => {
+    const t = 1.56 + i * 0.04, land = t + 0.26;
+    ft(t, c, { y: -1300, rotation: i % 2 ? 14 : -12 }, { y: 0, rotation: (i % 3 - 1) * 3, duration: 0.26, ease: 'power3.in' });
+    ft(land, c, { scaleY: 1, scaleX: 1 }, { scaleY: 0.72, scaleX: 1.2, duration: 0.05, ease: 'power2.out' });
+    ft(land + 0.05, c, { scaleY: 0.72, scaleX: 1.2 }, { scaleY: 1, scaleX: 1, duration: 0.5, ease: 'elastic.out(1,.4)' });
+  });
+  // strangers jump down onto the pile, then ASK (arms up + "?")
+  const CB = [[114, 1092], [330, 1092], [560, 1092], [760, 1092], [880, 1092]];
+  CB.forEach(([x, y], i) => {
+    const p = person($('#crowdB'), pool[Math.floor(R() * pool.length)], x, y, 150, i % 3 === 1 ? '#3CC5F7' : '#fff');
+    gsap.set(p, { y: -1400 });
+    ft(1.62 + i * 0.05, p, { y: -1400 }, { y: 0, duration: 0.32, ease: 'power3.in' });
+    ft(1.94 + i * 0.05, p, { scaleY: 0.8 }, { scaleY: 1, duration: 0.4, ease: 'elastic.out(1,.45)' });
+    const a1 = p.querySelector('.am1'), a2 = p.querySelector('.am2');
+    ft(2.10 + i * 0.03, a1, { rotation: 0 }, { rotation: 120, duration: 0.25, ease: 'back.out(2.5)' });
+    ft(2.10 + i * 0.03, a2, { rotation: 0 }, { rotation: -120, duration: 0.25, ease: 'back.out(2.5)' });
+    const q = document.createElement('div'); q.className = 'q'; q.textContent = '?';
+    q.style.cssText = `left:${x - 26}px;top:${y - 250}px`;
+    $('#qs').appendChild(q);
+    gsap.set(q, { scale: 0, rotation: -30 });
+    ft(2.12 + i * 0.035, q, { scale: 0, rotation: -30 }, { scale: 1, rotation: (i % 2 ? 10 : -8), duration: 0.32, ease: 'back.out(3)' });
+    ft(2.44 + i * 0.035, q, { y: 0 }, { y: -40, duration: 1.0, ease: 'sine.inOut' });
+  });
+
+  // ------------------------------------------------ 4. WHO IS THIS? sprayed, word by word, mist + drips + speckle
+  const SPR = [['#sWHO', 2.50, 0.22, 50, 190, 520], ['#sIS', 2.80, 0.16, 640, 160, 200], ['#sTHIS', 3.04, 0.22, 70, 340, 700]];
+  SPR.forEach(([sel, t, d, x, y, w], k) => {
+    gsap.set(sel, { clipPath: 'inset(-10% 100% -10% -5%)' });
+    ft(t, sel, { clipPath: 'inset(-10% 100% -10% -5%)' }, { clipPath: 'inset(-10% -5% -10% -5%)', duration: d, ease: 'power1.inOut' });
+    ft(t - 0.04, '#mist', { left: x, top: y + 110, opacity: 0 }, { left: x + w, top: y + 90, opacity: 1, duration: d + 0.04, ease: 'power1.inOut' });
+    ft(t + d, '#mist', { opacity: 1 }, { opacity: 0, duration: 0.14, ease: 'power2.out' });
+    for (let j = 0; j < 3 + k; j++) {
+      const dr = document.createElement('div'); dr.className = 'drip';
+      const dx = x + 30 + R() * (w - 60), top = y + 170 + (k === 2 ? 40 : 0) + R() * 30;
+      dr.style.cssText = `left:${dx}px;top:${top}px;width:${6 + R() * 6}px`;
+      $('#drips').appendChild(dr);
+      ft(t + d * ((dx - x) / w) + 0.08, dr, { height: 0 }, { height: 50 + R() * 150, duration: 1.1 + R() * 0.6, ease: 'power2.out' });
+    }
+    for (let j = 0; j < 18; j++) {
+      const dt = document.createElement('div'); dt.className = 'dot';
+      const s = 3 + R() * 7, dx = x + R() * w, dy = y - 60 + R() * 380;
+      dt.style.cssText = `left:${dx}px;top:${dy}px;width:${s}px;height:${s}px;opacity:0`;
+      $('#dots').appendChild(dt);
+      tl.set(dt, { opacity: 0.35 + R() * 0.5 }, t + d * ((dx - x) / w));
+    }
+  });
+  ft(3.26, '#arrowP', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.14, ease: 'power2.out' });
+  gsap.set('#spray', { scale: 1, transformOrigin: '50% 40%' });
+  ft(2.48, '#spray', { scale: 1.04 }, { scale: 1.0, duration: 1.0, ease: 'sine.out' });
+
+  // ------------------------------------------------ 5. the song drops out: lights die, STEAL THIS under one light
+  ft(3.50, '#shadeB', { opacity: 0 }, { opacity: 0.6, duration: 0.14, ease: 'power2.out' });
+  gsap.set('#cone', { opacity: 0.35 });
+  ft(3.66, '#cone', { opacity: 0.35 }, { opacity: 1, duration: 0.3, ease: 'power2.out' });
+  const st = letters('#bSTEAL', 'STEAL'), th = letters('#bTHIS', 'THIS');
+  gsap.set([st, th], { opacity: 0, fontVariationSettings: "'wdth' 125,'wght' 300", scaleY: 1.3 });
+  [[st, 3.62], [th, 3.76]].forEach(([g, t0]) => g.forEach((c, i) => {
+    const t = t0 + i * 0.035;
+    tl.set(c, { opacity: 1 }, t);
+    ft(t, c, { fontVariationSettings: "'wdth' 125,'wght' 300", scaleY: 1.3 }, { fontVariationSettings: "'wdth' 92,'wght' 900", scaleY: 0.9, duration: 0.14, ease: 'expo.out' });
+    ft(t + 0.14, c, { scaleY: 0.9, fontVariationSettings: "'wdth' 92,'wght' 900" }, { scaleY: 1, fontVariationSettings: "'wdth' 100,'wght' 900", duration: 0.3, ease: 'back.out(2)' });
+  }));
+  ft(3.92, '#sweep', { x: 0 }, { x: 1100, duration: 0.6, ease: 'power2.inOut' });
+  // the glove: reaches in from top right, grabs (fist), yanks the block up and out
+  gsap.set('#hand', { x: 520, y: -1100, rotation: -32 });
+  ft(4.14, '#hand', { x: 520, y: -1100, rotation: -32 }, { x: 0, y: 340, rotation: -8, duration: 0.2, ease: 'expo.out' });
+  tl.set('#hOpen', { opacity: 0 }, 4.35); tl.set('#hFist', { opacity: 1 }, 4.35);
+  ft(4.34, '#hand', { scaleY: 1, scaleX: 1 }, { scaleY: 0.86, scaleX: 1.1, duration: 0.05, ease: 'power2.out' });
+  ft(4.39, '#hand', { scaleY: 0.86, scaleX: 1.1 }, { scaleY: 1, scaleX: 1, duration: 0.12, ease: 'back.out(2)' });
+  ft(4.35, '#block', { y: 0 }, { y: 14, duration: 0.05, ease: 'power2.out' });                   // anticipation: pushed into the wall
+  ft(4.40, '#grab', { x: 0, y: 0, rotation: 0 }, { x: 260, y: -1500, rotation: 22, duration: 0.14, ease: 'expo.in' });
+  ft(4.40, '#grab', { filter: 'blur(0px)' }, { filter: 'blur(14px)', duration: 0.14, ease: 'power2.in' });
+  tl.set('#grab', { opacity: 0 }, 4.56);
+
+  // ------------------------------------------------ 6. SLAM: lights back, the hole, the strangers rush to its rim
+  ft(4.46, '#shadeC', { opacity: 0.5 }, { opacity: 0, duration: 0.1, ease: 'power3.out' });
+  ft(4.46, '#cone', { opacity: 1 }, { opacity: 0.55, duration: 0.6, ease: 'power2.out' });
+  ft(4.46, '#hole', { scale: 1.05 }, { scale: 1, duration: 0.4, ease: 'elastic.out(1,.5)' });
+  // the pile continues along the bottom of this wall
+  [[-20, 1190, -4, 'who is this??', 'P'], [600, 1210, 5, 'name pls', 'C'], [180, 1330, 3, 'who is this guy', 'F'], [640, 1360, -5, 'WHO IS THIS', 'H'], [-40, 1470, 2, 'need this', 'G'], [480, 1500, 4, 'wait who', 'V']]
+    .forEach(([x, y, r, txt, av], i) => {
+      const b = document.createElement('div'); b.className = 'bal';
+      b.style.cssText = `left:${x}px;top:${y}px;transform:rotate(${r}deg)`;
+      b.innerHTML = `<div class="tail"></div><div class="bb"><div class="av">${av}</div><div class="tx">${txt}</div></div>`;
+      $('#pileC').appendChild(b);
+      gsap.set(b, { y: 900, opacity: 0 });
+      tl.set(b, { opacity: 1 }, 4.5 + i * 0.05);
+      ft(4.5 + i * 0.05, b, { y: 900 }, { y: 0, duration: 0.4, ease: 'back.out(1.4)' });
+    });
+  const RIM = [[250, 1030, 190, -1], [420, 1030, 175, -1], [660, 1030, 175, 1], [830, 1030, 190, 1],
+    [110, 1330, 230, -1], [970, 1330, 230, 1], [360, 690, 160, -1], [720, 690, 160, 1]];
+  RIM.forEach(([x, y, h, from], i) => {
+    const p = person($('#crowdC'), pool[Math.floor(R() * pool.length)], x, y, h, i % 3 === 1 ? '#3CC5F7' : '#fff');
+    gsap.set(p, { opacity: 0 });
+    const t0 = 4.46 + i * 0.04;
+    tl.set(p, { opacity: 1 }, t0);
+    run(p, t0, 0.3 + R() * 0.1, from * (800 + R() * 300), 0);
+    // react: one arm shoots up pointing at the hole, the body leans in
+    const arm = p.querySelector(x < 540 ? '.am2' : '.am1');
+    ft(t0 + 0.55, arm, { rotation: 0 }, { rotation: (x < 540 ? -1 : 1) * (y < 800 ? 40 : 75), duration: 0.22, ease: 'back.out(3)' });
+    ft(t0 + 0.5, p, { rotation: 0 }, { rotation: (x < 540 ? 1 : -1) * (y < 800 ? 8 : 6), duration: 0.6, ease: 'back.out(1.6)' });
+  });
+  gsap.set('#glint', { opacity: 0 });
+  ft(4.50, '#glint', { opacity: 0 }, { opacity: 0.8, duration: 0.6, ease: 'power2.out' });
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines['who-hook'] = tl;
+})();
+</script>
+</body>
+</html>

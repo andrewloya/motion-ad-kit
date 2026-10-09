@@ -1,0 +1,182 @@
+<!doctype html>
+<!-- LYRC Rollout ad (goodbye) — HOOK ONLY, 0–4.0 s. Hook h1 "the lift" (r2): a wall of 16 real Rollout videos of THIS
+     song, one of them lit. "if you were SMART" is set on the wall itself. The song cuts out and the lights die on
+     "steal": SMART flips to STEAL, the lit video is ripped out of the wall and thrown past the camera; on the 808 slam
+     (2.60) the lights come back and the camera snaps flat onto the whole wall — one song, 16 videos that look nothing
+     alike — and holds with "your next song ROLLOUT" until the BASS IN (4.00), where the body takes over. -->
+<html data-composition-variables='[{"id":"hook","type":"enum","label":"Hook","default":"h1","options":[{"value":"h1","label":"Hook 1 — the lift"}]}]'>
+<head>
+<meta charset="utf-8">
+<title>LYRC — rollout-hook</title>
+<style>
+@font-face{font-family:'SG';src:url('fonts/SpaceGrotesk-Variable.ttf');font-weight:300 700}
+@font-face{font-family:'ARC';src:url('fonts/Archivo-VF.ttf');font-weight:100 900;font-stretch:62% 125%}
+:root{--stage:#05070D;--ink:#fff;--accent:#1BA3E0;--flood:#1BA3E0;--glow:#3CC5F7}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;background:var(--stage);overflow:hidden}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:'SG',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;background:var(--stage)}
+#stage{position:absolute;inset:0}
+.hook{position:absolute;inset:0;opacity:0}
+
+/* the world: a perspective rig carrying the wall of real Rollout videos (4x4, 360x640 tiles, 16 px gutters).
+   Wall px → screen: the hero slot's centre (556,1632) sits at screen (560,1250) at rest. */
+#rig{position:absolute;inset:0;perspective:1400px;perspective-origin:540px 960px;transform-origin:540px 960px}
+#wall{position:absolute;left:4px;top:-382px;width:1488px;height:2608px;transform-origin:556px 1632px;transform-style:preserve-3d}
+#wallv{position:absolute;left:0;top:0;width:1488px;height:2608px;object-fit:cover;filter:blur(3px) brightness(.62)}
+#hole{position:absolute;left:376px;top:1312px;width:360px;height:640px;background:radial-gradient(ellipse at 50% 30%,#0b1a22 0%,#000 70%);box-shadow:inset 0 0 60px 18px rgba(0,0,0,.95),inset 0 0 0 3px rgba(60,197,247,.5);opacity:0;transform:translateZ(1px)}
+#shade{position:absolute;inset:-400px;background:radial-gradient(ellipse 330px 470px at 956px 2032px,rgba(0,0,0,0) 48%,rgba(2,4,9,.86) 100%);opacity:0;transform:translateZ(2px)}
+#lift{position:absolute;left:376px;top:1312px;width:360px;height:640px;overflow:hidden;transform:translateZ(4px);
+  box-shadow:0 30px 70px rgba(0,0,0,.8),0 0 36px rgba(60,197,247,.4)}
+#herov{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:scale(.33334);transform-origin:0 0;object-fit:cover}
+/* type that lives ON the wall (it tilts, parallaxes and gets flown past with it) */
+#wtype{position:absolute;left:0;top:0;width:1488px;height:2608px;transform-style:preserve-3d;transform:translateZ(70px);pointer-events:none}
+.hero{position:absolute;text-align:center;font-family:'ARC';font-weight:900;line-height:.86;white-space:nowrap;text-shadow:0 22px 60px rgba(0,0,0,.6)}
+.hero .ch{display:inline-block;font-variation-settings:'wdth' 85,'wght' 900;transform-origin:50% 100%}
+#smart,#steal{left:20px;width:900px;top:1060px;font-size:188px;transform-style:preserve-3d}
+#smart .ch{transform-style:preserve-3d}
+#steal .ch{transform-origin:50% 50%}
+
+/* screen-space lockup for the second half: small line over the hero word */
+#fg{position:absolute;inset:0;transform-origin:540px 960px}
+#roll{left:0;width:1080px;top:760px;font-size:226px;perspective:1000px}
+#roll .ch{font-variation-settings:'wdth' 66,'wght' 900;transform-origin:50% 60%}
+#dim{position:absolute;inset:0;background:radial-gradient(ellipse 820px 560px at 540px 860px,rgba(3,5,10,.86) 0%,rgba(3,5,10,.4) 100%);opacity:0}
+#sweep{position:absolute;left:-600px;top:0;width:420px;height:1920px;background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.5) 50%,rgba(255,255,255,0) 100%);
+  mix-blend-mode:overlay;opacity:0;transform:skewX(-14deg)}
+#grain{position:absolute;inset:0;width:1080px;height:1920px;object-fit:cover;mix-blend-mode:overlay;opacity:.16;pointer-events:none}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse 760px 1150px at 540px 1000px,rgba(0,0,0,0) 55%,rgba(0,0,0,.5) 100%);pointer-events:none}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="rollout-hook" data-width="1080" data-height="1920" data-start="0" data-duration="4" data-fps="60">
+  <audio id="music" data-start="0" data-duration="4" data-track-index="0" src="assets/audio/final-mix.wav"></audio>
+  <div id="stage">
+    <div id="h1" class="hook">
+      <div id="rig">
+        <div id="wall">
+          <img id="wallv" src="assets/footage/wall.jpg" alt="">
+          <div id="hole"></div>
+          <div id="shade"></div>
+          <div id="lift"><video id="herov" src="assets/footage/hero.mp4" data-start="0" data-duration="4" data-track-index="2" muted playsinline></video></div>
+          <div id="wtype">
+            <div id="smart" class="hero">SMART</div>
+            <div id="steal" class="hero">STEAL</div>
+          </div>
+        </div>
+      </div>
+      <div id="vig"></div>
+      <div id="dim"></div>
+      <div id="fg">
+        <div id="roll" class="hero">ROLLOUT</div>
+        <div id="sweep"></div>
+      </div>
+      <video id="grain" src="assets/footage/grain.mp4" data-start="0" data-duration="4" data-track-index="3" muted playsinline></video>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<script>
+(function () {
+  // ------------------------------------------------ clock — measured on the stems (song 115.52 s = ad 0) and the take
+  // 808 hits 0.00 / 0.35 / 0.80 / 1.25 · the song drops OUT 1.72–2.58 · 808 SLAM 2.60 · hats 3.30 / 3.55 / 3.75 · BASS IN 4.00
+  // Jessica (words-ad.json): smart .64 · steal 1.76 · this 2.20 · your 2.56 · next 2.76 · song 3.00 · rollout 3.20
+  // Rollout cut markers (local template copy): 1.25 · 3.30 — the stolen video holds ONE shot from 1.25 through the landing.
+  const tl = gsap.timeline({ paused: true });
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
+  function ft(t, target, from, to) { tl.fromTo(target, from, Object.assign({ immediateRender: false }, to), t); }
+  function split(sel) { const el = $(sel); el.innerHTML = [...el.textContent].map((c) => `<span class="ch">${c === ' ' ? '&nbsp;' : c}</span>`).join(''); return $$(sel + ' .ch'); }
+  const VAR = (a, b) => `'wdth' ${a},'wght' ${b}`;
+  // wall poses (origin = hero slot centre)
+  const POSE = {
+    rest0: { rotationY: -14, rotationX: 8, rotationZ: -4, scale: 1.32, x: 0, y: 0 },
+    rest1: { rotationY: -11, rotationX: 6, rotationZ: -3, scale: 1.32, x: 0, y: 0 },
+    dark:  { rotationY: -7, rotationX: 4, rotationZ: -2, scale: 1.36, x: 0, y: 0 },
+    inside:{ rotationY: 0, rotationX: 0, rotationZ: 0, scale: 3.2, x: -20, y: -290 },   // hero slot = the full frame
+    full:  { rotationY: 0, rotationX: 0, rotationZ: 0, scale: 3.0, x: -20, y: -290 },
+    month: { rotationY: 0, rotationX: 0, rotationZ: 0, scale: 0.79, x: -170, y: -37 },  // the whole wall, flat, filling the frame
+  };
+  const pose = (t, a, b, dur, ease) => ft(t, '#wall', Object.assign({}, POSE[a]), Object.assign({}, POSE[b], { duration: dur, ease }));
+
+  const VARS = (window.__hyperframes && typeof window.__hyperframes.getVariables === 'function') ? window.__hyperframes.getVariables() : {};
+  const HOOK = ['h1'].includes(VARS.hook) ? VARS.hook : 'h1';
+  tl.set('#' + HOOK, { opacity: 1 }, 0);
+
+  const hooks = {
+    h1() {
+      const SM = split('#smart'), ST = split('#steal'), RO = split('#roll');
+      gsap.set('#wall', POSE.rest0);
+      gsap.set(SM, { z: 150, filter: 'blur(3px)' });
+      gsap.set(ST, { rotationX: -95, opacity: 0 });
+      gsap.set(RO, { opacity: 0 });
+
+      // ---- frame 0 = the cover: the wall braking out of a whip, the lit video, "if you were SMART" already arriving
+      ft(0, '#rig', { x: 140 }, { x: 0, duration: 0.5, ease: 'expo.out' });
+      pose(0, 'rest0', 'rest1', 1.7, 'sine.inOut');
+      [].forEach(([t, s]) => {          // camera surges on the measured 808s
+        ft(t, '#rig', { scale: 1 }, { scale: s, duration: 0.12, ease: 'power3.out' });
+        ft(t + 0.12, '#rig', { scale: s }, { scale: 1, duration: 0.3, ease: 'sine.inOut' });
+      });
+      ft(0, '#lift', { boxShadow: '0 30px 70px rgba(0,0,0,.8),0 0 20px rgba(60,197,247,.25)' },
+        { boxShadow: '0 30px 70px rgba(0,0,0,.8),0 0 44px rgba(60,197,247,.55)', duration: 0.8, ease: 'sine.inOut', yoyo: true, repeat: 1 });
+
+      // SMART: letters thrown from the camera onto the wall (already in flight on frame 0), squash + width punch on impact
+      SM.forEach((l, i) => {
+        const t = i * 0.035, z0 = 150;
+        ft(t, l, { z: z0, opacity: 1, filter: 'blur(3px)' }, { z: 0, opacity: 1, filter: 'blur(0px)', duration: 0.2, ease: 'power3.in' });
+        ft(t, l, { fontVariationSettings: VAR(70, 600) }, { fontVariationSettings: VAR(125, 900), duration: 0.2, ease: 'power2.in' });
+        ft(t + 0.2, l, { scaleY: 0.74, scaleX: 1.18 }, { scaleY: 1, scaleX: 1, duration: 0.55, ease: 'elastic.out(1,.42)' });
+        ft(t + 0.2, l, { fontVariationSettings: VAR(125, 900) }, { fontVariationSettings: VAR(85, 900), duration: 0.45, ease: 'back.out(2)' });
+      });
+
+      // ---- 1.72: the song drops out — the lights die; SMART flips to STEAL, letter by letter, on "steal"
+      ft(1.70, '#shade', { opacity: 0 }, { opacity: 1, duration: 0.14, ease: 'power4.out' });
+      pose(1.72, 'rest1', 'dark', 0.88, 'sine.inOut');
+      SM.forEach((l, i) => ft(1.70 + i * 0.045, l, { rotationX: 0, opacity: 1 }, { rotationX: 92, opacity: 0, duration: 0.12, ease: 'power2.in' }));
+      ST.forEach((l, i) => ft(1.80 + i * 0.045, l, { rotationX: -95, opacity: 1 }, { rotationX: 0, opacity: 1, duration: 0.34, ease: 'back.out(2.2)' }));
+      // the video: sinks into its slot, then gets RIPPED out, up and to the side, so the empty slot shows
+      tl.set('#hole', { opacity: 1 }, 1.95);
+      ft(1.95, '#lift', { z: 4, x: 0, y: 0, scale: 1 }, { z: 4, x: 0, y: 20, scale: 0.95, duration: 0.1, ease: 'power2.in' });
+      ft(2.05, '#lift', { z: 4, x: 0, y: 20, scale: 0.95, rotationY: 0, rotationZ: 0 }, { z: 170, x: 270, y: 130, scale: 1, rotationY: 14, rotationZ: 9, duration: 0.24, ease: 'expo.out' });
+      ft(2.29, '#lift', { y: 130, rotationZ: 9 }, { y: 110, rotationZ: 6, duration: 0.13, ease: 'sine.inOut' });   // held in the air a beat
+      // …and it's gone: thrown past the camera, blowing STEAL apart on the way
+      ft(2.42, '#lift', { z: 170, x: 270, y: 110, rotationY: 14, rotationZ: 6 }, { z: 1300, x: 60, y: -560, rotationY: -6, rotationZ: -4, duration: 0.18, ease: 'expo.in' });
+      tl.set('#lift', { opacity: 0 }, 2.60);
+      ST.forEach((l, i) => {
+        ft(2.46, l, { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1, filter: 'blur(0px)' },
+          { x: (i - 2) * 300 + 40, y: (i % 2 ? -1 : 1) * 240, rotation: (i - 2) * 22 + 8, scale: 1.8, opacity: 0, filter: 'blur(10px)', duration: 0.18, ease: 'power3.in' });
+      });
+      ft(2.40, '#rig', { filter: 'blur(0px)' }, { filter: 'blur(4px)', duration: 0.18, ease: 'power2.in' });
+      ft(2.58, '#rig', { filter: 'blur(4px)' }, { filter: 'blur(0px)', duration: 0.14, ease: 'power2.out' });
+
+      // ---- 2.60 SLAM: lights back, the camera snaps flat onto the whole wall — your rollout, 16 videos that don't match
+      tl.set(['#shade', '#hole', '#wtype'], { opacity: 0 }, 2.60);
+      pose(2.60, 'dark', 'month', 0.42, 'expo.out');
+      ft(2.60, '#wallv', { filter: 'blur(3px) brightness(.62)' }, { filter: 'blur(0px) brightness(.95)', duration: 0.3, ease: 'power2.out' });
+      [[18, 0.04], [-13, 0.05], [8, 0.05], [-4, 0.06], [0, 0.07]].reduce((t, [x, d], k, a) => {   // decaying shake
+        ft(t, '#rig', { x: k ? a[k - 1][0] : 0 }, { x, duration: d, ease: 'power2.inOut' }); return t + d;
+      }, 2.60);
+      ft(2.70, '#dim', { opacity: 0 }, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+
+      // ROLLOUT rolls in like wheels on "rollout", brakes with a squash, then holds (breathing) to the end
+      RO.forEach((l, i) => {
+        const t = 3.02 + i * 0.02;
+        ft(t, l, { x: 520, rotation: 200, opacity: 1 }, { x: 0, rotation: 0, opacity: 1, duration: 0.26, ease: 'back.out(1.3)' });
+        ft(t + 0.22, l, { scaleX: 1.08, scaleY: 0.92 }, { scaleX: 1, scaleY: 1, duration: 0.3, ease: 'back.out(2)' });
+      });
+      ft(3.62, RO, { fontVariationSettings: VAR(66, 900) }, { fontVariationSettings: VAR(72, 760), duration: 0.34, ease: 'sine.inOut', stagger: 0.025 });
+      // the held wall keeps living: slow push, surges on the hats (the body takes over at the BASS IN, 4.00)
+      ft(3.02, '#rig', { scale: 1 }, { scale: 1.02, duration: 0.28, ease: 'sine.inOut' });
+      ft(3.30, '#rig', { scale: 1.02 }, { scale: 1.045, duration: 0.2, ease: 'power3.out' });
+      ft(3.55, '#rig', { scale: 1.045 }, { scale: 1.07, duration: 0.2, ease: 'power3.out' });
+      ft(3.75, '#rig', { scale: 1.07 }, { scale: 1.09, duration: 0.25, ease: 'power3.out' });
+    },
+  };
+  hooks[HOOK]();
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines['rollout-hook'] = tl;
+})();
+</script>
+</body>
+</html>

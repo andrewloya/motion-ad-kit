@@ -1,0 +1,701 @@
+<!doctype html>
+<!-- LYRC in Claude (from invideo's MCP reel). Song: clovers, ad 0 = song 1.82. Hook: "the crush". -->
+<html data-composition-variables='[{"id":"hook","type":"enum","label":"Hook","default":"h1","options":[{"value":"h1","label":"Hook 1 — the crush"}]}]'>
+<head>
+<meta charset="utf-8">
+<title>LYRC — claude-connector</title>
+<style>
+@font-face{font-family:'SG';src:url('fonts/SpaceGrotesk-Variable.ttf');font-weight:300 700}
+@font-face{font-family:'IS';src:url('fonts/InstrumentSerif-Italic.ttf');font-style:italic;font-weight:400}
+@font-face{font-family:'JB';src:url('fonts/JetBrainsMono.ttf');font-weight:100 800}
+@font-face{font-family:'ARC';src:url('fonts/Archivo-VF.ttf');font-weight:100 900;font-stretch:62% 125%}
+:root{--stage:#000;--ink:#fff;--accent:#1BA3E0;--flood:#1BA3E0;--glow:#3CC5F7}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;background:#000;overflow:hidden}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:'SG',sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+.mask{overflow:hidden;display:block}
+.mask>span{display:inline-block}
+.hook{position:absolute;inset:0;opacity:0}
+.ch{display:inline-block}
+.arc{font-family:'ARC';font-weight:900;font-variation-settings:'wdth' 100,'wght' 900;line-height:.86;letter-spacing:-.01em;text-transform:uppercase}
+
+/* night stage: a deep blue floor light, dithered by the grain */
+#bg{position:absolute;inset:0;background:#02050b}
+#bgGlow{position:absolute;left:-300px;top:900px;width:1680px;height:1500px;border-radius:50%;background:radial-gradient(closest-side,rgba(27,120,190,.55),rgba(10,40,80,.25) 55%,rgba(0,0,0,0));}
+#bgGlow2{position:absolute;left:520px;top:1240px;width:900px;height:700px;border-radius:50%;background:radial-gradient(closest-side,rgba(60,197,247,.22),rgba(60,197,247,0))}
+#grain{position:absolute;inset:-60px;background:url('assets/ui/grain.png');opacity:.075;mix-blend-mode:overlay;pointer-events:none;z-index:90}
+
+/* ---------- hook: a cluttered editor timeline on a tilted plane ---------- */
+#tlRig{position:absolute;inset:0;perspective:1500px;perspective-origin:50% 35%}
+#tlPlane{position:absolute;left:-360px;top:760px;width:1800px;height:900px;border-radius:26px;background:#0a0e15;border:2px solid rgba(60,197,247,.22);
+  box-shadow:0 40px 120px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.03) inset;transform-origin:900px 450px;overflow:hidden}
+#tlRuler{position:absolute;left:0;top:0;right:0;height:64px;background:#070a10;border-bottom:1px solid rgba(255,255,255,.06)}
+.tk{position:absolute;bottom:0;width:2px;background:rgba(155,220,255,.28)}
+.tc{position:absolute;top:12px;font-family:'JB';font-size:21px;color:#5f7488;letter-spacing:.02em}
+.trk{position:absolute;left:0;right:0}
+.th{position:absolute;left:0;top:0;bottom:0;width:150px;background:#0c121b;border-right:1px solid rgba(255,255,255,.06);font-family:'JB';font-size:24px;color:#7d90a6;padding:16px 0 0 22px}
+.th i{display:block;width:22px;height:22px;border:2px solid #3a4b5e;border-radius:5px;margin-top:12px}
+.clip{position:absolute;top:8px;bottom:8px;border-radius:12px;background:#10304a;border:2px solid #2b78ab;overflow:hidden;display:flex}
+.clip .th2{flex:none;height:100%;width:78px;background-size:cover;background-position:center;opacity:.92;border-right:1px solid rgba(0,0,0,.4)}
+.word{position:absolute;top:14px;bottom:14px;border-radius:10px;background:#174a73;border:2px solid #3c9bd6;font:600 29px 'SG';color:#e8f6ff;display:flex;align-items:center;padding:0 14px;white-space:nowrap}
+.kf{position:absolute;top:21px;width:20px;height:20px;background:#9bdcff;transform:rotate(45deg);border-radius:3px;box-shadow:0 0 12px rgba(60,197,247,.7)}
+.sfx{position:absolute;top:14px;bottom:14px;border-radius:10px;background:#0d2436;border:2px solid #1f5677}
+.cut{position:absolute;top:64px;bottom:0;width:3px;background:rgba(255,255,255,.22)}
+.cutT{position:absolute;top:40px;width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;border-top:18px solid #9bdcff;margin-left:-9px}
+#tlHead{position:absolute;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.75) 30%,rgba(255,255,255,.3) 100%);box-shadow:0 0 8px rgba(155,220,255,.4);z-index:5}
+#tlHead::before{content:'';position:absolute;top:0;left:-15px;width:34px;height:40px;background:#fff;clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%)}
+#tlShade{position:absolute;inset:0;background:radial-gradient(ellipse 900px 700px at 50% 22%,rgba(2,5,11,.92),rgba(2,5,11,.55) 60%,rgba(2,5,11,0) 100%)}
+
+#hkStop{position:absolute;left:66px;top:262px;font-size:198px;color:#fff;text-shadow:0 10px 40px rgba(0,0,0,.6)}
+#hkStop .ln{display:block;white-space:nowrap}
+#hkSub{position:absolute;left:72px;top:610px;font:600 100px/1.05 'SG';letter-spacing:-.045em;color:#fff;text-shadow:0 6px 30px rgba(0,0,0,.7)}
+#hkText{position:absolute;left:66px;top:248px;text-align:left;font-size:212px;line-height:.86;font-variation-settings:'wdth' 89,'wght' 900;color:#fff;white-space:nowrap;text-shadow:0 12px 50px rgba(0,0,0,.55)}
+#hkText .blue{color:#3CC5F7}
+/* "(manually)..." — the aside that gives the game away, then goes up in smoke */
+#hkManWrap{position:absolute;left:594px;top:633px;transform-origin:40% 60%}
+#hkMan{font:500 76px/1 'SG';letter-spacing:-.03em;color:#dff3ff;white-space:nowrap;filter:url(#smoke);text-shadow:0 3px 14px rgba(0,0,0,.9),0 0 22px rgba(60,197,247,.4)}
+.puff{position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(closest-side,rgba(205,232,248,.42),rgba(155,220,255,.14) 55%,rgba(155,220,255,0));filter:blur(14px);pointer-events:none}
+
+/* Claude's user message bubble (light theme) — the hook ends on it, then it becomes the chat's first message */
+.ubub{background:#F0EEE6;color:#141413;border-radius:26px;padding:22px 30px;font:400 36px/1.3 -apple-system,'SF Pro Text','Helvetica Neue',sans-serif;letter-spacing:-.005em}
+#hkBubble{position:absolute;z-index:7;left:70px;top:1010px;width:940px;transform-origin:50% 50%;font-size:52px;padding:30px 40px;border-radius:38px;box-shadow:0 30px 90px rgba(0,0,0,.55)}
+#debris{position:absolute;inset:0;pointer-events:none}
+.db{position:absolute;left:0;top:0;border-radius:8px;background-size:cover;background-position:center}
+
+/* ---------- body: Claude Desktop (light), rebuilt from the reel's frames; LYRC cards from lib/mcp/ui/*.ts ---------- */
+#cam{position:absolute;inset:0;transform-origin:540px 960px;perspective:2600px;z-index:4}
+#app{position:absolute;left:30px;top:236px;width:1020px;height:1300px;border-radius:44px;background:#FAF9F5;overflow:hidden;
+  box-shadow:0 60px 160px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.06);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;color:#141413}
+#appBar{position:absolute;left:0;top:0;right:0;height:64px;border-bottom:1px solid #ECEAE2}
+.tl3{position:absolute;top:21px;width:22px;height:22px;border-radius:50%}
+#appTitle{position:absolute;left:250px;top:17px;font-size:25px;color:#3D3D3A;letter-spacing:-.01em}
+.ico{position:absolute;top:19px;color:#8A8984;font-size:25px}
+#vp{position:absolute;left:0;top:64px;width:1020px;height:1056px;overflow:hidden}
+#convo{position:absolute;left:0;top:0;width:1020px;height:3600px}
+.ub{position:absolute;right:40px;max-width:760px;font-size:42px;padding:24px 32px;border-radius:31px}
+.row{position:absolute;left:40px;height:48px;display:flex;align-items:center;gap:16px;font-size:38px;color:#5E5D59;white-space:nowrap}
+.row .ric{display:block;width:40px;height:40px;border-radius:10px;background:#0b0b0d url('assets/ui/lyrc-favicon.svg') center/30px no-repeat}
+.row .ok{color:#8A8984;font-size:26px;margin-left:4px}
+.row .chev{color:#A3A29C;font-size:28px}
+.txt{position:absolute;left:40px;width:930px;font-size:37px;line-height:1.42;color:#141413}
+.spark{position:absolute;width:52px;height:52px;background:url('assets/ui/claude/spark.png') center/contain no-repeat}
+/* LYRC widget card (shell.ts BASE_CSS, scaled) */
+.lc{position:absolute;left:40px;width:940px;background:#101013;border:1.5px solid rgba(255,255,255,.08);border-radius:28px;overflow:hidden;color:#e7e5e4}
+.lc .hd{position:absolute;left:0;right:0;top:0;height:104px;border-bottom:1.5px solid rgba(255,255,255,.06)}
+.lc .hd h1{position:absolute;left:32px;top:24px;font-size:31px;font-weight:600;letter-spacing:-.01em}
+.lc .hd .sub{position:absolute;left:32px;top:64px;font-size:23px;color:#78716c}
+.lc .hd .brand{position:absolute;right:32px;top:36px;height:33px;width:173px;background:url('assets/ui/lyrc-logo.svg') right center/contain no-repeat}
+.lc .ft{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1.5px solid rgba(255,255,255,.06)}
+.lc .ft .note{position:absolute;left:32px;top:22px;width:560px;font-size:21px;line-height:1.3;color:#78716c}
+.btn{position:absolute;right:30px;top:20px;height:56px;padding:0 26px;border-radius:16px;background:#3cc5f7;color:#fff;font-size:26px;font-weight:600;display:flex;align-items:center;gap:10px}
+.tile{position:absolute;border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#1c1917,#292524);border:1.5px solid rgba(255,255,255,.06);background-size:cover;background-position:center}
+.tile .idx{position:absolute;top:8px;left:8px;font-size:18px;font-weight:600;color:#d6d3d1;background:rgba(0,0,0,.55);border-radius:7px;padding:1px 9px}
+.tile .dur{position:absolute;bottom:8px;right:8px;font-size:18px;color:#a8a29e;background:rgba(0,0,0,.55);border-radius:7px;padding:1px 9px}
+#exStage{position:absolute;left:0;right:0;top:104px;height:640px;background:#000}
+#exVid{position:absolute;left:290px;top:0;width:360px;height:640px;object-fit:cover}
+.dt{position:absolute;top:128px;width:212.5px;height:378px;border-radius:14px;overflow:hidden;background:#000;outline:3px solid #34d399;outline-offset:-3px}
+.dt video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dt .ix{position:absolute;top:8px;left:8px;z-index:2;font-size:18px;font-weight:600;color:#d6d3d1;background:rgba(0,0,0,.55);border-radius:7px;padding:1px 9px}
+.dt .badge{position:absolute;top:8px;right:8px;z-index:2;font-size:17px;font-weight:800;border-radius:7px;padding:1px 9px;color:#0b0b0d;background:#34d399}
+.dt .acts{position:absolute;left:0;right:0;bottom:0;display:flex;z-index:2}
+.dt .acts b{flex:1;font-size:21px;font-weight:700;padding:11px 0;text-align:center;background:rgba(0,0,0,.62);color:#34d399}
+.dt .acts b.d{color:#f87171;border-left:1.5px solid rgba(255,255,255,.12)}
+/* composer */
+#comp{position:absolute;left:40px;top:1132px;width:940px;height:150px;background:#fff;border:1.5px solid #DEDCD1;border-radius:28px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+#compPh{position:absolute;left:32px;top:24px;font-size:34px;color:#8A8984}
+.compTx{position:absolute;left:32px;top:21px;font-size:38px;color:#141413;white-space:nowrap}
+.caret{display:inline-block;width:3px;height:42px;background:#141413;vertical-align:-8px;margin-left:2px}
+#compPlus{position:absolute;left:28px;top:88px;font-size:40px;color:#5E5D59;font-weight:300}
+#compModel{position:absolute;right:100px;top:100px;font-size:26px;color:#3D3D3A}
+#compSend{position:absolute;right:20px;top:84px;width:56px;height:56px;border-radius:15px;background:#C6613F;color:#fff;font-size:32px;display:flex;align-items:center;justify-content:center;font-weight:700}
+#cursor{position:absolute;left:0;top:0;width:44px;height:64px;z-index:60;pointer-events:none}
+#ring{position:absolute;z-index:61;left:-40px;top:-40px;width:80px;height:80px;border-radius:50%;border:4px solid rgba(60,197,247,.9)}
+/* the hero video: ONE screen the camera carries between the chat card and full frame */
+#feedWrap{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:0 0;overflow:hidden;background:#000;z-index:5}
+#feedIn{position:absolute;inset:0;transform-origin:50% 50%}
+#feedIn video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* the end: four videos out of the chat, a 2x2 wall */
+.wv{position:absolute;left:0;top:0;width:540px;height:960px;overflow:hidden;transform-origin:0 0;background:#000}
+.wv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#wall{position:absolute;inset:0;z-index:8}
+#wallIn{position:absolute;inset:0;transform-origin:540px 960px}
+#end{z-index:9}
+#wallShade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,5,11,.74) 0%,rgba(2,5,11,.64) 60%,rgba(2,5,11,.2) 76%,rgba(2,5,11,.06) 100%)}
+#end{position:absolute;inset:0}
+#endL1{position:absolute;left:74px;top:372px;font:600 80px/1.05 'SG';letter-spacing:-.045em;color:#fff}
+#endL2{position:absolute;left:58px;top:462px;font-size:196px;color:#3CC5F7;white-space:nowrap}
+#endL2 .ln{display:block}
+
+#endCta .sm{font-size:64px;color:#cfe9f7}
+#endCta{position:absolute;left:74px;top:690px;font:600 116px/1.05 'SG';letter-spacing:-.045em;color:#fff;white-space:nowrap}
+#endCta .w{display:inline-block;font-family:'ARC';font-weight:900;color:#3CC5F7;letter-spacing:0}
+#igBar{position:absolute;left:60px;top:930px;width:960px;height:118px;border-radius:59px;background:rgba(18,18,18,.82);border:2px solid rgba(255,255,255,.18);display:flex;align-items:center;padding:0 22px 0 26px;gap:22px}
+#igBar .av{width:74px;height:74px;border-radius:50%;background:url('assets/ui/avatar.jpg') center/cover}
+#igBar .in{flex:1;font:500 44px 'SG';color:#fff}
+#igBar .post{font:700 40px 'SG';color:#3CC5F7}
+#endUrl{position:absolute;left:74px;top:1100px;font:600 60px 'SG';letter-spacing:-.03em;color:#fff}
+#endStats{position:absolute;left:76px;top:1186px;font:500 36px 'SG';color:#9bdcff;letter-spacing:-.01em}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="claude-connector" data-width="1080" data-height="1920" data-start="0" data-duration="32.418" data-fps="60">
+  <audio id="music" data-start="0" data-duration="32.418" data-track-index="0" src="assets/audio/final-mix.wav"></audio>
+  <div id="bg"><div id="bgGlow"></div><div id="bgGlow2"></div></div>
+  <div id="stage">
+    <div id="h1" class="hook">
+      <div id="tlRig"><div id="tlPlane">
+        <div id="tlRuler"></div>
+        <div id="tlTracks"></div>
+        <div id="tlHead" style="left:520px"></div>
+      </div></div>
+      <div id="tlShade"></div>
+      <div id="hkStop" class="arc"><span class="ln" id="hkL1">STOP</span><span class="ln" id="hkL2">EDITING</span></div>
+      <div id="hkSub"><span class="mask"><span id="hkSubIn">lyric videos</span></span></div>
+      <div id="hkManWrap"><div id="hkMan">(manually)...</div></div>
+      <div id="smokeL"><div class="puff" id="pf0"></div><div class="puff" id="pf1"></div><div class="puff" id="pf2"></div><div class="puff" id="pf3"></div><div class="puff" id="pf4"></div><div class="puff" id="pf5"></div></div>
+      <svg width="0" height="0" style="position:absolute"><filter id="smoke" x="-30%" y="-80%" width="160%" height="260%"><feTurbulence id="smTurb" type="fractalNoise" baseFrequency="0.011 0.045" numOctaves="3" seed="7"/><feDisplacementMap id="smDisp" in="SourceGraphic" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
+      <div id="debris"></div>
+      <div id="hkText" class="arc"><span id="hkT1" style="display:block">TEXT</span><span id="hkT2" class="blue" style="display:block">CLAUDE</span><span id="hkT3" style="display:block">INSTEAD</span></div>
+    </div>
+
+    <!-- ===== body: one camera over Claude's window + the hero video ===== -->
+    <div id="cam">
+      <div id="app">
+        <div id="appBar">
+          <div class="tl3" style="left:24px;background:#FF5F57"></div><div class="tl3" style="left:56px;background:#FEBC2E"></div><div class="tl3" style="left:88px;background:#28C840"></div>
+          <div class="ico" style="left:132px">&#9707;</div><div class="ico" style="left:178px">&#8592;</div><div class="ico" style="left:212px;opacity:.5">&#8594;</div>
+          <div id="appTitle">Clovers lyric video</div>
+        </div>
+        <div id="vp"><div id="convo">
+          <div class="ub ubub" id="bub1" style="top:26px">make a lyric video for clovers. use my night shoot.</div>
+          <i class="spark" id="spark1" style="left:34px;top:206px"></i>
+          <div class="row" id="row1" style="top:214px;left:104px"><i class="ric"></i>Start a video from a song<span class="ok" id="ok1">&#10003;</span></div>
+          <div class="row" id="row2" style="top:272px;left:104px"><i class="ric"></i>Fill a video with clips<span class="ok" id="ok2">&#10003;</span></div>
+          <div class="txt" id="txt1" style="top:338px">Done. Used your clovers template.</div>
+          <div class="lc" id="sb" style="top:456px;height:1002px">
+            <div class="hd"><h1>clovers — night shoot</h1><div class="sub"><span id="sbN">0</span>/30 slots filled</div><i class="brand"></i></div>
+            <div id="sbGrid"></div>
+            <div class="ft"><div class="note">Watching the preview is free — exporting uses 1 of your monthly exports.</div><div class="btn" id="watchBtn">&#9654; Watch free</div></div>
+          </div>
+          <div class="row" id="row3" style="top:1484px"><i class="ric"></i>Export a video<span class="ok">&#10003;</span></div>
+          <div class="lc" id="ex" style="top:1542px;height:840px">
+            <div class="hd"><h1>Your video is ready</h1><i class="brand"></i></div>
+            <div id="exStage"><video id="exVid" src="assets/footage/feed.mp4" data-start="8.0348" data-duration="13.8833" data-media-start="0.0167" data-track-index="2" muted playsinline></video></div>
+            <div class="ft"><div class="note">This link never expires — it opens your LYRC account.</div><div class="btn">&#8595; Download MP4</div></div>
+          </div>
+          <div class="ub ubub" id="bub2" style="top:2404px">make the words huge. and blue.</div>
+          <i class="spark" id="spark2" style="left:34px;top:2518px"></i>
+          <div class="row" id="row4" style="top:2526px;left:104px"><i class="ric"></i>Change lyric and video style<span class="ok" id="ok4">&#10003;</span></div>
+          <div class="ub ubub" id="bub3" style="top:2590px">now make 4 more. all different.</div>
+          <i class="spark" id="spark3" style="left:34px;top:2708px"></i>
+          <div class="row" id="row5" style="top:2716px;left:104px"><i class="ric"></i>Make a rollout batch<span class="ok" id="ok5">&#10003;</span></div>
+          <div class="lc" id="deck" style="top:2778px;height:626px">
+            <div class="hd"><h1>Review your rollout</h1><div class="sub">4 videos · <span id="dkN">4</span> kept · 0 ditched</div><i class="brand"></i></div>
+            <div class="dt" id="dt0" style="left:24px"><video id="dv0" src="assets/footage/r0.mp4" data-start="21.4181" data-duration="2.4" data-media-start="0.028" data-track-index="10" muted playsinline></video><span class="ix">1</span><span class="badge">KEPT</span><div class="acts"><b>Keep</b><b class="d">Ditch</b></div></div>
+            <div class="dt" id="dt1" style="left:250.5px"><video id="dv1" src="assets/footage/r1.mp4" data-start="21.4181" data-duration="2.4" data-media-start="0.028" data-track-index="11" muted playsinline></video><span class="ix">2</span><span class="badge">KEPT</span><div class="acts"><b>Keep</b><b class="d">Ditch</b></div></div>
+            <div class="dt" id="dt2" style="left:477px"><video id="dv2" src="assets/footage/r2.mp4" data-start="21.4181" data-duration="2.4" data-media-start="0.028" data-track-index="12" muted playsinline></video><span class="ix">3</span><span class="badge">KEPT</span><div class="acts"><b>Keep</b><b class="d">Ditch</b></div></div>
+            <div class="dt" id="dt3" style="left:703.5px"><video id="dv3" src="assets/footage/r3.mp4" data-start="21.4181" data-duration="2.4" data-media-start="0.028" data-track-index="13" muted playsinline></video><span class="ix">4</span><span class="badge">KEPT</span><div class="acts"><b>Keep</b><b class="d">Ditch</b></div></div>
+            <div class="ft"><div class="note" id="dkNote">Reviewing is free — exporting the kept videos is the paid step.</div><div class="btn" id="dkBtn">Export 4 kept…</div></div>
+          </div>
+        </div></div>
+        <div id="comp">
+          <div id="compPh">Reply to Claude…</div>
+          <div class="compTx" id="ct2"><span id="ct2t">make the words huge. and blue.</span><span class="caret"></span></div>
+          <div class="compTx" id="ct3"><span id="ct3t">now make 4 more. all different.</span><span class="caret"></span></div>
+          <div id="compPlus">+</div><div id="compModel">Opus 5.5</div><div id="compSend">&#8593;</div>
+        </div>
+      </div>
+    </div>
+    <div id="feedWrap"><div id="feedIn"><video id="feed" src="assets/footage/feed.mp4" data-start="8.0181" data-duration="13.9" data-track-index="1" muted playsinline></video></div></div>
+    <div id="hkBubble" class="ubub"><span id="hkMsg">make a lyric video for clovers. use my night shoot.</span></div>
+
+    <!-- ===== the end: the four videos leave the chat as a wall ===== -->
+    <div id="wall"><div id="wallIn">
+      <div class="wv" id="wv0"><video id="wvv0" src="assets/footage/r0.mp4" data-start="21.4348" data-duration="5.8333" data-media-start="0.0447" data-track-index="20" muted playsinline></video><video id="wsv0" src="assets/footage/r0-slow.mp4" data-start="27.2581" data-duration="5.16" data-track-index="24" muted playsinline style="opacity:0"></video></div>
+      <div class="wv" id="wv1"><video id="wvv1" src="assets/footage/r1.mp4" data-start="21.4348" data-duration="5.8333" data-media-start="0.0447" data-track-index="21" muted playsinline></video><video id="wsv1" src="assets/footage/r1-slow.mp4" data-start="27.2581" data-duration="5.16" data-track-index="25" muted playsinline style="opacity:0"></video></div>
+      <div class="wv" id="wv2"><video id="wvv2" src="assets/footage/r2.mp4" data-start="21.4348" data-duration="5.8333" data-media-start="0.0447" data-track-index="22" muted playsinline></video><video id="wsv2" src="assets/footage/r2-slow.mp4" data-start="27.2581" data-duration="5.16" data-track-index="26" muted playsinline style="opacity:0"></video></div>
+      <div class="wv" id="wv3"><video id="wvv3" src="assets/footage/r3.mp4" data-start="21.4348" data-duration="5.8333" data-media-start="0.0447" data-track-index="23" muted playsinline></video><video id="wsv3" src="assets/footage/r3-slow.mp4" data-start="27.2581" data-duration="5.16" data-track-index="27" muted playsinline style="opacity:0"></video></div>
+      </div><div id="wallShade"></div>
+    </div>
+    <div id="end">
+      <div id="endL1"><span class="mask"><span id="endL1In">LYRC is live in</span></span></div>
+      <div id="endL2" class="arc"><span class="ln" id="endW">CLAUDE.</span></div>
+      <div id="endCta"><span class="mask"><span id="endCtaIn">comment <span class="w" id="ctaW">"LYRC"</span></span></span><span class="mask"><span id="endCta2In" class="sm">for the link</span></span></div>
+      <div id="igBar"><div class="av"></div><div class="in"><span id="igTx">LYRC</span></div><div class="post" id="igPost">Post</div></div>
+      <div id="endUrl"><span class="mask"><span id="endUrlIn">lyrc.studio</span></span></div>
+      <div id="endStats"><span class="mask"><span id="endStatsIn">2,400+ stock clips · 26 lyric styles</span></span></div>
+    </div>
+    <svg id="cursor" viewBox="0 0 22 32"><path d="M2 2 L2 26 L8 20 L12 30 L16 28 L12 18 L20 18 Z" fill="#111" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>
+    <div id="ring"></div>
+  </div>
+  <div id="grain"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<script>
+(function () {
+  const DUR = 32.418;
+  // The song starts at its very beginning (ad 0 = song 0.002, one bar earlier than v17) so the first Claude scene has a
+  // bar more to read: the beat hits at 1.82 (tracks spread), drops out 4.7–5.44 under the tool rows, hits again as "Done."
+  // lands, and the first sung word is at 8.35. Everything from the dive on runs one bar (BAR) later than v17; SH holds it.
+  const BAR = 1.81808;
+  let SH = 0;
+  const HOOK_END = 3.62;          // the +49 dB hit after the 0.72 s silence (song 5.44)
+  const tl = gsap.timeline({ paused: true });
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
+  function ft(t, target, from, to) { tl.fromTo(target, from, Object.assign({ immediateRender: false }, to), t + SH); }
+  const tlSet = tl.set.bind(tl);
+  tl.set = (target, vars, t) => tlSet(target, vars, typeof t === 'number' ? t + SH : t);
+  function letters(sel) { const el = $(sel); el.innerHTML = [...el.textContent].map((c) => `<span class="ch">${c === ' ' ? '&nbsp;' : c}</span>`).join(''); return $$(sel + ' .ch'); }
+  function typeOn(t, sel, cps) {
+    const el = $(sel); const fs = getComputedStyle(el).fontSize; const chs = letters(sel);
+    chs.forEach((c) => gsap.set(c, { fontSize: 0 }));
+    chs.forEach((c, i) => tl.set(c, { fontSize: fs }, t + i / cps));
+    return chs.length / cps;
+  }
+
+  // ------------------------------------------------ build the timeline plane (real thumbs, real waveform, real lyrics)
+  const NS = ['7e6ce5bf','494b2532','6d1f7821','b3d01eab','465d892c','9725fe16','434f402a','da7fd614','a36f4a44','1d1be820','14e64e0f','c97a5127','862a6008','aed5af7f','7109d410','263edf06','f20a2103','06278e4a','f4b6c6b7','d8bd7de0','ea073a79','9dc528e0','9ea0e93b','d1b4246c','0a9acaea','b9aa2a74','e78fe2f3','9c66d8da','d156c8e1','28192c37'];
+  const ruler = $('#tlRuler');
+  let rh = '';
+  for (let x = 160, n = 0; x < 1800; x += 34, n++) {
+    rh += `<div class="tk" style="left:${x}px;height:${n % 5 === 0 ? 22 : 10}px"></div>`;
+    if (n % 10 === 0) rh += `<div class="tc" style="left:${x + 8}px">00:00:${String(Math.floor(n / 10) + 4).padStart(2, '0')}:${String((n * 3) % 30).padStart(2, '0')}</div>`;
+  }
+  ruler.innerHTML = rh;
+  const tracks = $('#tlTracks');
+  const rows = [
+    { id: 'V2', top: 78, h: 150 }, { id: 'V1', top: 240, h: 150 }, { id: 'T1', top: 402, h: 92 },
+    { id: 'FX', top: 506, h: 64 }, { id: 'A1', top: 582, h: 170 }, { id: 'A2', top: 764, h: 92 },
+  ];
+  let th = '';
+  let k = 0;
+  rows.forEach((r, ri) => {
+    let inner = `<div class="th">${r.id}<i></i></div>`;
+    if (r.id === 'V2' || r.id === 'V1') {
+      const widths = r.id === 'V2' ? [236, 158, 312, 174, 250, 160, 330, 210, 260] : [170, 290, 150, 236, 330, 180, 220, 300, 190];
+      let x = 156 + (r.id === 'V1' ? 40 : 0);
+      widths.forEach((w) => {
+        let thumbs = '';
+        for (let j = 0; j < Math.ceil(w / 78); j++) thumbs += `<div class="th2" style="background-image:url('assets/ui/ns/${NS[(k++) % NS.length]}.jpg')"></div>`;
+        inner += `<div class="clip" style="left:${x}px;width:${w}px">${thumbs}</div>`;
+        x += w + 6;
+      });
+    } else if (r.id === 'T1') {
+      const words = ['A', 'heavy', 'heart', 'and', 'teary', 'eyes', 'on', 'the', 'sofa', "I'll", 'give', 'you', 'one', 'more', 'night', 'to', 'tell', 'me', "it's", 'over'];
+      let x = 170;
+      words.forEach((w) => { const ww = 40 + w.length * 17; inner += `<div class="word" style="left:${x}px;width:${ww}px">${w}</div>`; x += ww + 10; });
+    } else if (r.id === 'FX') {
+      inner += `<div style="position:absolute;left:156px;right:0;top:31px;height:2px;background:rgba(155,220,255,.25)"></div>`;
+      [190, 262, 318, 455, 520, 610, 700, 742, 880, 960, 1010, 1130, 1215, 1290, 1400, 1460, 1580, 1650, 1730].forEach((x) => { inner += `<div class="kf" style="left:${x}px"></div>`; });
+    } else if (r.id === 'A1') {
+      inner += `<div style="position:absolute;left:156px;right:0;top:10px;bottom:10px;border-radius:12px;background:#08223a url('assets/ui/waveform.png') 0 50%/1900px 150px no-repeat;border:2px solid #1d6b9c"></div>`;
+    } else {
+      [[180, 120], [340, 90], [470, 200], [720, 110], [880, 160], [1100, 90], [1240, 220], [1520, 140]].forEach(([x, w]) => { inner += `<div class="sfx" style="left:${x}px;width:${w}px"></div>`; });
+    }
+    th += `<div class="trk" id="trk${r.id}" style="top:${r.top}px;height:${r.h}px">${inner}</div>`;
+  });
+  [320, 494, 650, 812, 1010, 1180, 1356, 1530, 1700].forEach((x) => { th += `<div class="cut" style="left:${x}px"></div><div class="cutT" style="left:${x}px"></div>`; });
+  tracks.innerHTML = th;
+
+  // ------------------------------------------------ which hook
+  const VARS = (window.__hyperframes && typeof window.__hyperframes.getVariables === 'function') ? window.__hyperframes.getVariables() : {};
+  const HOOK = ['h1'].includes(VARS.hook) ? VARS.hook : 'h1';
+  tl.set('#' + HOOK, { opacity: 1 }, 0);
+
+  const hooks = {
+    // h1 — the crush. Line: "stop editing lyric videos (manually)... text Claude." Device: an editor timeline crushed into one chat message.
+    h1() {
+      // world: the plane brakes out of a whip at frame 0, then one long drift (never pulses)
+      gsap.set('#tlPlane', { rotationX: 34, rotationZ: -9, rotationY: 7 });
+      ft(0, '#tlPlane', { x: 300, y: 40, rotationZ: -13 }, { x: 0, y: 0, rotationZ: -9, duration: 0.5, ease: 'expo.out' });
+      ft(0.5, '#tlPlane', { x: 0, rotationY: 7 }, { x: -50, rotationY: 5.5, duration: 1.32, ease: 'sine.inOut' });
+      ft(0.5, '#tlPlane', { rotationX: 34 }, { rotationX: 33, duration: 1.32, ease: 'sine.inOut' });
+      ft(0.5, '#tlShade', { y: 0 }, { y: 20, duration: 1.4, ease: 'sine.inOut' });
+      // the playhead keeps playing under the whole hook (one long sine.out, never a stop); the word under it lights up,
+      // then cools to "played" as the playhead leaves it; the cut markers it crosses light up and STAY lit
+      const PH = [440, 1089, 6], PHE = gsap.parseEase('sine.out'), PH_END = 2.4;
+      ft(0, '#tlHead', { left: PH[0] }, { left: PH[1], duration: PH[2], ease: 'sine.out' });
+      const phAt = (x) => { let lo = 0, hi = 1; for (let n = 0; n < 40; n++) { const m = (lo + hi) / 2; if (PH[0] + (PH[1] - PH[0]) * PHE(m) < x) lo = m; else hi = m; } return lo * PH[2]; };
+      const W0 = { backgroundColor: '#174a73', borderColor: '#3c9bd6', color: '#e8f6ff', boxShadow: '0 0 0px rgba(60,197,247,0)' };
+      const WON = { backgroundColor: '#3CC5F7', borderColor: '#d8f3ff', color: '#04121f', boxShadow: '0 0 12px rgba(60,197,247,.6)' };
+      const WPLAYED = { backgroundColor: '#1d5d8f', borderColor: '#5fb4e6', color: '#e8f6ff', boxShadow: '0 0 0px rgba(60,197,247,0)' };
+      $$('#trkT1 .word').forEach((w) => {
+        const a = parseFloat(w.style.left), b = a + parseFloat(w.style.width);
+        if (b <= PH[0]) { gsap.set(w, WPLAYED); return; }
+        const tOn = a <= PH[0] ? 0 : phAt(a), tOff = phAt(b);
+        if (tOn > PH_END) return;
+        if (tOn === 0) gsap.set(w, WON); else ft(tOn, w, W0, Object.assign({}, WON, { duration: 0.35, ease: 'sine.inOut' }));
+        if (tOff < PH_END) ft(tOff, w, WON, Object.assign({}, WPLAYED, { duration: 0.45, ease: 'sine.inOut' }));
+      });
+      const CUT0 = { background: 'rgba(255,255,255,.22)', boxShadow: '0 0 0px rgba(60,197,247,0)' }, CUTLIT = { background: 'rgba(155,220,255,.9)', boxShadow: '0 0 14px rgba(60,197,247,.9)' };
+      $$('.cut').forEach((c) => {
+        const x = parseFloat(c.style.left);
+        if (x < PH[0]) { gsap.set(c, CUTLIT); return; }
+        const t = phAt(x);
+        if (t < PH_END) ft(t, c, CUT0, Object.assign({}, CUTLIT, { duration: 0.18, ease: 'power2.out' }));
+      });
+
+      // STOP EDITING: the block is already huge at frame 0 and braking toward the camera; each letter drops the last
+      // few px and squashes, with a width punch
+      gsap.set('#hkStop', { transformOrigin: '50% 50%' });
+      ft(0, '#hkStop', { scale: 1.04, filter: 'blur(3px)' }, { scale: 1, filter: 'blur(0px)', duration: 0.34, ease: 'power3.out' });
+      const L = [...letters('#hkL1'), ...letters('#hkL2')];
+      L.forEach((c, i) => {
+        const d = 0.1 + i * 0.024;
+        gsap.set(c, { transformOrigin: '50% 90%' });
+        ft(0, c, { y: -40 - (i % 3) * 18, fontVariationSettings: "'wdth' 106,'wght' 900" }, { y: 0, fontVariationSettings: "'wdth' 100,'wght' 900", duration: d, ease: 'power3.in' });
+        ft(d, c, { scaleY: 0.84, scaleX: 1.12 }, { scaleY: 1, scaleX: 1, duration: 0.42, ease: 'elastic.out(1,.45)' });
+      });
+      ft(0.5, '#hkStop', { x: 0, y: 0 }, { x: -18, y: 6, duration: 1.4, ease: 'sine.inOut' });
+      ft(0.4, '#hkL1', { x: 0 }, { x: 10, duration: 1.5, ease: 'sine.inOut' });
+      ft(0.4, '#hkL2', { x: 0 }, { x: -8, duration: 1.5, ease: 'sine.inOut' });
+      gsap.set('#hkSubIn', { yPercent: 115 });
+      ft(0, '#hkSubIn', { yPercent: 22 }, { yPercent: 0, duration: 0.3, ease: 'expo.out' });
+      ft(1.0, '#hkSub', { x: 0 }, { x: -12, duration: 0.9, ease: 'sine.inOut' });
+
+      // 0.75 — the aside: "(manually)..." whispers in after "lyric videos", letter by letter, then shrinks and goes up in smoke (1.8–2.35)
+      const MC = letters('#hkMan');
+      MC.forEach((c, i) => {
+        const t = 0.7 + i * 0.022;
+        gsap.set(c, { opacity: 0 });
+        ft(t, c, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.22, ease: 'power2.out' });
+      });
+      ft(1.8, '#hkManWrap', { scale: 1, y: 0, filter: 'blur(0px)', opacity: 1 }, { scale: 0.55, y: -70, filter: 'blur(6px)', opacity: 0, duration: 0.55, ease: 'power2.in' });
+      ft(1.77, '#smDisp', { attr: { scale: 0 } }, { attr: { scale: 85 }, duration: 0.55, ease: 'power2.in' });
+      ft(1.77, '#smTurb', { attr: { baseFrequency: '0.011 0.045' } }, { attr: { baseFrequency: '0.02 0.08' }, duration: 0.55, ease: 'sine.in' });
+      [[494, 613], [580, 597], [666, 619], [752, 603], [838, 615], [924, 607]].forEach(([x, y], i) => {
+        const id = '#pf' + i, t = 1.83 + i * 0.04;
+        gsap.set(id, { x, y, opacity: 0, scale: 0.5 });
+        ft(t, id, { x, y, opacity: 0, scale: 0.5 }, { x: x + (i % 2 ? 26 : -18), y: y - 120, opacity: 0.55, scale: 1.1, duration: 0.3, ease: 'power2.out' });
+        ft(t + 0.3, id, { x: x + (i % 2 ? 26 : -18), y: y - 120, opacity: 0.55, scale: 1.1 }, { x: x + (i % 2 ? 60 : -40), y: y - 300, opacity: 0, scale: 1.9, duration: 0.7, ease: 'sine.out' });
+      });
+
+      // 1.82 BASS IN — anticipation: the tracks spread apart, the plane leans in
+      const T = ['#trkV2', '#trkV1', '#trkT1', '#trkFX', '#trkA1', '#trkA2'];
+      const off = [-30, -18, -6, 6, 18, 30];
+      T.forEach((s, i) => ft(1.82, s, { y: 0 }, { y: off[i], duration: 0.22, ease: 'power2.out' }));
+      ft(1.82, '#tlPlane', { scale: 1 }, { scale: 1.035, duration: 0.22, ease: 'power2.out' });
+      // the crush: tracks slam together (outer first) …
+      const centre = [372, 210, 48, -56, -167, -350];
+      [0, 5, 1, 4, 2, 3].forEach((ix, n) => ft(2.04 + n * 0.035, T[ix], { y: off[ix], scaleY: 1 }, { y: centre[ix] + off[ix] * 0.1, scaleY: 0.35, duration: 0.3, ease: 'back.in(1.5)' }));
+      ft(2.04, '#tlShade', { opacity: 1 }, { opacity: 0, duration: 0.4, ease: 'power2.in' });
+      // … then the whole plane squeezes flat into a pill the size of a chat message, draining to the bubble's cream
+      ft(2.3, '#tlPlane', { rotationX: 33, rotationZ: -9, rotationY: 5.5, scaleX: 1.035, scaleY: 1.035, x: -50, y: 0, borderRadius: '26px' },
+        { rotationX: 0, rotationZ: 0, rotationY: 0, scaleX: 940 / 1800, scaleY: 195 / 900, x: 0, y: -103, borderRadius: '73px / 175px', duration: 0.56, ease: 'power3.inOut' });
+      ft(2.42, '#tlTracks, #tlRuler, #tlHead', { opacity: 1 }, { opacity: 0, duration: 0.22, ease: 'power2.in' });
+      ft(2.44, '#tlPlane', { backgroundColor: '#0a0e15', borderColor: 'rgba(60,197,247,.22)' }, { backgroundColor: '#F0EEE6', borderColor: 'rgba(240,238,230,1)', duration: 0.22, ease: 'power2.in' });
+      tl.set('#tlPlane', { opacity: 0 }, 2.86);
+      // EDITING is crushed flat with it; STOP and "lyric videos" fall out of frame
+      ft(2.36, '#hkL2', { scaleY: 1, scaleX: 1, transformOrigin: '50% 100%' }, { scaleY: 0.03, scaleX: 1.18, duration: 0.32, ease: 'back.in(2)' });
+      tl.set('#hkL2', { opacity: 0 }, 2.68);
+      ft(2.2, '#hkL1', { y: 0, x: 0, rotation: 0 }, { y: -900, x: -260, rotation: -14, duration: 0.4, ease: 'power3.in' });
+      ft(2.22, '#hkSub', { y: 0, rotation: 0 }, { y: 1800, rotation: -9, duration: 0.4, ease: 'power3.in' });
+      tl.set('#hkL1, #hkSub', { opacity: 0 }, 2.64);
+
+      // 2.86 — the music drops out as the pill lands: it's a message. Debris from the crush bursts out, then falls.
+      const deb = $('#debris'); let dh = ''; const DB = [];
+      for (let i = 0; i < 16; i++) {
+        const kind = i < 4 ? 'th' : i < 11 ? 'w' : 'k';
+        const w = kind === 'th' ? 96 : kind === 'w' ? 70 + (i % 4) * 28 : 26, h = kind === 'th' ? 170 : kind === 'w' ? 56 : 26;
+        const st = kind === 'th' ? `background-image:url('assets/ui/ns/${NS[(i * 7) % NS.length]}.jpg');border:2px solid #2b78ab`
+          : kind === 'w' ? 'background:#174a73;border:2px solid #3c9bd6' : 'background:#9bdcff;box-shadow:0 0 12px rgba(60,197,247,.7)';
+        const dep = [1.0, 1.7, 0.6][i % 3];
+        dh += `<div class="db" id="db${i}" style="width:${w}px;height:${h}px;${st};box-shadow:0 ${18 * dep}px ${40 * dep}px rgba(0,0,0,.55);filter:blur(${dep > 1.3 ? 5 : dep < 0.8 ? 1.5 : 0}px)"></div>`;
+        DB.push({ w, h, dep });
+      }
+      deb.innerHTML = dh;
+      DB.forEach((d, i) => {
+        const a = (i / 16) * Math.PI * 2 + (i % 3) * 0.4, r = 420 + ((i * 137) % 300);
+        const x0 = 540 + Math.cos(a) * 160 - d.w / 2, y0 = 1107 + Math.sin(a) * 40 - d.h / 2;
+        const x1 = Math.min(1000, Math.max(30, 540 + Math.cos(a) * r - d.w / 2)), y1 = Math.min(1780, Math.max(140, 1150 + Math.sin(a) * r * 1.05 - d.h / 2));
+        const rot = (i % 2 ? 1 : -1) * (14 + (i * 23) % 30);
+        gsap.set('#db' + i, { opacity: 0 });
+        tl.set('#db' + i, { opacity: 1 }, 2.86);
+        ft(2.86, '#db' + i, { x: x0, y: y0, rotation: 0, scale: 0.5 }, { x: x1, y: y1, rotation: rot, scale: d.dep, duration: 0.7, ease: 'expo.out' });
+        ft(3.86, '#db' + i, { x: x1, y: y1, rotation: rot }, { x: x1 + Math.cos(a) * 50, y: y1 + 1400 * d.dep, rotation: rot * 1.6, duration: 0.9, ease: 'power2.in' });
+      });
+      tl.set('#debris', { opacity: 0 }, 4.8);
+      gsap.set('#hkBubble', { opacity: 0 });
+      tl.set('#hkBubble', { opacity: 1 }, 2.86);
+      ft(2.86, '#hkBubble', { scaleX: 1.12, scaleY: 0.74, transformOrigin: '50% 50%' }, { scaleX: 1, scaleY: 1, duration: 0.55, ease: 'elastic.out(1,.4)' });
+      ft(3.0, '#hkBubble', { rotation: -1.2 }, { rotation: 0.5, duration: 0.62, ease: 'sine.inOut' });
+      // TEXT CLAUDE INSTEAD lands up top, where STOP EDITING was; each line has its own move so no line crosses another:
+      // TEXT drops from above, CLAUDE whips in from the right, INSTEAD rises out from behind the landing message
+      function landIn(chs, t0, step, from, dur, ease, squash) {
+        chs.forEach((c, i) => {
+          const t = t0 + i * step;
+          gsap.set(c, { opacity: 0, transformOrigin: '50% 100%' });
+          tl.set(c, { opacity: 1 }, t);
+          ft(t, c, from, { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: dur, ease });
+          if (squash) ft(t + dur, c, squash, { scaleX: 1, scaleY: 1, duration: 0.45, ease: 'elastic.out(1,.4)' });
+        });
+      }
+      landIn(letters('#hkT1'), 2.66, 0.025, { y: -380, scaleY: 1.25, scaleX: 0.85 }, 0.2, 'power3.in', { scaleY: 0.8, scaleX: 1.14 });
+      landIn(letters('#hkT2'), 2.76, 0.025, { x: 560, scaleX: 1.3, scaleY: 0.9 }, 0.3, 'expo.out', null);
+      landIn(letters('#hkT3'), 2.9, 0.025, { y: 380, scaleY: 1.2, scaleX: 0.9 }, 0.3, 'back.out(1.6)', null);
+      ft(3.1, '#hkText', { y: 0 }, { y: 14, duration: 1.0, ease: 'sine.inOut' });
+      ft(3.1, '#hkT1', { x: 0 }, { x: -6, duration: 1.0, ease: 'sine.inOut' });
+      ft(3.1, '#hkT2', { x: 0 }, { x: 9, duration: 1.0, ease: 'sine.inOut' });
+      ft(3.1, '#hkT3', { x: 0 }, { x: -4, duration: 1.0, ease: 'sine.inOut' });
+      // the send pushes the headline out the top, bottom line first, just ahead of the rising message
+      ['#hkT3', '#hkT2', '#hkT1'].forEach((sel, k) => ft(3.6 + k * 0.03, sel, { y: 0, rotation: 0 }, { y: -1150, rotation: (k % 2 ? 4 : -4), duration: 0.38, ease: 'expo.out' }));
+
+      // 3.62 — the +49 dB hit: SEND. The message whips up to its place in Claude's chat (the camera is already in close)
+      ft(3.62, '#hkBubble', { x: 0, y: 0, scale: 1, rotation: 0.5, transformOrigin: '0% 0%' }, { x: -24, y: -572.6, scale: 760 * 1.3 / 940, rotation: 0, duration: 0.36, ease: 'expo.out' });
+      tl.set('#hkBubble', { opacity: 0 }, 4.08);
+    },
+  };
+  hooks[HOOK]();
+  tl.set('#' + HOOK, { opacity: 0 }, 4.8);
+
+  // ================================================ body (shared by every hook)
+  // ONE camera over Claude's window: cam(t, s, [cx, cy] content point, [sx, sy] where it sits on screen). Calls in time order.
+  let CAM = { x: 0, y: 0, scale: 1 };
+  gsap.set('#cam', { transformOrigin: '0 0' });
+  function cam(t, s, c, p, dur, ease) {
+    const to = { x: p[0] - s * c[0], y: p[1] - s * c[1], scale: s };
+    ft(t, '#cam', Object.assign({}, CAM), Object.assign({}, to, { duration: dur, ease }));
+    CAM = to;
+  }
+  const onScreen = (x, y) => [CAM.x + CAM.scale * x, CAM.y + CAM.scale * y];
+  const R = { FULL: [0, 0, 1080], EXP: [360, 420, 360] };
+  const rectScr = (r) => ({ x: r[0], y: r[1], scale: r[2] / 1080 });
+  function moveScreen(t, a, b, dur, ease) { ft(t, '#feedWrap', rectScr(a), Object.assign(rectScr(b), { duration: dur, ease })); }
+  function rowIn(t, sel, okSel, tOk) {
+    gsap.set(sel, { clipPath: 'inset(0 100% 0 0)' });
+    ft(t, sel, { clipPath: 'inset(0 100% 0 0)', x: -14 }, { clipPath: 'inset(0 0% 0 0)', x: 0, duration: 0.38, ease: 'power3.out' });
+    ft(t + 0.05, sel + ' .ric', { scale: 0.3, rotation: -40 }, { scale: 1, rotation: 0, duration: 0.4, ease: 'back.out(2.5)' });
+    gsap.set(okSel, { opacity: 0 });
+    ft(tOk, okSel, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(3)' });
+  }
+  function sparkIn(t, sel, dur) {
+    gsap.set(sel, { opacity: 0 });
+    tl.set(sel, { opacity: 1 }, t);
+    ft(t, sel, { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: 0.42, ease: 'back.out(2.2)' });
+    ft(t + 0.42, sel, { rotation: 0 }, { rotation: 200, duration: dur, ease: 'sine.inOut' });
+  }
+  function massLand(t, sel, dy = 90) {
+    gsap.set(sel, { opacity: 0 });
+    tl.set(sel, { opacity: 1 }, t);
+    ft(t, sel, { y: dy, scale: 0.94, rotation: -1.2 }, { y: 0, scale: 1, rotation: 0, duration: 0.55, ease: 'back.out(1.6)' });
+  }
+  function streamWords(t, sel, dur) {
+    const el = $(sel); const ws = el.textContent.split(' ');
+    el.innerHTML = ws.map((w) => `<span class="sw">${w} </span>`).join('');
+    const sp = $$(sel + ' .sw'); sp.forEach((s) => gsap.set(s, { opacity: 0 }));
+    sp.forEach((s, i) => tl.set(s, { opacity: 1 }, t + (i / sp.length) * dur));
+  }
+  let CUR = [1010, 1560];
+  function tap(t, x, y) {
+    tl.set('#cursor', { opacity: 1 }, t - 0.35);
+    ft(t - 0.35, '#cursor', { x: CUR[0], y: CUR[1] }, { x: x - 4, y: y - 4, duration: 0.3, ease: 'power3.out' });
+    ft(t, '#cursor', { scale: 1 }, { scale: 0.86, duration: 0.08, ease: 'power2.in' });
+    ft(t + 0.08, '#cursor', { scale: 0.86 }, { scale: 1, duration: 0.2, ease: 'back.out(3)' });
+    ft(t, '#ring', { x, y, scale: 0.3, opacity: 1 }, { x, y, scale: 1.5, opacity: 0, duration: 0.45, ease: 'expo.out' });
+    CUR = [x - 4, y - 4];
+  }
+  function press(t, sel) { ft(t, sel, { scale: 1 }, { scale: 0.92, duration: 0.07, ease: 'power2.in' }); ft(t + 0.07, sel, { scale: 0.92 }, { scale: 1, duration: 0.3, ease: 'back.out(3)' }); }
+  gsap.set('#cursor, #ring', { opacity: 0, transformOrigin: '0 0' });
+  // the composer, close enough to read what's typed (its text starts at content x 102, its line at y 1409)
+  const COMP = [[102, 1409], [92, 1150]];
+
+  // ---- S1 (3.62–8.35) the ask: Claude's window opens out of the message; LYRC does the work. Paced to READ (loya 10-02:
+  // "too hard to read cant understand it fast enough"): tool rows 4.25–5.3, the reply 5.4, held to 6.4, then the storyboard.
+  gsap.set('#cam', { x: 540 - 1.3 * 630, y: 700 - 1.3 * 528, scale: 1.3 });
+  CAM = { x: 540 - 1.3 * 630, y: 700 - 1.3 * 528, scale: 1.3 };
+  gsap.set('#app', { opacity: 0, clipPath: 'inset(90px 40px 1053px 220px round 31px)' });
+  tl.set('#app', { opacity: 1 }, 3.9);
+  ft(3.92, '#app', { clipPath: 'inset(90px 40px 1053px 220px round 31px)' }, { clipPath: 'inset(0px 0px 0px 0px round 44px)', duration: 0.55, ease: 'expo.out' });
+  cam(3.92, 1.32, [630, 528], [540, 690], 0.22, 'sine.out');
+  // close enough to read, wide enough that the reply, both rows and the whole message fit (content x 70–1010 → 23–1057)
+  cam(4.02, 1.1, [540, 600], [540, 640], 0.6, 'expo.inOut');
+  sparkIn(4.08, '#spark1', 3.4);
+  gsap.set('#app', { transformOrigin: '50% 40%' });
+  ft(4.2, '#app', { rotationY: 0, rotationX: 0 }, { rotationY: -2.2, rotationX: 1.2, duration: 3.5, ease: 'sine.inOut' });
+  ft(7.938, '#app', { rotationY: -2.2, rotationX: 1.2 }, { rotationY: 0, rotationX: 0, duration: 0.3, ease: 'power2.in' });
+  // the steps tick in during the song's dropout (4.7–5.44), "Done." types, and the result drops in ON the hit at 5.44
+  rowIn(4.2, '#row1', '#ok1', 4.55);
+  rowIn(4.6, '#row2', '#ok2', 4.95);
+  streamWords(5.02, '#txt1', 0.33);
+  massLand(5.44, '#sb');   // right under the reply: request, steps, "Done." and the result in one view
+  // the storyboard fills: 30 real night-shoot clips, one per slot (real slot lengths from the template's cut markers)
+  const SLOT = [0.3, 0.4, 1.1, 0.4, 0.3, 0.6, 0.5, 0.4, 0.3, 1.1, 0.4, 0.3, 1.1, 0.4, 0.4, 1.1, 0.4, 0.3, 0.7, 0.5, 0.3, 0.3, 1.1, 0.4, 0.3, 0.4, 0.2, 0.2, 0.3, 0.5];
+  const TW = 101, THh = 179.6, G = 12;
+  let gh = '';
+  for (let i = 0; i < 30; i++) {
+    const x = 24 + (i % 8) * (TW + G), y = 128 + Math.floor(i / 8) * (THh + G);
+    gh += `<div class="tile" id="tile${i}" style="left:${x}px;top:${y}px;width:${TW}px;height:${THh}px;background-image:url('assets/ui/ns/${NS[i]}.jpg')"><span class="idx">${i + 1}</span><span class="dur">${SLOT[i]}s</span></div>`;
+  }
+  $('#sbGrid').innerHTML = gh;
+  for (let i = 0; i < 30; i++) {
+    const t = 5.6 + i * 0.026;
+    gsap.set('#tile' + i, { opacity: 0 });
+    ft(t, '#tile' + i, { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: 'back.out(2)' });
+    tl.set('#sbN', { textContent: String(i + 1) }, t);
+    ft(t, '#tile' + i, { backgroundPosition: '50% 30%' }, { backgroundPosition: '50% 62%', duration: 1.4, ease: 'sine.out' });
+  }
+  ft(6.95, '#convo', { y: 0 }, { y: -432, duration: 0.62, ease: 'expo.inOut' });   // the whole card + Watch free
+  cam(6.95, 1.025, [540, 825], [540, 905], 0.62, 'expo.inOut');
+  ft(7.1, '#sb', { rotation: 0 }, { rotation: 0.6, duration: 0.8, ease: 'sine.inOut' });
+  ft(7.968, '#sb', { rotation: 0.6 }, { rotation: 0, duration: 0.2, ease: 'power2.in' });
+  { const p = onScreen(870, 1278); tap(7.958, p[0], p[1]); }
+  press(7.958, '#watchBtn');
+  ft(7.72, '#watchBtn', { boxShadow: '0 0 0px rgba(60,197,247,0)' }, { boxShadow: '0 0 30px rgba(60,197,247,.8)', duration: 0.25, ease: 'power2.out' });
+  tl.set('#cursor', { opacity: 0 }, 6.4 + BAR);
+  // dive: the 30 clips pull together into one video, which takes the frame on the first sung word (6.53 + BAR)
+  // From here on every time is written as before and lands one bar later.
+  SH = BAR;
+  for (let i = 0; i < 30; i++) {
+    const cx = 24 + (i % 8) * (TW + G) + TW / 2, cy = 128 + Math.floor(i / 8) * (THh + G) + THh / 2;
+    ft(6.18, '#tile' + i, { x: 0, y: 0, scale: 1 }, { x: 470 - cx, y: 505 - cy, scale: 0.6, duration: 0.3, ease: 'expo.in' });
+  }
+  const FP = onScreen(603.6, 875), FS = 132 / 1.1 * CAM.scale;
+  cam(6.18, 1.7, [540, 829], [540, 960], 0.35, 'expo.in');
+  gsap.set('#feedWrap', { opacity: 0 });
+  tl.set('#feedWrap', { opacity: 1 }, 6.26);
+  ft(6.26, '#feedWrap', { x: FP[0] - FS / 2, y: FP[1] - FS * 118 / 132, scale: FS / 1080 }, Object.assign(rectScr(R.FULL), { duration: 0.27, ease: 'expo.in' }));
+  ft(6.53, '#feedIn', { scale: 1.04 }, { scale: 1, duration: 0.35, ease: 'power2.out' });
+
+  // ---- S3 (10.46–13.74) change it with words, without leaving the video: Claude's composer rises over it
+  // The chat sits under the video (z 4 < 5) except while the composer is up. Its bottom is shown through a clip.
+  const CLIP = (top) => `inset(${top}px 0px 0px 0px round 44px)`;
+  const COMPF = [[540, 1443], [540, 1380]];               // composer centre (content) → where it sits on screen
+  ft(6.9, '#feedIn', { scale: 1 }, { scale: 1.08, duration: 10.7, ease: 'sine.inOut' });
+  tl.set('#convo', { y: -1536 }, 9.0);
+  tl.set('#app', { clipPath: CLIP(1300) }, 9.0);
+  tl.set('#cam', { zIndex: 6 }, 10.44);
+  cam(10.46, 1.0, COMPF[0], COMPF[1], 0.01, 'power1.out');
+  ft(10.48, '#app', { y: 170, clipPath: CLIP(1300) }, { y: 0, clipPath: CLIP(1100), duration: 0.42, ease: 'expo.out' });
+  ft(10.46, '#feed', { filter: 'blur(0px) brightness(1)' }, { filter: 'blur(30px) brightness(.3)', duration: 0.45, ease: 'power2.out' });
+  ft(13.3, '#feed', { filter: 'blur(30px) brightness(.3)' }, { filter: 'blur(0px) brightness(1)', duration: 0.42, ease: 'power2.inOut' });
+  gsap.set('#ct2, #ct3', { opacity: 0 });
+  ft(10.5, '#compPh', { x: -20 }, { x: 0, duration: 0.3, ease: 'power3.out' });
+  tl.set('#compPh', { opacity: 0 }, 10.92);
+  tl.set('#ct2', { opacity: 1 }, 10.92);
+  typeOn(11.0, '#ct2t', 55);
+  ft(10.95, '#comp', { y: 0, boxShadow: '0 6px 24px rgba(0,0,0,.06)' }, { y: -4, boxShadow: '0 14px 40px rgba(0,0,0,.12)', duration: 0.5, ease: 'power2.out' });
+  cam(10.9, 1.4, COMP[0], [138, 1330], 0.5, 'expo.inOut');
+  cam(12.04, 1.0, COMPF[0], [540, 1370], 0.45, 'expo.inOut');
+  ft(10.5, '#app', { rotationX: 0 }, { rotationX: 1.4, duration: 1.4, ease: 'sine.inOut' });
+  press(12.02, '#compSend');
+  ft(11.98, '#ct2t', { y: 0 }, { y: -26, duration: 0.08, ease: 'power2.in' });
+  tl.set('#ct2', { opacity: 0 }, 12.04);
+  tl.set('#compPh', { opacity: 1 }, 12.04);
+  ft(12.02, '#app', { clipPath: CLIP(1100) }, { clipPath: CLIP(900), duration: 0.36, ease: 'expo.out' });
+  massLand(12.04, '#bub2', 160);
+  sparkIn(12.2, '#spark2', 1.0);
+  rowIn(12.32, '#row4', '#ok4', 12.72);
+  ft(12.6, '#bub2', { x: 0 }, { x: -8, duration: 0.7, ease: 'sine.inOut' });
+  // the sheet drops away; the huge blue words land on the next sung line (13.74)
+  ft(13.22, '#app', { y: 0 }, { y: 760, duration: 0.36, ease: 'expo.in' });
+  tl.set('#cam', { zIndex: 4 }, 13.6);
+  tl.set('#app', { y: 0, clipPath: CLIP(1300) }, 13.62);
+
+  // ---- S4 (17.76–22.3) four more, all different: the composer again, then Claude's window takes over for the batch
+  tl.set('#convo', { y: -1722 }, 16.0);
+  tl.set('#cam', { zIndex: 6 }, 17.74);
+  ft(17.76, '#app', { y: 170, clipPath: CLIP(1300) }, { y: 0, clipPath: CLIP(1100), duration: 0.42, ease: 'expo.out' });
+  ft(17.74, '#feed', { filter: 'blur(0px) brightness(1)' }, { filter: 'blur(24px) brightness(.42)', duration: 0.45, ease: 'power2.out' });
+  tl.set('#compPh', { opacity: 0 }, 18.2);
+  tl.set('#ct3', { opacity: 1 }, 18.2);
+  typeOn(18.3, '#ct3t', 58);
+  cam(18.0, 1.4, COMP[0], [138, 1330], 0.5, 'expo.inOut');
+  cam(19.22, 1.0, COMPF[0], [540, 1370], 0.4, 'expo.inOut');
+  ft(18.2, '#comp', { y: -4 }, { y: -7, duration: 0.9, ease: 'sine.inOut' });
+  ft(17.8, '#app', { rotationX: 0 }, { rotationX: 1.4, duration: 1.4, ease: 'sine.inOut' });
+  press(19.2, '#compSend');
+  ft(19.16, '#ct3t', { y: 0 }, { y: -26, duration: 0.08, ease: 'power2.in' });
+  tl.set('#ct3', { opacity: 0 }, 19.24);
+  tl.set('#compPh', { opacity: 1 }, 19.24);
+  ft(19.2, '#app', { clipPath: CLIP(1100) }, { clipPath: CLIP(900), duration: 0.36, ease: 'expo.out' });
+  massLand(19.22, '#bub3', 160);
+  sparkIn(19.4, '#spark3', 1.6);
+  rowIn(19.45, '#row5', '#ok5', 19.85);
+  // the sheet opens into the whole window (the video fades out behind it) and scrolls to the batch
+  ft(19.95, '#app', { clipPath: CLIP(900) }, { clipPath: CLIP(0), duration: 0.6, ease: 'expo.inOut' });
+  ft(19.95, '#convo', { y: -1722 }, { y: -2566, duration: 0.6, ease: 'expo.inOut' });
+  cam(19.95, 1.0, [540, 825], [540, 900], 0.6, 'expo.inOut');
+  ft(19.95, '#feedWrap', { opacity: 1 }, { opacity: 0, duration: 0.5, ease: 'power2.in' });
+  ft(19.95, '#app', { rotationY: 0, rotationX: 0 }, { rotationY: -1.6, rotationX: 1.0, duration: 1.8, ease: 'sine.inOut' });
+  massLand(20.42, '#deck', 110);
+  ['#dt0', '#dt1', '#dt2', '#dt3'].forEach((sel, i) => {
+    const t = 20.55 + i * 0.35;
+    gsap.set(sel, { opacity: 0 });
+    ft(t, sel, { scale: 0.6, opacity: 0, y: 40 }, { scale: 1, opacity: 1, y: 0, duration: 0.45, ease: 'back.out(1.8)' });
+  });
+  ft(20.6, '#deck', { y: 0 }, { y: -6, duration: 1.1, ease: 'sine.inOut' });
+
+  // ---- the payoff (21.75–25.44): the four videos leave the card and fill the frame, 2×2, playing
+  const tileX = [94, 320.5, 547, 773.5];
+  const WALL = [[0, 960], [540, 960], [0, 0], [540, 0]];
+  gsap.set('#wall, #end', { opacity: 0 });
+  tl.set('#wall', { opacity: 1 }, 21.75);
+  tl.set('#dt0 video, #dt1 video, #dt2 video, #dt3 video', { opacity: 0 }, 21.75);
+  gsap.set('#wallShade', { opacity: 0 });
+  tileX.forEach((x, i) => {
+    const p = onScreen(x, 640 - 6), s0 = 212.5 * CAM.scale / 540;
+    ft(21.75 + i * 0.05, '#wv' + i, { x: p[0], y: p[1], scale: s0 }, { x: WALL[i][0], y: WALL[i][1], scale: 1, duration: 0.6, ease: 'expo.out' });
+  });
+  cam(21.75, 0.92, [540, 825], [540, 960], 0.6, 'expo.out');
+  ft(22.3, '#wallIn', { scale: 1 }, { scale: 1.04, duration: 8.3, ease: 'sine.inOut' });
+  ft(22.4, '#wvv0', { scale: 1.06 }, { scale: 1, duration: 3.0, ease: 'sine.out' });
+  ft(22.4, '#wvv3', { scale: 1.06 }, { scale: 1, duration: 3.0, ease: 'sine.out' });
+  ft(22.4, '#wvv1', { scale: 1 }, { scale: 1.05, duration: 3.0, ease: 'sine.inOut' });
+  ft(22.4, '#wvv2', { scale: 1 }, { scale: 1.05, duration: 3.0, ease: 'sine.inOut' });
+
+  // ---- S5 (25.44–30.6) the end card on the wall, which slows to half speed and softens behind the type
+  ['0', '1', '2', '3'].forEach((i) => { tl.set('#wsv' + i, { opacity: 1 }, 25.44); tl.set('#wvv' + i, { opacity: 0 }, 25.46); });
+  ft(25.44, '#wallIn', { filter: 'blur(0px) brightness(1)' }, { filter: 'blur(6px) brightness(.92)', duration: 0.3, ease: 'power2.out' });
+  ft(25.44, '#wallShade', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' });
+  tl.set('#end', { opacity: 1 }, 25.5);
+  gsap.set('#endL1In, #endCtaIn, #endCta2In, #endUrlIn, #endStatsIn', { yPercent: 115 });
+  ft(25.55, '#endL1In', { yPercent: 115 }, { yPercent: 0, duration: 0.55, ease: 'expo.out' });
+  const EW = letters('#endW');
+  EW.forEach((c, i) => {
+    const t = 25.8 + i * 0.035;
+    gsap.set(c, { opacity: 0, transformOrigin: '50% 100%' });
+    tl.set(c, { opacity: 1 }, t);
+    ft(t, c, { y: 70, scaleY: 1.3, fontVariationSettings: "'wdth' 62,'wght' 300" }, { y: 0, scaleY: 0.92, fontVariationSettings: "'wdth' 125,'wght' 900", duration: 0.22, ease: 'expo.out' });
+    ft(t + 0.22, c, { scaleY: 0.92, fontVariationSettings: "'wdth' 125,'wght' 900" }, { scaleY: 1, fontVariationSettings: "'wdth' 100,'wght' 900", duration: 0.4, ease: 'back.out(1.6)' });
+  });
+  ft(26.55, '#endCtaIn', { yPercent: 115 }, { yPercent: 0, duration: 0.55, ease: 'expo.out' });
+  ft(26.8, '#ctaW', { scale: 1.35, rotation: -6 }, { scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(2.4)' });
+  ft(26.72, '#endCta2In', { yPercent: 115 }, { yPercent: 0, duration: 0.5, ease: 'expo.out' });
+  massLand(27.05, '#igBar', 120);
+  ft(27.15, '#igBar .av', { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: 0.45, ease: 'back.out(2.2)' });
+  typeOn(27.45, '#igTx', 9);
+  press(28.05, '#igPost');
+  tl.set('#igPost', { color: '#9bdcff' }, 28.05);
+  ft(28.05, '#igBar', { borderColor: 'rgba(255,255,255,.18)' }, { borderColor: 'rgba(60,197,247,.85)', duration: 0.4, ease: 'power2.out' });
+  ft(28.05, '#igTx', { x: 0 }, { x: 6, duration: 0.5, ease: 'back.out(2)' });
+  ft(27.1, '#endCta2In', { x: 0 }, { x: -6, duration: 3.4, ease: 'sine.inOut' });
+  ft(27.9, '#endUrlIn', { yPercent: 115 }, { yPercent: 0, duration: 0.5, ease: 'expo.out' });
+  ft(28.1, '#endStatsIn', { yPercent: 115 }, { yPercent: 0, duration: 0.5, ease: 'expo.out' });
+  // the layers drift at their own rates; nothing pulses
+  ft(26.0, '#end', { y: 0 }, { y: -14, duration: 4.6, ease: 'sine.inOut' });
+  ft(26.2, '#endL1', { x: 0 }, { x: -10, duration: 4.4, ease: 'sine.inOut' });
+  ft(26.2, '#endL2', { x: 0 }, { x: -20, duration: 4.4, ease: 'sine.inOut' });
+  ft(26.9, '#endCta', { x: 0 }, { x: -8, duration: 3.7, ease: 'sine.inOut' });
+  ft(27.6, '#igBar', { x: 0 }, { x: 6, duration: 3.0, ease: 'sine.inOut' });
+  ft(28.7, '#endUrl', { x: 0 }, { x: -6, duration: 1.9, ease: 'sine.inOut' });
+  ft(28.9, '#endStats', { x: 0 }, { x: -9, duration: 1.7, ease: 'sine.inOut' });
+  ft(25.6, '#wsv0', { scale: 1, x: 0 }, { scale: 1.08, x: 14, duration: 5.0, ease: 'sine.inOut' });
+  ft(25.6, '#wsv1', { scale: 1.06, y: 0 }, { scale: 1, y: -16, duration: 5.0, ease: 'sine.inOut' });
+  ft(25.6, '#wsv2', { scale: 1, y: 0 }, { scale: 1.07, y: 12, duration: 5.0, ease: 'sine.inOut' });
+  ft(25.6, '#wsv3', { scale: 1.07, x: 0 }, { scale: 1, x: -12, duration: 5.0, ease: 'sine.inOut' });
+
+  SH = 0;
+  // ------------------------------------------------ texture: grain drifts the whole time (never still, never a pulse)
+  ft(0, '#grain', { x: 0, y: 0 }, { x: 47, y: -61, duration: DUR, ease: 'sine.inOut' });
+  ft(0, '#bgGlow', { x: -60, y: 0 }, { x: 80, y: -40, duration: 15, ease: 'sine.inOut' });
+  ft(15, '#bgGlow', { x: 80, y: -40 }, { x: -40, y: 20, duration: 17.4, ease: 'sine.inOut' });
+  ft(0, '#bgGlow2', { x: 0, y: 0 }, { x: -260, y: -120, duration: 16, ease: 'sine.inOut' });
+  ft(16, '#bgGlow2', { x: -260, y: -120 }, { x: -60, y: -260, duration: 16.4, ease: 'sine.inOut' });
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines['claude-connector'] = tl;
+})();
+</script>
+</body>
+</html>

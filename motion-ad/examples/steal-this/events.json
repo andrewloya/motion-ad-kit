@@ -1,0 +1,86 @@
+[
+ {
+  "t": 0.25,
+  "sfx": "voice",
+  "file": "../assets/audio/vo/01-c1.wav",
+  "gain": 1.0
+ },
+ {
+  "t": 4.95,
+  "sfx": "voice",
+  "file": "../assets/audio/vo/02-c1.wav",
+  "gain": 1.0
+ },
+ {
+  "t": 8.35,
+  "sfx": "voice",
+  "file": "../assets/audio/vo/03-c2.wav",
+  "gain": 1.0
+ },
+ {
+  "t": 12.0,
+  "sfx": "voice",
+  "file": "../assets/audio/vo/04-c3.wav",
+  "gain": 1.0
+ },
+ {
+  "t": 15.2,
+  "sfx": "voice",
+  "file": "../assets/audio/vo/05-c1.wav",
+  "gain": 1.0
+ },
+ {
+  "t": 19.5,
+  "sfx": "voice",
+  "file": "../assets/audio/vo/06-c1.wav",
+  "gain": 1.0
+ },
+ {
+  "t": 22.55,
+  "sfx": "voice",
+  "file": "../assets/audio/vo/07-c1.wav",
+  "gain": 1.0
+ },
+ {
+  "t": 0.0,
+  "sfx": "sample",
+  "file": "../assets/audio/sfx/kit-swipe.wav",
+  "gain": 0.3
+ },
+ {
+  "t": 0.72,
+  "sfx": "sample",
+  "file": "../assets/audio/sfx/kit-rush.wav",
+  "gain": 0.32
+ },
+ {
+  "t": 3.56,
+  "sfx": "sample",
+  "file": "../assets/audio/sfx/kit-smack2.wav",
+  "gain": 0.55
+ },
+ {
+  "t": 8.85,
+  "sfx": "sample",
+  "file": "../assets/audio/sfx/kit-typing.wav",
+  "gain": 0.22
+ },
+ {
+  "t": 11.1,
+  "sfx": "sample",
+  "file": "../assets/audio/sfx/kit-drop.wav",
+  "gain": 0.3
+ },
+ {
+  "t": 16.45,
+  "sfx": "sample",
+  "file": "../assets/audio/sfx/kit-rip1.wav",
+  "gain": 0.5
+ },
+ {
+  "t": 18.95,
+  "sfx": "sample",
+  "file": "../assets/audio/sfx/kit-swell.wav",
+  "gain": 0.3
+ }
+]
